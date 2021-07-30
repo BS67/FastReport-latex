@@ -25,12 +25,12 @@
 \DeclareOptionX{activ}[true]{\toggletrue{attach} \def\activ{#1}} %print the table
 \DeclareOptionX{pathappendix}{\newcommand{\appath}{#1}} %Anhang/
 \DeclareOptionX{code}{\toggletrue{code}\newcommand{\codetyp}{#1}} %only c++
-\DeclareOptionX{logo}{\newcommand{\pathlogo}{#1}}%logo a mettre en entête
+\DeclareOptionX{logo}{\newcommand{\appathlogo}{#1}}%logo a mettre en entête
 \DeclareOptionX{language}[fr]{\newcommand{\doclanguage}{#1}}
 \ProcessOptionsX\relax
 
 %if not defined
-\providecommand{\pathlogo}{no}
+\providecommand{\appathlogo}{no}
 \providecommand{\appath}{ }
 %	================================================================================================================================
 %	attachement
@@ -137,16 +137,16 @@
 \RequirePackage{geometry}
 \def\achaptertitle{}%initialiser pour le style de page
 
-\ifthenelse{\equal{\pathlogo}{no}}{%no logo avaible for page head
+\ifthenelse{\equal{\appathlogo}{no}}{%no logo avaible for page head
 															\newcommand{\headlogo}{}
 															}{%logo avaible for page head
-															\newcommand{\headlogo}{\hfill\mbox{\includegraphics[width=0.3\textwidth]{\pathlogo}}}
+															\newcommand{\headlogo}{\hfill\mbox{\includegraphics[width=0.3\textwidth]{\appathlogo}}}
 															}	
 
 
 \newpagestyle{appendix}{%
 	\pagenumbering{Roman}
-	\sethead{\fontsize{20pt}{0pt}\selectfont \scshape \Alph{achapter}.\hspace{3mm} \achaptertitle}{}{\hfill\mbox{\headlogo}
+	\sethead{\fontsize{20pt}{0pt}\selectfont \scshape \Alph{achapter}.\hspace{3mm} \achaptertitle}{}{\hfill\mbox{\headlogo}}
 	\setfoot{}{\centering \thepage}{}
 	\headrule
 	\setheadrule{0.4pt}

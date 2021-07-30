@@ -18,17 +18,23 @@
 \newtoggle{newchappage}
 
 \DeclareOptionX{NewChapPage}{\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{newchappage}}{}}	%for chapter create new page or not 	
-\DeclareOptionX{ChapPrefix}{\newcommand{\prechap}{#1}} % met un préfix devant le nom des chapitres, ex : Projet I
+\DeclareOptionX{ChapPrefix}{\newcommand{\prefixchap}{#1}} % met un préfix devant le nom des chapitres, ex : Projet I
 \DeclareOptionX{titlenum}{\newcommand{\titlenum}{#1}}%numérotation
 \DeclareOptionX{fancytitle}{\newcommand{\fancytitle}{#1}}%savoir quel style de titre
 \DeclareOptionX{fancypage}{\newcommand{\fancypage}{#1}}%savoir quel style de titre
 \DeclareOptionX{logo}{\newcommand{\pathlogo}{#1}}%logo a mettre en entête
 \DeclareOptionX{name}{\newcommand{\name}{{\begin{tabular}[b]{r@{}} #1 \end{tabular} }}}%noms à mettre en en-tête nom // nom ....
+%securité
+\DeclareOptionX{Chapprefix}{\PackageError{styles_package}{ChapPrefix avec les majuscules}}
+\DeclareOptionX{chapprefix}{\PackageError{styles_package}{ChapPrefix avec les majuscules}}
+\DeclareOptionX{NewChappage}{\PackageError{styles_package}{NewChapPage avec les majuscules}}
+\DeclareOptionX{Newchappage}{\PackageError{styles_package}{NewChapPage avec les majuscules}}
+\DeclareOptionX{newchappage}{\PackageError{styles_package}{NewChapPage avec les majuscules}}
 \ProcessOptionsX\relax
 
-\providecommand{\prechap}{}
+\providecommand{\prefixchap}{}
 \providecommand{\name}{}
-\providecommand{\num}{0}% if not defined, will be set to 1
+\providecommand{\titlenum}{0}% if not defined, will be set to 1
 \providecommand{\fancytitle}{0}% if not defined, will be set to 1
 \providecommand{\fancypage}{0}% if not defined, will be set to 1
 \providecommand{\pathlogo}{no}% if not defined, will be set to 1
@@ -39,16 +45,45 @@
 \PassOptionsToPackage{indentafter, pagestyles}{titlesec}%titre, entête et pied de page
 \RequirePackage{titlesec}
 
+
+%	==============================================================
+%	prefix/suffix management
+% ==============================================================
+
+\newcommand{\thechaptertitle}{}
+
+\newcommand{\nocprefix} % pas de préfixe
+	{
+		\def\sufchap{~} 
+		\def\chappoint{.} % I.
+		\def\prechap{} % supprime le préfixe
+	}
+	
+\newcommand{\cprefix} % préfixe activé
+	{
+		\def\sufchap{ :~} %ajout d'un ":"
+		\def\chappoint{} % I
+		\def\prechap\prefixchap % ajoute le préfixe
+	}
+
+
+\ifthenelse{\equal{\prefixchap}{}}{\nocprefix}{\cprefix} 
+
+
+
+
 %	==============================================================
 %	title numerotation
 % ==============================================================
 
+%ajout d'une numérotation juste pour les titres de chapitres !!!
 \ifthenelse{\equal{\titlenum}{1}}
 		{
 			\makeatletter
-			\renewcommand{\thechapter}{\@Roman\c@chapter.}
-			\renewcommand{\thesection}{\@arabic\c@section}
-			\renewcommand\thesubsection {\thesection.\@arabic\c@subsection}
+			\renewcommand{\thechaptertitle}{\@Roman\c@chapter\chappoint}
+			\renewcommand{\thechapter}{\@Roman\c@chapter.} 
+			\renewcommand{\thesection}{\@arabic\c@section.}
+			\renewcommand\thesubsection {\thesection.\@arabic\c@subsection.}
 			\renewcommand{\thesubsubsection}{\thesubsection.\@Alph\c@subsubsection}
 			\renewcommand{\theparagraph}{\@alph\c@paragraph}
 			\makeatother
@@ -57,11 +92,12 @@
 
 
 
+
 %	==============================================================
 %	title styling
 % ==============================================================
 
-\ifthenelse{\equal{\prechap}{}}{\def\sufchap{~}}{\def\sufchap{ :~}}
+
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 \ifthenelse{\equal{\fancytitle}{1}}
 		{
@@ -216,6 +252,7 @@
 % ==============================================================
 
 \iftoggle{newchappage}{\let\newcpage\newpage}{\def\newcpage{}}
+
 %attention peut causer des prob en twocolumn car les ifs ont été supprimé
 \makeatletter
 	%desactive mode empty page aux chapitres + newpage si besoin
@@ -223,6 +260,7 @@
 			\global\@topnum\z@%
 			\@afterindentfalse%
 			\secdef\@chapter\@schapter}
+			
 	%desactive mode plain page aux parties		
 	\renewcommand\part{\clearpage%
 			\null\vfil
