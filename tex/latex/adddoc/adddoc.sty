@@ -26,12 +26,13 @@
 \DeclareOptionX{pathappendix}{\newcommand{\appath}{#1}} %Anhang/
 \DeclareOptionX{code}{\toggletrue{code}\newcommand{\codetyp}{#1}} %only c++
 \DeclareOptionX{logo}{\newcommand{\appathlogo}{#1}}%logo a mettre en entête
-\DeclareOptionX{language}[fr]{\newcommand{\doclanguage}{#1}}
+\DeclareOptionX{language}{\newcommand{\doclanguage}{#1}}
 \ProcessOptionsX\relax
 
 %if not defined
 \providecommand{\appathlogo}{no}
 \providecommand{\appath}{ }
+\providecommand{\doclanguage}{fr}
 %	================================================================================================================================
 %	attachement
 % ==================================================================================================================================

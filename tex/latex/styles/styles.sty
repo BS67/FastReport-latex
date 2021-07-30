@@ -23,7 +23,7 @@
 \DeclareOptionX{fancytitle}{\newcommand{\fancytitle}{#1}}%savoir quel style de titre
 \DeclareOptionX{fancypage}{\newcommand{\fancypage}{#1}}%savoir quel style de titre
 \DeclareOptionX{logo}{\newcommand{\pathlogo}{#1}}%logo a mettre en entête
-\DeclareOptionX{name}{\newcommand{\name}{{\begin{tabular}[b]{r@{}} #1 \end{tabular} }}}%noms à mettre en en-tête nom // nom ....
+\DeclareOptionX{name}{\newcommand{\name}{{\begin{tabular}[b]{l@{}} #1 \end{tabular} }}}%noms à mettre en en-tête nom \\ nom ....
 %securité
 \DeclareOptionX{Chapprefix}{\PackageError{styles_package}{ChapPrefix avec les majuscules}}
 \DeclareOptionX{chapprefix}{\PackageError{styles_package}{ChapPrefix avec les majuscules}}
@@ -63,7 +63,7 @@
 	{
 		\def\sufchap{ :~} %ajout d'un ":"
 		\def\chappoint{} % I
-		\def\prechap\prefixchap % ajoute le préfixe
+		\def\prechap{\prefixchap~} % ajoute le préfixe
 	}
 
 
@@ -83,8 +83,8 @@
 			\renewcommand{\thechaptertitle}{\@Roman\c@chapter\chappoint}
 			\renewcommand{\thechapter}{\@Roman\c@chapter.} 
 			\renewcommand{\thesection}{\@arabic\c@section.}
-			\renewcommand\thesubsection {\thesection.\@arabic\c@subsection.}
-			\renewcommand{\thesubsubsection}{\thesubsection.\@Alph\c@subsubsection}
+			\renewcommand\thesubsection {\thesection\@arabic\c@subsection.}
+			\renewcommand{\thesubsubsection}{\thesubsection\@Alph\c@subsubsection}
 			\renewcommand{\theparagraph}{\@alph\c@paragraph}
 			\makeatother
 		
@@ -105,7 +105,7 @@
 			\titleformat{\chapter}% command
 				[hang]% shape
 				{\bf \Huge}% format
-				{\prechap\thechapter\sufchap}% label
+				{\prechap\thechaptertitle\sufchap}% label
 				{1pt}% sep
 				{}% before-code
 				[]% after-code
@@ -158,7 +158,7 @@
 			\titleformat{\chapter}% command
 				[hang]% shape
 				{\bf \huge \color{MidnightBlue}}% format
-				{\prechap\thechapter\sufchap}% label
+				{\prechap\thechaptertitle\sufchap}% label
 				{1pt}% sep
 				{}% before-code
 				[]% after-code
@@ -210,7 +210,7 @@
 			\titleformat{\chapter}% command
 				[hang]% shape
 				{\bf \huge}% format
-				{\prechap\thechapter\sufchap}% label
+				{\prechap\thechaptertitle\sufchap}% label
 				{1pt}% sep
 				{}% before-code
 				[]% after-code
@@ -273,7 +273,7 @@
 \ifthenelse{\equal{\pathlogo}{no}}{%no logo avaible for page head
 															\newcommand{\headlogo}{}
 															}{%logo avaible for page head
-															\newcommand{\headlogo}{\hfill\mbox{\includegraphics[width=0.3\textwidth]{\pathlogo}}}
+															\newcommand{\headlogo}{\hfill\mbox{\includegraphics[width=0.2\textwidth]{\pathlogo}}}
 															}	
 
 									
@@ -327,7 +327,7 @@
 			%stylepage
 		\newpagestyle{debut}{%
 			\pagenumbering{Roman}
-			\sethead{\fontsize{20pt}{0pt}\selectfont \scshape \thechapter\hspace{3mm}\chaptertitle}{}{\headlogo}
+			\sethead{\name}{}{\headlogo}
 			\setfoot{}{\centering\Roman{page}}{}
 			\headrule
 			\setheadrule{0.4pt}
@@ -335,7 +335,7 @@
 
 		\newpagestyle{main}{%
 			\pagenumbering{arabic}
-			\sethead{\name}{}{\headlogo}
+			\sethead{\fontsize{20pt}{0pt}\selectfont \scshape \thechapter\hspace{3mm}\chaptertitle}{}{\hfill\mbox{\includegraphics[width=0.3\textwidth]{\pathlogo}}}
 			\setfoot{}{\centering \thepage}{}
 			\headrule
 			\setheadrule{0.4pt}

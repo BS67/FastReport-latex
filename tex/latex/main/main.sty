@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{package_v0}[2020/24/05 mon premier package]
+\ProvidesPackage{main}[2021/07/30 principal]
 
 
 
@@ -24,16 +24,16 @@
 \newtoggle{quote}
 \newtoggle{calc}
 
-\DeclareOptionX{calc}{				\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{calc}}{}}
+\DeclareOptionX{calc}{			\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{calc}}{}}
 \DeclareOptionX{quote}{			\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{quote}}{}}
-\DeclareOptionX{floatbarrier}{	\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{floatbarrier}}{}}
-\DeclareOptionX{link}{				\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{link}}{}}
+\DeclareOptionX{floatbarrier}{\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{floatbarrier}}{}}
+\DeclareOptionX{link}{			\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{link}}{}}
 \DeclareOptionX{svg}{				\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{svg}}{}}
 \DeclareOptionX{bibstyle}{ \newcommand{\bibstyle}{#1}}
 \DeclareOptionX{bib}{				\ifthenelse{\equal{#1}{no}}{}{\toggletrue{bib} \newcommand{\bibfile}{#1}}}
 \DeclareOptionX{math}{\toggletrue{math}			\ifthenelse{\equal{#1}{old} }{\def\mathmode{old}}{\def\mathmode{new}}}
 \DeclareOptionX{spacing}{\newcommand{\textspacing}{#1}}%savoir quel style de titre
-\DeclareOptionX{language}[fr]{\newcommand{\doclanguage}{#1}}
+\DeclareOptionX{language}{\newcommand{\doclanguage}{#1}}
 \DeclareOptionX{geometry}[1]{\newcommand{\fancygeometry}{#1}}
 \DeclareOptionX*{\PackageError{main_package}{the entry #1 doesn't exist}}
 
@@ -41,6 +41,7 @@
 \providecommand{\fancygeometry}{1}
 \providecommand{\textspacing}{1}
 \providecommand{\bibstyle}{unsrt}
+\providecommand{\doclanguage}{fr}
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 % MAIN
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -50,7 +51,7 @@
 % =============================================================
 
 \newcommand{\sbsec}{\subsection}
-\newcomand{\sbbsec}{\subsubsection}
+\newcommand{\sbbsec}{\subsubsection}
 \newcommand{\para}{\paragraph*}
 
 % =============================================================
@@ -89,7 +90,7 @@
 %	figure, table, equation
 % ==============================================================
 
-
+\RequirePackage{graphics}
 \PassOptionsToPackage{dvips}{graphicx}
 \PassOptionsToPackage{svgnames}{xcolor}%donne des couleurs, ex : Midnightblue
 \RequirePackage{graphicx,xcolor}
