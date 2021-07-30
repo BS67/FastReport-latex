@@ -1,0 +1,306 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{adddoc}[2020/24/05 mon premier package]
+
+
+
+
+
+
+
+% =============================================================
+% base packages
+% =============================================================
+
+\RequirePackage{xkeyval} %working with keys --> only one ProcessOptionsX, and every Options have to be with xkeyval
+\RequirePackage{ifthen} 
+\RequirePackage{etoolbox} % provides a lot of robusts commands, here for the toogle bool
+\RequirePackage{fmtcount}	%for counters
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+% Package Options
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+\newtoggle{attach} 
+\newtoggle{code}
+
+\DeclareOptionX{activ}[true]{\toggletrue{attach} \def\activ{#1}} %print the table
+\DeclareOptionX{pathappendix}{\newcommand{\appath}{#1}} %Anhang/
+\DeclareOptionX{code}{\toggletrue{code}\newcommand{\codetyp}{#1}} %only c++
+\DeclareOptionX{logo}{\newcommand{\pathlogo}{#1}}%logo a mettre en entête
+\DeclareOptionX{language}[fr]{\newcommand{\doclanguage}{#1}}
+\ProcessOptionsX\relax
+
+%if not defined
+\providecommand{\pathlogo}{no}
+\providecommand{\appath}{ }
+%	================================================================================================================================
+%	attachement
+% ==================================================================================================================================
+
+\iftoggle{attach}{
+
+	\RequirePackage{titletoc}
+
+%	-------------------------------------------------------------
+%	langues
+% -------------------------------------------------------------
+%langue
+\ifthenelse{\equal{\doclanguage}{fr}}
+			{%option is french
+					\newcommand{\listappendixname}{Table des Annexes}
+					\newcommand{\attachname}{Annexes}
+			}{
+\ifthenelse{\equal{\doclanguage}{de}}
+			{%option is german
+					\newcommand{\listappendixname}{Anhangsverzeichnis}
+					\newcommand{\attachname}{Anhänge}
+			}{
+\ifthenelse{\equal{\doclanguage}{en}}
+			{%option is english
+					\newcommand{\listappendixname}{Table of Appendices}
+					\newcommand{\attachname}{Appendices}
+			}{}}}
+			
+			
+%	-------------------------------------------------------------
+%	theorie
+% -------------------------------------------------------------
+
+%\addcontentsline{ext}{section}{title} 
+%		---> écrit dans root.ext file \contentsline{section}{title}{page from the addcontent cmd }   
+%				---> in the \listofappendix will be read : \l@appendix{title}{page} 
+%						-->\@dottedtocline{lvl}{left indent}{numwidth }{title}{page}
+
+%*numwidth : espace alloqué pour le section num dans \numberline
+
+%title can be set with : \numberline{section num}{section title} in the addcontentsline
+
+
+
+%	-------------------------------------------------------------
+%	compteurs
+% --------------------------------------------------------------
+\newcounter{achapter}%chapter for appendix
+\newcounter{appendix}[achapter]%real attachment
+%format des compteurs
+\makeatletter
+	\renewcommand*{\theachapter}{\@Alph\c@achapter}
+	\renewcommand*{\theappendix}{\ifnum \c@achapter>\z@ \theachapter.\fi \@arabic\c@appendix}
+\makeatother
+
+%	-------------------------------------------------------------
+%	rendu de la table des matière
+% --------------------------------------------------------------
+%rendu dans la table
+
+
+\makeatletter
+	\newcommand*\l@achapter[2]{%	
+												\addvspace{2.25em \@plus\p@}% espace de séparation entre titre
+													{
+														\leavevmode
+														\hspace{0em}  #1 \hfill % indent, 
+													}\par\nobreak
+												} 
+																
+	\newcommand*\l@appendix{\@dottedtocline{1}{2.5em}{2.3em}} 
+\makeatother
+
+\contentsuse{appendix}{loa}
+
+
+\let\listofappendixs\listoftables
+%on adapte juste la table des matières, le code est pas compliqué mais c'est plus simple comme ca
+\patchcmd{\listofappendixs}{\listtablename}{\listappendixname}{}{}
+\patchcmd{\listofappendixs}{\listtablename}{\listappendixname}{}{}
+\patchcmd{\listofappendixs}{\listtablename}{\listappendixname}{}{}
+\patchcmd{\listofappendixs}{lot}{loa}{}{}
+
+%	-------------------------------------------------------------
+%	commande d'entrée
+% --------------------------------------------------------------
+
+
+\newcommand\attachment[2]{
+									\refstepcounter{appendix}
+									\label{#2}
+									\addcontentsline{loa}{appendix}{\numberline{\theappendix}{\itshape #1}}
+									}
+\newcommand\achapter[1]{
+								\refstepcounter{achapter}
+								\def\achaptertitle{#1}
+								\addcontentsline{loa}{achapter}{\bfseries\theachapter \hspace{1em} #1}%style, espacement entre num et label 
+								}
+
+%	-------------------------------------------------------------
+%	style de page
+% --------------------------------------------------------------
+\RequirePackage{geometry}
+\def\achaptertitle{}%initialiser pour le style de page
+
+\ifthenelse{\equal{\pathlogo}{no}}{%no logo avaible for page head
+															\newcommand{\headlogo}{}
+															}{%logo avaible for page head
+															\newcommand{\headlogo}{\hfill\mbox{\includegraphics[width=0.3\textwidth]{\pathlogo}}}
+															}	
+
+
+\newpagestyle{appendix}{%
+	\pagenumbering{Roman}
+	\sethead{\fontsize{20pt}{0pt}\selectfont \scshape \Alph{achapter}.\hspace{3mm} \achaptertitle}{}{\hfill\mbox{\headlogo}
+	\setfoot{}{\centering \thepage}{}
+	\headrule
+	\setheadrule{0.4pt}
+}
+
+
+
+
+%	-------------------------------------------------------------
+%	initialisation de l'appendix
+% --------------------------------------------------------------
+
+
+\let\oldappendix\appendix
+\renewcommand{\appendix}{%
+													%\setcounter{LastPage}{\value{page}}???
+													\newpage
+													\pagestyle{empty}
+													\oldappendix
+													\addcontentsline{toc}{chapter}{\attachname}
+													\part*{\attachname}
+													\pagestyle{appendix}
+													\newgeometry{paper=a4paper,tmargin=2cm,bmargin=1.5cm,lmargin=0.5cm,rmargin=0.5cm,headheight=100pt, headsep=0.5cm, footskip=1cm}
+												}
+
+%	-------------------------------------------------------------
+%	annexes en pdf
+% -------------------------------------------------------------
+
+
+\RequirePackage{pdfpages}													
+	%\pdf[langscape->true/false]{titre}{ref}{nom du doc avec extension}												
+\newcommand{\pdf}[4][false]%
+{
+	\attachment{#2}{ap:#3}
+	\includepdf[scale=.8, pages=-, landscape=#1, pagecommand={\section*{#2}}]{\appath#4}
+									}
+
+	%\pdf[langscape->true/false]{taille}{titre}{ref}{nom du doc avec extension}		
+	\newcommand{\pdfsize}[5][false]%
+	{ 	
+		\attachment{#3}{ap:#4}
+		\includepdf[scale=#2, pages=-, landscape=#1, pagecommand={\section*{#3}}]{\appath#5}
+	}
+	
+	%---------------------------------------
+	%impression de la table 
+	%---------------------------------------
+	
+	\ifthenelse{\equal{\activ}{false}}%
+	{\def\listofappendixs{}}%annule la commande quand on ne veut pas
+	{}%laisse la commande intacte
+	
+	
+	
+}{}	
+
+
+
+
+%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+%code
+%$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+\iftoggle{code}{
+
+	\RequirePackage{listings}
+	
+%----------------------------------------------------------------
+%langues
+%----------------------------------------------------------------
+\ifthenelse{\equal{\doclanguage}{fr}}
+			{%option is french
+					\renewcommand{\lstlistingname}{Extrait}
+			}{
+\ifthenelse{\equal{\doclanguage}{de}}
+			{%option is german
+					\renewcommand{\lstlistingname}{Code-Abschnitt}
+			}{
+\ifthenelse{\equal{\doclanguage}{en}}
+			{%option is english
+					\renewcommand{\lstlistingname}{Code-Extract}
+			}{}}}
+%----------------------------------------------------------------
+%general cmd
+%----------------------------------------------------------------
+\newcommand{\lstcolor}[2]{\texttt{\textcolor{#1}{#2}}}
+
+\newcommand\cref[1]{\texttt{\lstlistingname} \ref{c:#1}.~}
+
+%environement -> begin{code}{option}
+\newenvironment{code}[1]%
+		{\begin{minipage}{\textwidth} \begin{lstlisting}[#1]}
+		{\end{lstlisting}\end{minipage}}
+%----------------------------------------------------------------
+%caption
+%----------------------------------------------------------------
+\RequirePackage{caption}
+\captionsetup[lstlisting]{position=above, font={tt}, labelfont={sc}, textfont={bf}}
+
+%----------------------------------------------------------------
+%c++ style
+%----------------------------------------------------------------
+
+	
+	\ifthenelse{\equal{\codetyp}{c++}}%
+	{
+		\definecolor{clr-background}{RGB}{0,0,0}
+		\definecolor{clr-text}{RGB}{255,255,255}
+		\definecolor{clr-string}{RGB}{163,21,21}
+		\definecolor{clr-namespace}{RGB}{255,255,255}
+		\definecolor{clr-preprocessor}{RGB}{128,128,128}
+		\definecolor{clr-keyword}{RGB}{0,0,255}
+		\definecolor{clr-type}{RGB}{43,145,175}
+		\definecolor{clr-variable}{RGB}{255,255,255}
+		\definecolor{clr-constant}{RGB}{111,156,234} % macro color
+		\definecolor{clr-comment}{RGB}{218,240,13}
+		\definecolor{clr-serial}{RGB}{22,219,194}
+		\definecolor{clr-add}{RGB}{101,156,234}
+	
+	
+		\lstdefinestyle{c++}%
+		{
+			backgroundcolor=\color{clr-background},
+			basicstyle=\scriptsize\ttfamily\color{clr-text}, % any text
+			stringstyle=\color{clr-string},
+			identifierstyle=\color{clr-variable}, % just about anything that isn't a directive, comment, string or known type
+			commentstyle=\color{clr-comment},
+			keywordstyle=\color{clr-type},
+			morekeywords={[2]char,int,void, long,enum}, keywordstyle={[2]\color{clr-constant}}, % you'll need to define these or use a custom language
+			morecomment=[s][\color{red}]{/*!}{*/},
+			tabsize=4,
+			escapeinside={<@}{@>},
+			captionpos=b,
+			frame=single,
+			framexleftmargin=5pt,
+			framexrightmargin=0.5cm,
+			numberbychapter=false,
+			morekeywords ={Serial,Serial1,Serial2},keywordstyle=\color{clr-serial}
+		}
+
+	
+		\lstset{style=c++}%set this style for the rest of the page
+	
+		
+	
+	}{}
+	
+
+
+
+
+
+
+
+
+
+}{}
