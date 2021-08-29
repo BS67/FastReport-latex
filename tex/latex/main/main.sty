@@ -82,7 +82,7 @@
 		\ifthenelse{\equal{\textspacing}{2} }{\doublespacing}{}	
 
 %main font
-\RequirePackage{libertine}%no slanted variant
+\RequirePackage{courier}}%typewriter font
 %for every unit : \DeclareSIUnit{\fahrenheit}{\degree F} \SI{nb}{unit}
 \RequirePackage{siunitx}
 
@@ -108,11 +108,10 @@
 
 
 %caption
-\PassOptionsToPackage{justification=centering, format=hang, labelfont={sc}, textfont={bf,sl}, skip=10pt}{caption}
 \RequirePackage{caption}
-		\captionsetup[table]{position=top,font={tt}}
-		\captionsetup[figure]{position=above, font={tt}}	
-		\captionsetup[sub]{font={tt}}
+		\captionsetup[table]{justification=centering, format=hang, labelfont={sc,tt}, textfont={bf,sl,tt}, skip=10pt, position=top , labelsep=colon}
+		\captionsetup[figure]{justification=centering, format=hang, labelfont={sc,tt}, textfont={bf,sl,tt}, skip=10pt, position=above, labelsep=colon}	
+		\captionsetup[sub]{justification=centering, format=hang, labelfont={sc,tt}, textfont={bf,sl,tt}, skip=10pt, labelsep=colon}
 
 %compteur, met le num du chapitre aussi
 
@@ -249,7 +248,7 @@
 					\PassOptionsToPackage{english}{isodate}
 			}
 			{
-			\PackageError{my own package}{you didn't choosed a language}{package options : fr, de, en}
+			\PackageError{main-package}{you didn't choosed a language}{package options : fr, de, en}
 			}}}		
 
 	
@@ -341,7 +340,7 @@
 
 					
 \newcommand{\fnm}{\footnotemark}
-\newcommand{\pnm}[1]{\protecting{\footnotemark{#1}}} % a utiliser dans ce qui est écrit dans les tables 
+\newcommand{\pnm}{\protecting{\footnotemark}} % a utiliser dans ce qui est écrit dans les tables 
 \newcommand{\fnt}{\footnotetext}
 					
 				
@@ -416,5 +415,6 @@
 	\newcommand{\refB}[2]{\hypertarget{#1}{\hyperlink{#1A}{#2}}}
 
 }{}
+
 \let\oldref\ref
 \renewcommand{\ref}{ \ref} %ajoute un espace avant		

@@ -142,7 +142,7 @@
 				{} % before-code
 				[~:~] % after-code
 				
-			%\titlespacing*{command}{left}{before-sep}{after-sep}[right-sepi] 
+			%\titlespacing*{command}{left}{before-sep}{after-sep}[right-sep] 
 			\titlespacing*{\chapter}				{0cm}		{0cm}		{0.7cm}
 			\titlespacing*{\section}				{0.5cm}	{1cm}		{0.7cm}
 			\titlespacing*{\subsection}			{0.5cm}	{0.7cm}	{0.7cm}
@@ -195,7 +195,7 @@
 				{} % before-code
 				[~:~] % after-code
 				
-			%\titlespacing*{command}{left}{before-sep}{after-sep}[right-sepi] 
+			%\titlespacing*{command}{left}{before-sep}{after-sep}[right-sep] 
 			\titlespacing*{\chapter}				{0cm}		{0cm}		{0.7cm}
 			\titlespacing*{\section}				{0.5cm}	{1cm}		{0.7cm}
 			\titlespacing*{\subsection}			{1cm}	{0.5cm}	{0.5cm}
@@ -246,12 +246,19 @@
 				{1pt} % sep
 				{} % before-code
 				[~:~] % after-code
+				
+			%\titlespacing*{command}{left}{before-sep}{after-sep}[right-sep] 
+			\titlespacing*{\chapter}				{0cm}		{0cm}		{0.2cm}
+			\titlespacing*{\section}				{0.3cm}	{1cm}		{0.7cm}
+			\titlespacing*{\subsection}			{0.5cm}	{0.7cm}	{0.7cm}
+			\titlespacing*{\subsubsection}		{0.5cm}	{0.3cm}	{0.5cm}
+			\titlespacing*{\paragraph}			{0.7cm}	{\parskip}{3pt}%before=\parskip : longueur entre paragraph
 }{}
 %	==============================================================
 %	page styling
 % ==============================================================
 
-\iftoggle{newchappage}{\let\newcpage\newpage}{\def\newcpage{}}
+\iftoggle{newchappage}{\let\newcpage\newpage}{\def\newcpage{\clearpage}}
 
 %attention peut causer des prob en twocolumn car les ifs ont été supprimé
 \makeatletter
