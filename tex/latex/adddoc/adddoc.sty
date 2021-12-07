@@ -22,7 +22,7 @@
 \newtoggle{attach} 
 \newtoggle{code}
 
-\DeclareOptionX{activ}[true]{\toggletrue{attach} \def\activ{#1}} %print the table
+\DeclareOptionX{actif}[true]{\toggletrue{attach} \def\activ{#1}} %print the table
 \DeclareOptionX{pathappendix}{\newcommand{\appath}{#1}} %Anhang/
 \DeclareOptionX{code}{\toggletrue{code}\newcommand{\codetyp}{#1}} %only c++
 \DeclareOptionX{logo}{\newcommand{\appathlogo}{#1}}%logo a mettre en entête
@@ -276,7 +276,7 @@
 			identifierstyle=\color{clr-variable}, % just about anything that isn't a directive, comment, string or known type
 			commentstyle=\color{clr-comment},
 			keywordstyle=\color{clr-type},
-			morekeywords={[2]char,int,void, long,enum}, keywordstyle={[2]\color{clr-constant}}, % you'll need to define these or use a custom language
+			morekeywords={[2]char,int,void, long,enum}, keywordstyle={[2]				\color{clr-constant}}, % you'll need to define these or use a custom language
 			morecomment=[s][\color{red}]{/*!}{*/},
 			tabsize=4,
 			escapeinside={<@}{@>},

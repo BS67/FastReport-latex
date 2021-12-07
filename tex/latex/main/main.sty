@@ -3,6 +3,9 @@
 
 
 
+
+
+
 % =============================================================
 % base packages
 % =============================================================
@@ -29,7 +32,7 @@
 \DeclareOptionX{floatbarrier}{\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{floatbarrier}}{}}
 \DeclareOptionX{link}{			\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{link}}{}}
 \DeclareOptionX{svg}{				\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{svg}}{}}
-\DeclareOptionX{bibstyle}{ \newcommand{\bibstyle}{#1}}
+\DeclareOptionX{bibstyle}{ \newcommand{\mybibstyle}{#1}}
 \DeclareOptionX{bib}{				\ifthenelse{\equal{#1}{no}}{}{\toggletrue{bib} \newcommand{\bibfile}{#1}}}
 \DeclareOptionX{math}{\toggletrue{math}			\ifthenelse{\equal{#1}{old} }{\def\mathmode{old}}{\def\mathmode{new}}}
 \DeclareOptionX{spacing}{\newcommand{\textspacing}{#1}}%savoir quel style de titre
@@ -40,11 +43,12 @@
 \ProcessOptionsX\relax
 \providecommand{\fancygeometry}{1}
 \providecommand{\textspacing}{1}
-\providecommand{\bibstyle}{unsrt}
+\providecommand{\mybibstyle}{unsrt}
 \providecommand{\doclanguage}{fr}
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 % MAIN
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
 
 % =============================================================
 % raccourci de base
@@ -73,6 +77,7 @@
 %paragraph spacing
 \setlength{\parindent}{5ex}
 \setlength{\parskip}{5mm plus 3pt minus3pt }
+\widowpenalties 1 10000 %evite les pagebreaks au milieu des paragraphes
 
 %text interspacing 
 \RequirePackage{setspace}
@@ -82,7 +87,8 @@
 		\ifthenelse{\equal{\textspacing}{2} }{\doublespacing}{}	
 
 %main font
-\RequirePackage{courier}}%typewriter font
+\RequirePackage{libertine}%main font
+\RequirePackage{courier} %typewriter font
 %for every unit : \DeclareSIUnit{\fahrenheit}{\degree F} \SI{nb}{unit}
 \RequirePackage{siunitx}
 
@@ -107,10 +113,10 @@
 
 
 
-%caption
+%caption pour tableau, figure, subfigure
 \RequirePackage{caption}
-		\captionsetup[table]{justification=centering, format=hang, labelfont={sc,tt}, textfont={bf,sl,tt}, skip=10pt, position=top , labelsep=colon}
-		\captionsetup[figure]{justification=centering, format=hang, labelfont={sc,tt}, textfont={bf,sl,tt}, skip=10pt, position=above, labelsep=colon}	
+		\captionsetup[table]{justification=centering, format=hang,  labelfont={sc,tt}, textfont={bf,sl,tt}, skip=10pt, position=above, labelsep=colon}
+		\captionsetup[figure]{justification=centering, format=hang, labelfont={sc,tt}, textfont={bf,sl,tt}, skip=10pt, position=bottom, labelsep=colon}	
 		\captionsetup[sub]{justification=centering, format=hang, labelfont={sc,tt}, textfont={bf,sl,tt}, skip=10pt, labelsep=colon}
 
 %compteur, met le num du chapitre aussi
@@ -219,8 +225,8 @@
 \SetEnumitemKey{sblist}{labelindent=1cm, label= \alph*)}
 \SetEnumitemKey{sbblist}{labelindent=1.5cm, label= \textit{(\arabic*)}}
 \makeatletter
-	\@beginparpenalty=300 % high penality -> do not encourage break
-	\@itempenalty=300% high penality -> do not encourage break
+	\@beginparpenalty=1000 % high penality -> do not encourage break
+	\@itempenalty=1000% high penality -> do not encourage break
 	\@endparpenalty=1% low penality ->  encourage break
 \makeatother
 %	==============================================================
@@ -287,8 +293,6 @@
 		\ifthenelse{\equal{\mathmode}{old}}{
 			\PassOptionsToPackage{fleqn}{amsmath} % num a droite
 			\RequirePackage{amsmath,amssymb,amsfonts} % remplacé par mathtools
-				\newcommand\eq[1]{\begin{align}#1\end{align}} %equations
-				\newcommand\noeq[1]{\begin{align*}#1\end{align*}}%pour les paramètres	
 				
 				
 							\renewcommand{\[}{\mbox{[\hspace{-0.45em} [}} % accolades pour entiers
@@ -307,7 +311,9 @@
 							\newcommand{\A}{\mathcal{A}}
 							\newcommand{\F}{\mathcal{F}}
 							\renewcommand{\L}{\mathcal{L}}
-
+							
+				\newcommand\eq[1]{\begin{align}#1\end{align}} %equations
+				\newcommand\noeq[1]{\begin{align*}#1\end{align*}}
 
 
 \newcommand{\bc}{\begin{cases}} 
@@ -315,8 +321,16 @@
 				
 				
 		}{
+			\PassOptionsToPackage{fleqn}{amsmath}
 			\PassOptionsToPackage{disallowspaces}{mathtools} %https://ctan.crest.fr/tex-archive/macros/latex/contrib/mathtools/mathtools.pdf
-			\RequirePackage{mathtools}%mathtools très très puissant voir si problème il y a enormément de chose
+			\RequirePackage{amsmath, mathtools}%mathtools très très puissant voir si problème il y a enormément de chose
+			
+				\providecommand\eq[1]{\begin{align}#1\end{align}} %equations
+				\providecommand\noeq[1]{\begin{align*}#1\end{align*}}
+
+
+			\providecommand{\bc}{\begin{dcases}} 
+			\providecommand{\ec}{\end{dcases}}
 		}
 	
 			
@@ -339,8 +353,8 @@
 %protecting : etoolbox robust cmd
 
 					
-\newcommand{\fnm}{\footnotemark}
-\newcommand{\pnm}{\protecting{\footnotemark}} % a utiliser dans ce qui est écrit dans les tables 
+\newcommand{\fnm}{\footnotemark~}
+\newcommand{\pnm}{\protecting{\footnotemark}~} % a utiliser dans ce qui est écrit dans les tables 
 \newcommand{\fnt}{\footnotetext}
 					
 				
@@ -370,10 +384,10 @@
 
 \iftoggle{bib}{
 					\RequirePackage{cite}	
-					\RequirePackage{natbib}%pour commande bibsection
-					\renewcommand{\bibsection}{\section}
-					\def\biblio{
-							\bibliographystyle{\bibstyle}
+					\patchcmd{\bibliography}{\chapter}{\section}{et la ?} %transforme le chapitre en section
+
+					\def\biblio{ 
+							\bibliographystyle{\mybibstyle}
 							\bibliography{\bibfile}
 					}
 					
