@@ -1,0 +1,137 @@
+\chapter{Dans un fichier bibtex}
+
+\section{initialisation}
+\begin{verbatim}
+\usepackage{cite} pour la bibliographie
+\end{verbatim}
+
+environnement suivant à place au tout début avant document class :
+\begin{verbatim}
+\begin{filecontents*}{document.bib}
+%%here
+\end{filecontents*}
+\end{verbatim}
+
+\section{commande}
+
+\textbf{@type\_d'œuvre}\{\%\\
+\textsl{référence\_courte}\textbf{,} \\
+Titre\_du\_champ1=\{texte de votre choix\}\textbf{,} \\
+Titre\_du\_champ2=\{texte de votre choix\},\\
+Titre\_du\_champ3=\{texte de votre choix\},\\
+Titre\_du\_champ4=\{texte de votre choix\},\\
+\}\\
+\textit{Entre deux œuvres, mon texte est considéré comme commentaire.\\}
+\textbf{@type\_d'œuvre}\{\%
+\\\textsl{référence\_courte},\\
+Titre\_du\_champ1=\{texte de votre choix\},\\
+Titre\_du\_champ2=\{texte de votre choix\},\\
+Titre\_du\_champ3=\{texte de votre choix\},\\
+Titre\_du\_champ4=\{texte de votre choix\},\\
+\}
+@misc : defaut, site internet
+
+\textbf{@STRING(raccourci = "texte en entier" )}
+
+\textit{" texte" \# raccourci }, \textbf{attention laisser espace ou newline autour \# avant de mettre les 2 strings}
+
+Si besoin de précision : autre fx surlignée dans fichier
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{table}
+	\centering
+		\begin{tabular}{|l|l|l|}
+			
+\hline		
+Type d'oeuvre & pour quel type de document & Champs  \\\hline
+
+@article & Article & 
+\myminipage{ \vspace{0.5cm}
+author\\
+journal\\
+title\\
+year\\
+month\\
+pages\\
+notes  \vspace{0.5cm}\\} \\\hline
+
+@book& Livre &
+\myminipage{ \vspace{0.5cm}
+author\\
+title\\
+publisher\\
+year \vspace{0.5cm}\\} \\\hline
+
+@manual& Document technique&
+\myminipage{ \vspace{0.5cm}
+title\\
+author\\
+year\\
+organization \vspace{0.5cm}\\} \\\hline
+
+@misc& Divers&
+\myminipage{\vspace{0.5cm}
+author\\
+title\\
+month\\
+year\\
+note \vspace{0.5cm}\\} \\\hline
+
+@phdthesis& Thése de docotorat&
+\myminipage{ \vspace{0.5cm}
+title\\
+author\\
+school\\
+year \vspace{0.5cm}\\} \\\hline
+
+@unpublished & Manuscrit non publié&
+\myminipage{ \vspace{0.5cm}
+author\\
+title\\
+note\\
+year\\
+month \vspace{0.5cm}\\}  \\\hline
+
+\end{tabular}
+	\caption{tableau récapitulatif}
+	\label{tab:tableauRécapitulatif}
+\end{table}
+
+\chapter{utilisation dans le document tex}
+
+\section{les commandes}
+
+\begin{verbatim}\cite{référence_courte}\end{verbatim}
+ \textit{pour créer la référence dans le texte}
+\begin{verbatim}\bibliographystyle{ }\end{verbatim} \textit{pour le style de la biblio}
+ \begin{verbatim}\bibliography{nom du fichier.bib sans l'extension .bib}\end{verbatim} \textit{pour créer une bibliographie avec le fichier:  document.bib}{\small crée plus tot}
+
+
+\section{les styles de bibliographie}
+
+\begin{description}
+\item[plain : ] classe les entrées par ordre alphabétique et les numérote en conséquence
+\item[abbrv : ] classe les entrées par ordre alphabétique, les numérote en conséquence et abrège certains éléments de la bibliographie
+\item[unsrt : ] trie les entrées par ordre d'apparition dans le texte 
+\item[alpha : ] le repère n'est plus un chiffre, mais les trois premières lettres du nom de l'auteur accolées aux deux derniers chiffres de l'année de parution
+\end{description}
+\chapter{compilation}
+\begin{enumerate}
+	\item latex
+	\item bibtex
+	\item latex
+\end{enumerate}
