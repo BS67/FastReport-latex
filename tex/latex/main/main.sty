@@ -34,6 +34,7 @@
 \DeclareOptionX{svg}{				\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{svg}}{}}
 \DeclareOptionX{bibstyle}{ \newcommand{\mybibstyle}{#1}}
 \DeclareOptionX{bib}{				\ifthenelse{\equal{#1}{no}}{}{\toggletrue{bib} \newcommand{\bibfile}{#1}}}
+\DeclareOptionX{table}{			\newcommand{\mylistoftables}{\listoftables}}
 \DeclareOptionX{math}{\toggletrue{math}			\ifthenelse{\equal{#1}{old} }{\def\mathmode{old}}{\def\mathmode{new}}}
 \DeclareOptionX{spacing}{\newcommand{\textspacing}{#1}}%savoir quel style de titre
 \DeclareOptionX{language}{\newcommand{\doclanguage}{#1}}
@@ -45,6 +46,7 @@
 \providecommand{\textspacing}{1}
 \providecommand{\mybibstyle}{unsrt}
 \providecommand{\doclanguage}{fr}
+\providecommand{\mylistoftables}{}
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 % MAIN
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -182,7 +184,7 @@
 % ---------------------------------
 % table print title language
 % ---------------------------------
-\ifthenelse{\equal{\doclanguage}{fr}}{\newcommand*{\tabletitle}{Listes}}{}
+\ifthenelse{\equal{\doclanguage}{fr}}{\newcommand*{\tabletitle}{Listes \& Tables}}{}
 \ifthenelse{\equal{\doclanguage}{de}}{\newcommand*{\tabletitle}{Verzeichnisse}}{}
 \ifthenelse{\equal{\doclanguage}{en}}{\newcommand*{\tabletitle}{Tables}}{}
 
@@ -193,7 +195,7 @@
 \def\prechap{}%dans style package
 	\chapter{\tabletitle}
 	\listoffigures
-	\listoftables
+	\mylistoftables
 	\listofappendixs
 	\biblio
 }
@@ -226,7 +228,7 @@
 \SetEnumitemKey{sbblist}{labelindent=1.5cm, label= \textit{(\arabic*)}}
 \makeatletter
 	\@beginparpenalty=1000 % high penality -> do not encourage break
-	\@itempenalty=1000% high penality -> do not encourage break
+	\@itempenalty=10000% high penality -> do not encourage break
 	\@endparpenalty=1% low penality ->  encourage break
 \makeatother
 %	==============================================================
