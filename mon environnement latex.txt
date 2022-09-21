@@ -1,0 +1,6 @@
+installer Vscode
+	extention latex workshop + ltex languagetool 
+	extension live share qui permet de modifier la même chose==> il faut un compte github cependant
+
+pour aller plus vite utiliser :  file+preference+user snippet + latex json, celui qui est avec ce dossier
+

@@ -1,0 +1,102 @@
+{
+	"Crée le document principal": {
+		"prefix": "main",
+	 	"body": [
+			"% LTeX: language=fr",
+			"\\documentclass[12pt,twoside]{report}",
+			"\\usepackage[language=fr, math=new,link, quote, floatbarrier, geometry=1]{main}",
+			"\\usepackage[titlenum=2,fancytitle=3,fancypage=4, name={Benjamin Stambach \\\\ MIQ3},logo={pictures/Insas_logo.png} ]{styles}",
+			"\\usepackage[actif=false]{adddoc}",
+			"\\begin{document}",
+			"\\input{src_tex/pdg.tex}",
+			"\\pagestyle{debut}",
+			"\\newpage",
+			"\\input{src_tex/resume_remerciement.tex}",
+			"\\tableofcontents",
+			"\\justify",
+			"\\sloppy",
+			"\\newpage",
+			"\\pagestyle{main}",
+			"\\input{src_tex/.tex}",
+			"\\tables",
+			"\\end{document}",
+	 		"$2"
+	 	],
+	 	"description": "fichier principal"
+	},
+
+	"insertion d'une image": {
+		"prefix": "figure",
+	 	"body": [
+			"\\begin{figure}[!ht]",
+    		"\t\\centering",
+    		"\t\\includegraphics[width=0.5\\textwidth]{image/$2}",
+    		"\t\\caption{}",
+			"\t\\label{fig:}",
+			"\\end{figure}"
+	 	],
+	 	"description": "insertion d'une image"
+	}
+	,
+
+	"reconnaissance de la langue Ltex": {
+		"prefix": "ltex",
+		"body": [
+			"% LTeX: language=fr",
+			"$2"
+		],
+		"description": "comment pour ltex"
+	},
+
+	"deux images côte à le côte": {
+		"prefix": "twopic",
+		"body": [
+		"\\begin{figure}[!ht]",
+    	"\t\\centering",
+    	"\t\\twopic{\\includegraphics[width=\\textwidth]{pictures/$2.png}\\subcaption{}}{\\includegraphics[width=\\textwidth]{pictures/}\\subcaption{}}",
+    	"\t\\caption{}",
+    	"\t\\label{fig:}",
+		"\\end{figure}"
+		],
+		"description": "double picture"
+	},
+
+	"première page de garde": {
+		"prefix": "pdg1",
+		"body": [
+			"\\begin{titlepage}",
+			"\t\\topmargin=-2cm",
+			"\t\\begin{flushright}",
+				"\t\t\\includegraphics[width=0.50\\textwidth]{pictures/Insas_logo.png}",
+			"\t\\end{flushright}",
+		"\\vspace{3cm}",
+			"\t\\begin{sffamily}",
+				"\t\t\\begin{center}",
+					"\t\t\t\\textsc{\\huge title 1 }\\vspace{2cm}",
+					"\t\t\t\\vspace{1.5cm}",
+		"\\hrule \\vspace{1.3cm}",
+						"\t\t\t\t{ \\centering \\huge \\bfseries title 2\\\\ [0.2cm] {\\origdate \\daterange{début}{fin}} \\vspace{1.5cm} }",
+		"\\hrule \\vspace{1cm}",
+					"\t\t\t\\begin{minipage}{0.5\\textwidth}",
+						"\t\t\t\t\\begin{centering}",
+						"\t\t\t\t{\\Large \\textbf{Benjamin \\textsc{Stambach}}}\\vp",
+						"\t\t\t\t{\\large \\textsl{MIQ4}}\\vp",
+						"\t\t\t\t\\end{centering}",
+					"\t\t\t\\end{minipage}%",
+					"\t\t\t\\vspace{0.5cm}",
+					"\t\t\t\\begin{minipage}{\\textwidth}",
+						"\t\t\t\t\\centering",
+						"\t\t\t\t\\includegraphics[width=0.5\\textwidth]{pictures/}",
+					"\t\t\t\\end{minipage}",
+		"\\vspace{2cm}",
+		"\\vfill",
+		"% Bottom of the page",
+				"\t\t\\end{center}",
+			"\t\\end{sffamily}",
+		"\\end{titlepage}"
+		],
+		"description": "double picture"
+	}
+
+}
+
