@@ -1,4 +1,4 @@
-installer Vscode
+installer Vscode et perl (prendre strawberry)
 	extention latex workshop + ltex languagetool 
 	extension live share qui permet de modifier la même chose==> il faut un compte github cependant
 
