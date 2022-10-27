@@ -141,7 +141,7 @@
 
 %regarder dans geometry pour trouver l'offset --> package automatique
 \newcommand\sidecap[2]{
-\begin{figure}[!ht]
+\begin{figure}[H]
 	\hspace{-1cm}\begin{minipage}[m]{0.8\textwidth}\centering#1 \end{minipage}%
 	\nolinebreak\hspace{0.5cm}\begin{minipage}[m]{0.3\textwidth} \small #2 \end{minipage}
 \end{figure}
@@ -324,11 +324,12 @@
 				
 		}{
 			\PassOptionsToPackage{fleqn}{amsmath}
-			\PassOptionsToPackage{disallowspaces}{mathtools} %https://ctan.crest.fr/tex-archive/macros/latex/contrib/mathtools/mathtools.pdf
+			\PassOptionsToPackage{allowspaces}{mathtools} %https://ctan.crest.fr/tex-archive/macros/latex/contrib/mathtools/mathtools.pdf
 			\RequirePackage{amsmath, mathtools}%mathtools très très puissant voir si problème il y a enormément de chose
 			
 				\providecommand\eq[1]{\begin{align}#1\end{align}} %equations
 				\providecommand\noeq[1]{\begin{align*}#1\end{align*}}
+				
 
 
 			\providecommand{\bc}{\begin{dcases}} 

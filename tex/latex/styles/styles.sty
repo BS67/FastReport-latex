@@ -90,6 +90,19 @@
 		
 		}{}
 
+\ifthenelse{\equal{\titlenum}{2}}
+		{
+			\makeatletter
+			\renewcommand{\thechaptertitle}{\@Roman\c@chapter\chappoint}
+			\renewcommand{\thechapter}{\@Roman\c@chapter.} 
+			\renewcommand{\thesection}{}
+			\renewcommand\thesubsection {\@Alph\c@section.\@arabic\c@subsection}
+			\renewcommand{\thesubsubsection}{\thesubsection\@alph\c@subsubsection}
+			\renewcommand{\theparagraph}{\@roman\c@paragraph}
+			\makeatother
+		
+		}{}
+
 
 
 
@@ -254,6 +267,7 @@
 			\titlespacing*{\subsubsection}		{0.5cm}	{0.3cm}	{0.5cm}
 			\titlespacing*{\paragraph}			{0.7cm}	{\parskip}{3pt}%before=\parskip : longueur entre paragraph
 }{}
+
 %	==============================================================
 %	page styling
 % ==============================================================
