@@ -93,6 +93,8 @@
 \RequirePackage{courier} %typewriter font
 %for every unit : \DeclareSIUnit{\fahrenheit}{\degree F} \SI{nb}{unit}
 \RequirePackage{siunitx}
+\DeclareSIUnit{\dBV}{dBV}
+\sisetup{ detect-all = true }
 
 %	==============================================================
 %	figure, table, equation
@@ -330,10 +332,14 @@
 				\providecommand\eq[1]{\begin{align}#1\end{align}} %equations
 				\providecommand\noeq[1]{\begin{align*}#1\end{align*}}
 				
-
+				\mathtoolsset{showonlyrefs}
+				\usetagform{default}
 
 			\providecommand{\bc}{\begin{dcases}} 
 			\providecommand{\ec}{\end{dcases}}
+
+			\newcommand*\abs[1]{\lvert#1\rvert}
+			\usetagform{default}
 		}
 	
 			
