@@ -95,9 +95,9 @@
 			\makeatletter
 			\renewcommand{\thechaptertitle}{\@Roman\c@chapter\chappoint}
 			\renewcommand{\thechapter}{\@Roman\c@chapter.} 
-			\renewcommand{\thesection}{}
-			\renewcommand\thesubsection {\@arabic\c@subsection}
-			\renewcommand{\thesubsubsection}{\c@subsubsection}
+			\renewcommand{\thesection}{\@arabic\c@section.}
+			\renewcommand\thesubsection {\@Alph\c@section.\@arabic\c@subsection}
+			\renewcommand{\thesubsubsection}{\@arabic\c@subsubsection}
 			\renewcommand{\theparagraph}{\@roman\c@paragraph}
 			\makeatother
 		
