@@ -296,7 +296,7 @@
 
 		\ifthenelse{\equal{\mathmode}{old}}{
 			\PassOptionsToPackage{fleqn}{amsmath} % num a droite
-			\RequirePackage{amsmath,amssymb,amsfonts} % remplacé par mathtools
+			\RequirePackage{amsmath,amssymb,amsfonts} 
 				
 				
 							\renewcommand{\[}{\mbox{[\hspace{-0.45em} [}} % accolades pour entiers
@@ -327,7 +327,7 @@
 		}{
 			\PassOptionsToPackage{fleqn}{amsmath}
 			\PassOptionsToPackage{allowspaces}{mathtools} %https://ctan.crest.fr/tex-archive/macros/latex/contrib/mathtools/mathtools.pdf
-			\RequirePackage{amsmath, mathtools}%mathtools très très puissant voir si problème il y a enormément de chose
+			\RequirePackage{amsmath,amssymb,amsfonts, mathtools}%mathtools très très puissant voir si problème il y a enormément de chose
 			
 				\providecommand\eq[1]{\begin{align}#1\end{align}} %equations
 				\providecommand\noeq[1]{\begin{align*}#1\end{align*}}
@@ -341,6 +341,19 @@
 			\newcommand*\abs[1]{\lvert#1\rvert}
 			\usetagform{default}
 		}
+		\newcommand{\N}{\mathbb{N}}
+		\newcommand{\R}{\mathbb{R}}
+		\newcommand{\C}{\mathbb{C}}
+		\newcommand{\Z}{\mathbb{Z}}
+		\newcommand{\Q}{\mathbb{Q}}
+		\newcommand{\K}{\mathbb{K}}
+		\newcommand{\U}{\mathbb{U}}
+		\newcommand{\Mn}{\mathcal{M}_n}
+		\newcommand{\M}{\mathcal{M}}
+		\newcommand{\B}{\mathcal{B}}
+		\newcommand{\A}{\mathcal{A}}
+		\newcommand{\F}{\mathcal{F}}
+		\renewcommand{\L}{\mathcal{L}}
 	
 			
 			%equations
