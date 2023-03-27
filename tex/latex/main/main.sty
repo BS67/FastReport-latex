@@ -59,7 +59,6 @@
 \newcommand{\sbsec}{\subsection}
 \newcommand{\sbbsec}{\subsubsection}
 \newcommand{\para}{\paragraph*}
-
 % =============================================================
 % main Page style
 % =============================================================
@@ -449,7 +448,7 @@
 
 	\newcommand{\refA}[2]{\hyperlink{#1B}{\hypertarget{#1A}{#2}}}
 	\newcommand{\refB}[2]{\hypertarget{#1B}{\hyperlink{#1A}{#2}}}
-
+	\renewcommand{\url}[2]{\href{#1}{#2}}
 }{}
 
 \let\oldref\ref
