@@ -1,6 +1,17 @@
-installer Vscode et perl (prendre strawberry)
-	extention latex workshop + ltex languagetool 
-	extension live share qui permet de modifier la même chose==> il faut un compte github cependant
+installer Miktek 
+	ajouter ce dossier (package-latex) à miktek = setting/directories 
+	MAJ database
 
-pour aller plus vite utiliser :  file+preference+user snippet + latex json, celui qui est avec ce dossier
+installer Vscode 
+	extention latex workshop + ltex languagetool 
+	extension live share qui permet de modifier la même chose ==> il faut un compte github cependant
+	usersnippet :  file+preference+user snippet + latex json, celui qui est avec ce dossier
+
+installer perl (prendre strawberry) 
+	OU utiliser pdflatex
+	**ouvrir settings.json => coller le texte du fichier du dossier json**
+
+
+Quand les extensions ont démarré => reload pour qu'elle voient le pdflatex.exe de miktek
+
 
