@@ -87,7 +87,7 @@
 			\renewcommand{\thesection}{\@arabic\c@section.}
 			\renewcommand\thesubsection {\thesection\@arabic\c@subsection.}
 			\renewcommand{\thesubsubsection}{\thesubsection\@Alph\c@subsubsection}
-			\renewcommand{\theparagraph}{\@alph\c@paragraph}
+			\renewcommand{\theparagraph}{\@alph\c@paragraph)}
 			\makeatother
 		
 		}{}
@@ -98,9 +98,9 @@
 			\renewcommand{\thechaptertitle}{\@Roman\c@chapter\chappoint}
 			\renewcommand{\thechapter}{\@Roman\c@chapter.} 
 			\renewcommand{\thesection}{\@arabic\c@section.}
-			\renewcommand\thesubsection {\@Alph\c@section.\@arabic\c@subsection}
-			\renewcommand{\thesubsubsection}{\@arabic\c@subsubsection}
-			\renewcommand{\theparagraph}{\@roman\c@paragraph}
+			\renewcommand\thesubsection {\thesection\@alph\c@subsection}
+			\renewcommand{\thesubsubsection}{\@arabic\c@subsubsection.}
+			\renewcommand{\theparagraph}{\@alph\c@paragraph)}
 			\makeatother
 		
 		}{}
@@ -137,7 +137,7 @@
 				[hang] % shape
 				{\bf \itshape \Large } % format
 				{\thesubsection} % label
-				{1cm} % sep
+				{0,5cm} % sep
 				{} % before-code
 				[ ] % after-code
 				
@@ -145,7 +145,7 @@
 				[hang] % shape
 				{\bfseries \slshape } % format
 				{\thesubsubsection} % label
-				{1cm} % sep
+				{0,5cm} % sep
 				{} % before-code
 				[ ] % after-code
 
@@ -153,7 +153,7 @@
 				[runin] % shape
 				{\bf \slshape } % format
 				{} % label
-				{1pt} % sep
+				{0cm} % sep
 				{} % before-code
 				[~:~] % after-code
 				
@@ -162,7 +162,7 @@
 			\titlespacing*{\section}				{0.5cm}	{1cm}		{0.7cm}
 			\titlespacing*{\subsection}			{0.5cm}	{0.7cm}	{0.7cm}
 			\titlespacing*{\subsubsection}		{0.5cm}	{0.3cm}	{0.5cm}
-			\titlespacing*{\paragraph}			{0.7cm}	{\parskip}{3pt}%before=\parskip : longueur entre paragraph
+			\titlespacing*{\paragraph}			{0cm}	{\parskip}{3pt}%before=\parskip : longueur entre paragraph
 		
 		}{}
 	
@@ -198,7 +198,7 @@
 				[hang] % shape
 				{\bfseries \slshape } % format
 				{\thesubsubsection} % label
-				{1cm} % sep
+				{0,5cm} % sep
 				{} % before-code
 				[ ] % after-code
 
@@ -206,7 +206,7 @@
 				[runin] % shape
 				{\bf \slshape \color{MidnightBlue}} % format
 				{\theparagraph} % label
-				{1pt} % sep
+				{5pt} % sep
 				{} % before-code
 				[~:~] % after-code
 				
@@ -250,7 +250,7 @@
 				[hang] % shape
 				{\large \bfseries \slshape \sc} % format
 				{\thesubsubsection} % label
-				{1cm} % sep
+				{0,5cm} % sep
 				{} % before-code
 				[ ] % after-code
 
@@ -272,7 +272,7 @@
 
 %	==============================================================
 %	page styling
-% ==============================================================
+%	==============================================================
 
 \iftoggle{newchappage}{\let\newcpage\newpage}{\def\newcpage{\clearpage}}
 
@@ -387,3 +387,73 @@
 			}
 		
 }{}
+
+%	==============================================================
+%	modification table of content
+%	==============================================================
+\makeatletter
+\newcommand{\deflen}[2]{% créer une longeur et la définir aussitot
+  \expandafter\@ifdefinable\csname #1\endcsname{\prefix@deflen{#1}{#2}}%
+}
+
+\newcommand{\prefix@deflen}[2]{%
+  \expandafter\newlength\csname #1\endcsname
+  \expandafter\setlength\csname #1\endcsname{#2}%
+}
+
+
+\makeatother
+
+
+
+%distance entre
+\deflen{lenlabelsec}{2.3em}
+ \deflen{lenlabelsbsec}{2.3em}
+ \deflen{lenlabelsbbsec}{2.3em}
+ \deflen{lenlabelpara}{1.5em}
+
+%distance à gauche du numéro
+\deflen{leftspacesec}{1em}
+ \deflen{leftspacesbsec}{2em}
+ \deflen{leftspacesbbsec}{3.3em}
+ \deflen{leftspacepara}{\leftspacesbbsec +\lenlabelsbbsec }
+
+
+
+
+
+\RequirePackage{titletoc}
+
+
+\titlecontents{section} %hsectioni
+			[\lenlabelsec + \leftspacesec ] %hlefti % ie, 1.5em (chapter) + 2.3em
+			{}%habove-codei
+			{\contentslabel{\lenlabelsec}}%hnumbered-entry-formati
+			{\hspace*{-\lenlabelsec}}%hnumberless-entry-formati
+			{\titlerule*[1pc]{.}\contentspage}%hfiller-page-formati
+			[]%hbelow-codei
+
+
+\titlecontents{subsection} %hsectioni
+			[\lenlabelsbsec + \leftspacesbsec] %hlefti % ie, 1.5em (chapter) + 2.3em
+			{}%habove-codei
+			{\contentslabel{\lenlabelsbsec}}%hnumbered-entry-formati
+			{\hspace*{-\lenlabelsbsec}}%hnumberless-entry-formati
+			{\titlerule*[1pc]{.}\contentspage}%hfiller-page-formati
+			[]%hbelow-codei
+
+\titlecontents{subsubsection} %hsectioni
+			[\lenlabelsbbsec + \leftspacesbbsec] %hlefti % ie, 1.5em (chapter) + 2.3em
+			{}%habove-codei
+			{\contentslabel{\lenlabelsbbsec}}%hnumbered-entry-formati
+			{\hspace*{-\lenlabelsbbsec}}%hnumberless-entry-formati
+			{\titlerule*[1pc]{.}\contentspage}%hfiller-page-formati
+			[]%hbelow-codei
+
+\titlecontents{paragraph} %hsectioni
+			[\lenlabelpara + \leftspacepara] %hlefti % ie, 1.5em (chapter) + 2.3em
+			{}%habove-codei
+			{\contentslabel{\lenlabelpara}}%hnumbered-entry-formati
+			{\hspace*{-\lenlabelpara}}%hnumberless-entry-formati
+			{\titlerule*[1pc]{.}\contentspage}%hfiller-page-formati
+			[]%hbelow-codei
