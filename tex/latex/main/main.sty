@@ -192,7 +192,7 @@
 
 
 \newcommand\tables{
-\def\sufchap{~}%dans style package
+\def\sufchap{~}% supprimer une quelconque mise en forme provenant du style package
 \def\prechap{}%dans style package
 	\chapter{\tabletitle}
 	\listoffigures
@@ -225,8 +225,8 @@
 \setlist[itemize]{itemsep=0.75mm, topsep = 1mm, parsep=1mm, labelindent=5pt }	
 
 %2 nouveaux formats pour des subliste
-\SetEnumitemKey{sblist}{labelindent=1cm, label= \alph*)}
-\SetEnumitemKey{sbblist}{labelindent=1.5cm, label= \textit{(\arabic*)}}
+\SetEnumitemKey{sblist}{labelindent=1cm, leftmargin = *,label= \alph*)}
+\SetEnumitemKey{sbblist}{labelindent=1.5cm, leftmargin = *,label= \textit{(\roman*)}}
 \makeatletter
 	\@beginparpenalty=1000 % high penality -> do not encourage break
 	\@itempenalty=10000% high penality -> do not encourage break
@@ -372,7 +372,6 @@
 %	footnote
 % ==============================================================
 %protecting : etoolbox robust cmd
-
 					
 \newcommand{\fnm}{\footnotemark~}
 \newcommand{\pnm}{\protecting{\footnotemark}~} % a utiliser dans ce qui est écrit dans les tables 
@@ -448,8 +447,9 @@
 
 	\newcommand{\refA}[2]{\hyperlink{#1B}{\hypertarget{#1A}{#2}}}
 	\newcommand{\refB}[2]{\hypertarget{#1B}{\hyperlink{#1A}{#2}}}
+	\let\oldurl\url
 	\renewcommand{\url}[2]{\href{#1}{#2}}
 }{}
 
 \let\oldref\ref
-\renewcommand{\ref}{ \ref} %ajoute un espace avant		
+\renewcommand{\ref}{ \oldref} %ajoute un espace avant		
