@@ -25,6 +25,7 @@
 \DeclareOptionX{logo}{\newcommand{\pathlogo}{#1}}%logo a mettre en entête
 \DeclareOptionX{name}{\newcommand{\name}{{\begin{tabular}[b]{l@{}} #1 \end{tabular} }}}%noms à mettre en en-tête nom \\ nom ....
 \DeclareOptionX{titre}{\newcommand{\titre}{#1}}%titre milieux de page
+\DeclareOptionX{fancyfooter}{\newcommand{\fancyfooter}{#1}}%titre milieux de page
 %securité
 \DeclareOptionX{Chapprefix}{\PackageError{styles_package}{ChapPrefix avec les majuscules}}
 \DeclareOptionX{chapprefix}{\PackageError{styles_package}{ChapPrefix avec les majuscules}}
@@ -33,6 +34,7 @@
 \DeclareOptionX{newchappage}{\PackageError{styles_package}{NewChapPage avec les majuscules}}
 \ProcessOptionsX\relax
 
+\providecommand{\fancyfooter}{}
 \providecommand{\prefixchap}{}
 \providecommand{\name}{}
 \providecommand{\titre}{}
@@ -315,7 +317,7 @@
 		\newpagestyle{main}{%
 			\pagenumbering{arabic}
 			\sethead{\fontsize{20pt}{0pt}\selectfont \scshape \thechapter\hspace{3mm}\chaptertitle}{\titre}{\headlogo}
-			\setfoot{}{\centering \thepage}{}
+			\setfoot{\fancyfooter}{\centering \thepage}{}
 			\headrule
 			\setheadrule{0.4pt}
 			}
@@ -328,7 +330,7 @@
 		\newpagestyle{debut}{%
 			\pagenumbering{Roman}
 			\sethead{\name}{\titre}{\headlogo}
-			\setfoot{}{}{}
+			\setfoot{\fancyfooter}{}{}
 			\headrule
 			\setheadrule{0.4pt}
 			}
@@ -336,7 +338,7 @@
 		\newpagestyle{main}{%
 			\pagenumbering{arabic}
 			\sethead{\name}{\titre}{\headlogo}
-			\setfoot{}{\centering \thepage}{}
+			\setfoot{\fancyfooter}{\centering \thepage}{}
 			\headrule
 			\setheadrule{0.4pt}
 			}
@@ -351,7 +353,7 @@
 		\newpagestyle{debut}{%
 			\pagenumbering{Roman}
 			\sethead{\name}{\titre}{\headlogo}
-			\setfoot{}{\centering\Roman{page}}{}
+			\setfoot{\fancyfooter}{\centering\Roman{page}}{}
 			\headrule
 			\setheadrule{0.4pt}
 			}
@@ -359,7 +361,7 @@
 		\newpagestyle{main}{%
 			\pagenumbering{arabic}
 			\sethead{\fontsize{20pt}{0pt}\selectfont \scshape \thechapter\hspace{3mm}\chaptertitle}{\titre}{\headlogo}
-			\setfoot{}{\centering \thepage}{}
+			\setfoot{\fancyfooter}{\centering \thepage}{}
 			\headrule
 			\setheadrule{0.4pt}
 			}
@@ -373,7 +375,7 @@
 		\newpagestyle{debut}{%
 			\pagenumbering{Roman}
 			\sethead{\name}{\titre}{\headlogo}
-			\setfoot{}{\centering\Roman{page}}{}
+			\setfoot{\fancyfooter}{\centering\Roman{page}}{}
 			\headrule
 			\setheadrule{0.4pt}
 			}
@@ -381,7 +383,7 @@
 		\newpagestyle{main}{%
 			\pagenumbering{arabic}
 			\sethead{\name}{\titre}{\headlogo}
-			\setfoot{}{\centering \thepage}{}
+			\setfoot{\fancyfooter}{\centering \thepage}{}
 			\headrule
 			\setheadrule{0.4pt}
 			}
