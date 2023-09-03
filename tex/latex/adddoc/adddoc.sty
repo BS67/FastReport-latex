@@ -27,12 +27,14 @@
 \DeclareOptionX{code}{\toggletrue{code}\newcommand{\codetyp}{#1}} %only c++
 \DeclareOptionX{logo}{\newcommand{\appathlogo}{#1}}%logo a mettre en entête
 \DeclareOptionX{language}{\newcommand{\doclanguage}{#1}}
+\DeclareOptionX{fancyfooter}{\newcommand{\fancyfooter}{#1}}%titre milieux de page
 \ProcessOptionsX\relax
 
 %if not defined
 \providecommand{\appathlogo}{no}
 \providecommand{\appath}{ }
 \providecommand{\doclanguage}{fr}
+\providecommand{\fancyfooter}{}
 %	================================================================================================================================
 %	attachement
 % ==================================================================================================================================
@@ -148,7 +150,7 @@
 \newpagestyle{appendix}{%
 	\pagenumbering{Roman}
 	\sethead{\fontsize{20pt}{0pt}\selectfont \scshape \Alph{achapter}.\hspace{3mm} \achaptertitle}{}{\hfill\mbox{\apheadlogo}}
-	\setfoot{}{\centering \thepage}{}
+	\setfoot{\fancyfooter}{\centering \thepage}{}
 	\headrule
 	\setheadrule{0.4pt}
 }
@@ -164,7 +166,7 @@
 \let\oldappendix\appendix
 \renewcommand{\appendix}{%
 													%\setcounter{LastPage}{\value{page}}???
-													\newpage
+													\clearpage
 													\pagestyle{empty}
 													\oldappendix
 													\addcontentsline{toc}{chapter}{\attachname}
