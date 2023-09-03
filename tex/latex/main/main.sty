@@ -62,11 +62,16 @@
 % =============================================================
 % main Page style
 % =============================================================
-\ifthenelse{\equal{\fancygeometry}{1}}{
-\PassOptionsToPackage{paper=a4paper,tmargin=3cm,bmargin=3cm,lmargin=3cm,rmargin=1.5cm,headheight=100pt, headsep= 1cm, footskip=2cm}{geometry}}{}
-
 \RequirePackage{geometry}
+\ifthenelse{\equal{\fancygeometry}{1}}{
+\newgeometry{paper=a4paper,tmargin=3cm,bmargin=3cm,lmargin=3cm,rmargin=1.5cm,headheight=100pt, headsep= 1cm, footskip=2cm}}{}
+\ifthenelse{\equal{\fancygeometry}{2}}{
+\newgeometry{paper=a4paper,tmargin=3cm,bmargin=3cm,lmargin=1.5cm,rmargin=1.5cm,headheight=100pt, headsep= 1cm, footskip=2cm}}{}
 
+
+\savegeometry{normal}
+\newgeometry{tmargin=0cm,bmargin=0cm,lmargin=1.5cm,rmargin=1.5cm,headheight=0cm, headsep=0cm}
+\savegeometry{title}
 
 % =============================================================
 % text style
