@@ -62,11 +62,12 @@
 % =============================================================
 % main Page style
 % =============================================================
+\PassOptionsToPackage{paper=a4paper}{geometry} 
 \RequirePackage{geometry}
 \ifthenelse{\equal{\fancygeometry}{1}}{
-\newgeometry{paper=a4paper,tmargin=3cm,bmargin=3cm,lmargin=3cm,rmargin=1.5cm,headheight=100pt, headsep= 1cm, footskip=2cm}}{}
+\newgeometry{tmargin=3cm,bmargin=3cm,lmargin=3cm,rmargin=1.5cm,headheight=100pt, headsep= 1cm, footskip=2cm}}{}
 \ifthenelse{\equal{\fancygeometry}{2}}{
-\newgeometry{paper=a4paper,tmargin=3cm,bmargin=3cm,lmargin=1.5cm,rmargin=1.5cm,headheight=100pt, headsep= 1cm, footskip=2cm}}{}
+\newgeometry{tmargin=3cm,bmargin=3cm,lmargin=1.5cm,rmargin=1.5cm,headheight=100pt, headsep= 1cm, footskip=2cm}}{}
 
 
 \savegeometry{normal}
@@ -225,11 +226,14 @@
 % ==============================================================		
 \RequirePackage{enumitem}%parametrer enumeration
 %liste
-\setlist[enumerate]{itemsep=0.75mm , topsep = 1mm, parsep=1mm, labelindent=5pt, label= \arabic*.}
-\setlist[description]{itemsep=0.75mm, topsep = 1mm, parsep=1mm, labelindent=5pt }
-\setlist[itemize]{itemsep=0.75mm, topsep = 1mm, parsep=1mm, labelindent=5pt, label=\textbullet }	
+\setlist[enumerate]{itemsep=0.75mm , topsep = 0mm, parsep=1mm, labelindent=5pt, label= \arabic*.}
+\setlist[description]{itemsep=0.75mm, topsep = 0mm, parsep=1mm, labelindent=5pt }
+\setlist[itemize]{itemsep=0.75mm, topsep = 0mm, parsep=1mm, labelindent=5pt, label=\textbullet }	
 
 %2 nouveaux formats pour des subliste
+\newcommand{\doublepoint}[1]{{\bfseries #1 ~:~}}
+
+\SetEnumitemKey{dp}{font=\doublepoint}
 \SetEnumitemKey{sblist}{labelindent=1cm, leftmargin = *,label= \alph*)}
 \SetEnumitemKey{sbblist}{labelindent=1.5cm, leftmargin = *,label= \textit{(\roman*)}}
 \makeatletter
