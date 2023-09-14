@@ -107,6 +107,19 @@
 		
 		}{}
 
+\ifthenelse{\equal{\titlenum}{3}}
+{
+	\makeatletter
+	\renewcommand{\thechaptertitle}{\@Roman\c@chapter\chappoint}
+	\renewcommand{\thechapter}{\@Roman\c@chapter.} 
+	\renewcommand{\thesection}{\@arabic\c@section.}
+	\renewcommand\thesubsection {\@Alph\c@subsection.}
+	\renewcommand{\thesubsubsection}{\@arabic\c@subsubsection.}
+	\renewcommand{\theparagraph}{\@alph\c@paragraph)}
+	\makeatother
+
+}{}
+
 
 
 
@@ -425,7 +438,13 @@
 
 
 \RequirePackage{titletoc}
-
+\titlecontents{chapter} %hsectioni
+			[\leftspacesec] %hlefti % ie, 1.5em (chapter) + 2.3em
+			{}%habove-codei
+			{\contentslabel{\lenlabelsec}}%hnumbered-entry-formati
+			{\hspace*{-\lenlabelsec}}%hnumberless-entry-formati
+			{\titlerule*[1pc]{.}\contentspage}%hfiller-page-formati
+			[]%hbelow-codei
 
 \titlecontents{section} %hsectioni
 			[\lenlabelsec + \leftspacesec ] %hlefti % ie, 1.5em (chapter) + 2.3em
