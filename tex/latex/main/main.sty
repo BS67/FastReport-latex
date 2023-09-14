@@ -36,14 +36,14 @@
 \DeclareOptionX{bib}{				\ifthenelse{\equal{#1}{no}}{}{\toggletrue{bib} \newcommand{\bibfile}{#1}}}
 \DeclareOptionX{table}{			\newcommand{\mylistoftables}{\listoftables}}
 \DeclareOptionX{math}{\toggletrue{math}			\ifthenelse{\equal{#1}{old} }{\def\mathmode{old}}{\def\mathmode{new}}}
-\DeclareOptionX{spacing}{\newcommand{\textspacing}{#1}}%savoir quel style de titre
+\DeclareOptionX{spacing}{\newcommand{\textspacing}{#1}}
 \DeclareOptionX{language}{\newcommand{\doclanguage}{#1}}
 \DeclareOptionX{geometry}[1]{\newcommand{\fancygeometry}{#1}}
 \DeclareOptionX*{\PackageError{main_package}{the entry #1 doesn't exist}}
 
 \ProcessOptionsX\relax
 \providecommand{\fancygeometry}{1}
-\providecommand{\textspacing}{1}
+\providecommand{\textspacing}{1.5}% if not defined, will be set to 2
 \providecommand{\mybibstyle}{unsrt}
 \providecommand{\doclanguage}{fr}
 \providecommand{\mylistoftables}{}
@@ -83,15 +83,14 @@
 
 %paragraph spacing
 \setlength{\parindent}{5ex}
-\setlength{\parskip}{5mm plus 3pt minus3pt }
 \widowpenalties 1 10000 %evite les pagebreaks au milieu des paragraphes
 
 %text interspacing 
 \RequirePackage{setspace}
-\providecommand{\textspacing}{1}% if not defined, will be set to 1
-		\ifthenelse{\equal{\textspacing}{1} }{\singlespacing}{}
-		\ifthenelse{\equal{\textspacing}{1.5} }{\onehalfspacing}{}
-		\ifthenelse{\equal{\textspacing}{2} }{\doublespacing}{}	
+
+		\ifthenelse{\equal{\textspacing}{1} }{\singlespacing \setlength{\parskip}{1mm plus 3pt minus3pt } \def\setItemsep{0mm} \def\setParsep{0mm} }{}
+		\ifthenelse{\equal{\textspacing}{1.5} }{\onehalfspacing \setlength{\parskip}{2mm plus 3pt minus3pt } \def\setItemsep{0.75mm} \def\setParsep{1mm}}{}
+		\ifthenelse{\equal{\textspacing}{2} }{\doublespacing \setlength{\parskip}{5mm plus 3pt minus3pt } \def\setItemsep{1mm} \def\setParsep{1.5mm} }{}	
 
 %main font
 \RequirePackage{libertine}%main font
@@ -226,9 +225,9 @@
 % ==============================================================		
 \RequirePackage{enumitem}%parametrer enumeration
 %liste
-\setlist[enumerate]{itemsep=0.75mm , topsep = 0mm, parsep=1mm, labelindent=5pt, label= \arabic*.}
-\setlist[description]{itemsep=0.75mm, topsep = 0mm, parsep=1mm, labelindent=5pt }
-\setlist[itemize]{itemsep=0.75mm, topsep = 0mm, parsep=1mm, labelindent=5pt, label=\textbullet }	
+\setlist[enumerate]{itemsep=\setItemsep , topsep = 0mm, parsep=\setParsep, labelindent=5pt, label= \arabic*.}
+\setlist[description]{itemsep=\setItemsep, topsep = 0mm, parsep=\setParsep, labelindent=5pt }
+\setlist[itemize]{itemsep=\setItemsep, topsep = 0mm, parsep=\setParsep, labelindent=5pt, label=\textbullet }	
 
 %2 nouveaux formats pour des subliste
 \newcommand{\doublepoint}[1]{{\bfseries #1 ~:~}}
