@@ -223,11 +223,19 @@
 %	==============================================================
 %	enumerations
 % ==============================================================		
+\PassOptionsToPackage{inline}{enumitem}
 \RequirePackage{enumitem}%parametrer enumeration
 %liste
+<<<<<<< Updated upstream
 \setlist[enumerate]{itemsep=\setItemsep , topsep = 0mm, parsep=\setParsep, labelindent=5pt, label= \arabic*.}
 \setlist[description]{itemsep=\setItemsep, topsep = 0mm, parsep=\setParsep, labelindent=5pt }
 \setlist[itemize]{itemsep=\setItemsep, topsep = 0mm, parsep=\setParsep, labelindent=5pt, label=\textbullet }	
+=======
+%les liste * on le même paramétrage que les listes normales
+\setlist[enumerate]{itemsep=0.75mm , topsep = 0mm, parsep=1mm, labelindent=5pt, label= \arabic*.,font=\bfseries}
+\setlist[description]{itemsep=0.75mm, topsep = 0mm, parsep=1mm, labelindent=5pt }
+\setlist[itemize]{itemsep=0.75mm, topsep = 0mm, parsep=1mm, labelindent=5pt, label=\textbullet }	
+>>>>>>> Stashed changes
 
 %2 nouveaux formats pour des subliste
 \newcommand{\doublepoint}[1]{{\bfseries #1 ~:~}}
