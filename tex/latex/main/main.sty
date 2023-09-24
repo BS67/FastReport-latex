@@ -414,7 +414,7 @@
 
 \iftoggle{bib}{
 					\RequirePackage{cite}	
-					\patchcmd{\bibliography}{\chapter}{\section}{et la ?} %transforme le chapitre en section
+					\patchcmd{\thebibliography}{\chapter*{\bibname}}{\section{\bibname}}{}{} %transforme le chapitre en section
 
 					\def\biblio{ 
 							\bibliographystyle{\mybibstyle}
