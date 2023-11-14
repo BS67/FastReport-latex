@@ -709,7 +709,7 @@ Package babel Info: Hyphen rules for 'acadian' set to \l@french
 Package babel Info: Hyphen rules for 'canadien' set to \l@french
 (babel)             (\language22). Reported on input line 92.
 \FB@nonchar=\count283
-Package babel Info: Making : an active character on input line 430.
+Package babel Info: Making: an active character on input line 430.
 Package babel Info: Making ; an active character on input line 431.
 Package babel Info: Making ! an active character on input line 432.
 Package babel Info: Making ? an active character on input line 433.

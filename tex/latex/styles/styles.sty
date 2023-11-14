@@ -18,7 +18,7 @@
 \newtoggle{newchappage}
 
 \DeclareOptionX{NewChapPage}{\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{newchappage}}{}}	%for chapter create new page or not 	
-\DeclareOptionX{ChapPrefix}{\newcommand{\prefixchap}{#1}} % met un préfix devant le nom des chapitres, ex : Projet I
+\DeclareOptionX{ChapPrefix}{\newcommand{\prefixchap}{#1}} % met un préfix devant le nom des chapitres, ex: Projet I
 \DeclareOptionX{titlenum}{\newcommand{\titlenum}{#1}}%numérotation
 \DeclareOptionX{fancytitle}{\newcommand{\fancytitle}{#1}}%savoir quel style de titre
 \DeclareOptionX{fancypage}{\newcommand{\fancypage}{#1}}%savoir quel style de titre
@@ -65,7 +65,7 @@
 	
 \newcommand{\cprefix} % préfixe activé
 	{
-		\def\sufchap{ :~} %ajout d'un ":"
+		\def\sufchap{:~} %ajout d'un ":"
 		\def\chappoint{} % I
 		\def\prechap{\prefixchap~} % ajoute le préfixe
 	}
@@ -177,7 +177,7 @@
 			\titlespacing*{\section}				{0.5cm}	{1cm}		{0.7cm}
 			\titlespacing*{\subsection}			{0.5cm}	{0.7cm}	{0.7cm}
 			\titlespacing*{\subsubsection}		{0.5cm}	{0.3cm}	{0.5cm}
-			\titlespacing*{\paragraph}			{0cm}	{\parskip}{3pt}%before=\parskip : longueur entre paragraph
+			\titlespacing*{\paragraph}			{0cm}	{\parskip}{3pt}%before=\parskip: longueur entre paragraph
 		
 		}{}
 	
@@ -230,7 +230,7 @@
 			\titlespacing*{\section}				{0.5cm}	{1cm}		{0.7cm}
 			\titlespacing*{\subsection}			{1cm}	{0.5cm}	{0.5cm}
 			\titlespacing*{\subsubsection}		{2cm}	{0.5cm}	{0.5cm}
-			\titlespacing*{\paragraph}			{0.7cm}	{\parskip}{3pt}%before=\parskip : longueur entre paragraph
+			\titlespacing*{\paragraph}			{0.7cm}	{\parskip}{3pt}%before=\parskip: longueur entre paragraph
 		
 		}{}
 	% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -282,7 +282,7 @@
 			\titlespacing*{\section}				{0.3cm}	{1cm}		{0.7cm}
 			\titlespacing*{\subsection}			{0.5cm}	{0.7cm}	{0.7cm}
 			\titlespacing*{\subsubsection}		{0.5cm}	{0.3cm}	{0.5cm}
-			\titlespacing*{\paragraph}			{0.7cm}	{\parskip}{3pt}%before=\parskip : longueur entre paragraph
+			\titlespacing*{\paragraph}			{0.7cm}	{\parskip}{3pt}%before=\parskip: longueur entre paragraph
 }{}
 
 %	==============================================================
