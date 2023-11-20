@@ -185,14 +185,14 @@
 \newcommand{\pdf}[4][false]%
 {
 	\attachment{#2}{ap:#3}
-	\includepdf[scale=.8, pages=-, landscape=#1, pagecommand={\section*{#2}}]{\appath#4}
+	\includepdf[scale=.8, pages=-,offset ={0cm -2cm}, landscape=#1, pagecommand={\section*{#2}}]{\appath#4}
 									}
 
 	%\pdf[langscape->true/false]{taille}{titre}{ref}{nom du doc avec extension}		
 	\newcommand{\pdfsize}[5][false]%
 	{ 	
 		\attachment{#3}{ap:#4}
-		\includepdf[scale=#2, pages=-, landscape=#1, pagecommand={\section*{#3}}]{\appath#5}
+		\includepdf[scale=#2, pages=-,offset ={0cm -2cm}, landscape=#1, pagecommand={\section*{#3}}]{\appath#5}
 	}
 	
 	%---------------------------------------
