@@ -82,7 +82,7 @@
 % text style
 % =============================================================
 \PassOptionsToPackage{document}{ragged2e} 
-\RequirePackage{ragged2e} % permet un alignement du texte qui soit plus naturel avec les cmd  : \Centering \RaggedLeft \RaggedRight
+\RequirePackage{ragged2e} % permet un alignement du texte qui soit plus naturel avec les cmd: \Centering \RaggedLeft \RaggedRight
 \RequirePackage{parskip}%pour avoir des parskip qui soient propre et qui ne donnent pas de trucs bizarre
 
 %paragraph spacing
@@ -99,7 +99,7 @@
 %main font
 \RequirePackage{libertine}%main font
 \RequirePackage{courier} %typewriter font
-%for every unit : \DeclareSIUnit{\fahrenheit}{\degree F} \SI{nb}{unit}
+%for every unit: \DeclareSIUnit{\fahrenheit}{\degree F} \SI{nb}{unit}
 \RequirePackage{siunitx}
 \DeclareSIUnit{\dBV}{dBV}
 \sisetup{ detect-all = true }
@@ -110,14 +110,14 @@
 
 \RequirePackage{graphics}
 \PassOptionsToPackage{dvips}{graphicx}
-\PassOptionsToPackage{svgnames}{xcolor}%donne des couleurs, ex : Midnightblue
+\PassOptionsToPackage{svgnames}{xcolor}%donne des couleurs, ex: Midnightblue
 \RequirePackage{graphicx,xcolor}
 \RequirePackage{subcaption} %create cmd to make subcaption easyer
 
 
 
-\RequirePackage{multirow} % : 
-	%\multicolumn{nomb_col}{alignement ex :|c|}{contenu} 
+\RequirePackage{multirow} %: 
+	%\multicolumn{nomb_col}{alignement ex:|c|}{contenu} 
 	%\multirow{nomb_ligne}{largeur ex * }{contenu qui est 1 fusionné}
 
 \setlength\textfloatsep{8pt plus 2pt minus 2pt}%espace avant float
@@ -277,12 +277,12 @@
 					\PassOptionsToPackage{english}{isodate}
 			}
 			{
-			\PackageError{main-package}{you didn't choosed a language}{package options : fr, de, en}
+			\PackageError{main-package}{you didn't choosed a language}{package options: fr, de, en}
 			}}}		
 
 	
 	\RequirePackage{babel}
-	\RequirePackage{isodate} % dateprint : https://mirrors.chevalier.io/CTAN/macros/latex/contrib/isodate/isodate.pdf
+	\RequirePackage{isodate} % dateprint: https://mirrors.chevalier.io/CTAN/macros/latex/contrib/isodate/isodate.pdf
 
 %	==============================================================
 %	maths
@@ -391,7 +391,7 @@
 %	==============================================================
 %	footnote
 % ==============================================================
-%protecting : etoolbox robust cmd
+%protecting: etoolbox robust cmd
 					
 \newcommand{\fnm}{\footnotemark~}
 \newcommand{\pnm}{\protecting{\footnotemark}~} % a utiliser dans ce qui est écrit dans les tables 
@@ -404,8 +404,8 @@
 \iftoggle{quote}{
 					\PassOptionsToPackage{babel=true, csdisplay=true}{csquotes} %enquote{}
 					\RequirePackage{csquotes} 
-					%bcp bcp d'option aller regarder : https://mirror.ibcp.fr/pub/CTAN/macros/latex/contrib/csquotes/csquotes.pdf
-				\RequirePackage{epigraph} % sectional heading : https://mirrors.chevalier.io/CTAN/macros/latex/contrib/epigraph/epigraph.pdf
+					%bcp bcp d'option aller regarder: https://mirror.ibcp.fr/pub/CTAN/macros/latex/contrib/csquotes/csquotes.pdf
+				\RequirePackage{epigraph} % sectional heading: https://mirrors.chevalier.io/CTAN/macros/latex/contrib/epigraph/epigraph.pdf
 				
 				
 				\ifthenelse{\equal{\doclanguage}{fr}}{\setquotestyle[quotes]{french}}{}
