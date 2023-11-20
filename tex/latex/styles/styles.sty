@@ -422,13 +422,13 @@
 
 
 %distance entre
-\deflen{lenlabelsec}{2.3em}
+\deflen{lenlabelsec}{2em}
  \deflen{lenlabelsbsec}{2.3em}
  \deflen{lenlabelsbbsec}{2.3em}
  \deflen{lenlabelpara}{1.5em}
 
 %distance à gauche du numéro
-\deflen{leftspacesec}{1em}
+\deflen{leftspacesec}{3em}
  \deflen{leftspacesbsec}{2em}
  \deflen{leftspacesbbsec}{3.3em}
  \deflen{leftspacepara}{\leftspacesbbsec +\lenlabelsbbsec }
@@ -456,7 +456,7 @@
 
 
 \titlecontents{subsection} %hsectioni
-			[\lenlabelsbsec + \leftspacesbsec] %hlefti % ie, 1.5em (chapter) + 2.3em
+			[\leftspacesec +\lenlabelsbsec + \leftspacesbsec] %hlefti % ie, 1.5em (chapter) + 2.3em
 			{}%habove-codei
 			{\contentslabel{\lenlabelsbsec}}%hnumbered-entry-formati
 			{\hspace*{-\lenlabelsbsec}}%hnumberless-entry-formati
@@ -464,7 +464,7 @@
 			[]%hbelow-codei
 
 \titlecontents{subsubsection} %hsectioni
-			[\lenlabelsbbsec + \leftspacesbbsec] %hlefti % ie, 1.5em (chapter) + 2.3em
+			[\leftspacesec + \lenlabelsbbsec + \leftspacesbbsec] %hlefti % ie, 1.5em (chapter) + 2.3em
 			{}%habove-codei
 			{\contentslabel{\lenlabelsbbsec}}%hnumbered-entry-formati
 			{\hspace*{-\lenlabelsbbsec}}%hnumberless-entry-formati
@@ -472,7 +472,7 @@
 			[]%hbelow-codei
 
 \titlecontents{paragraph} %hsectioni
-			[\lenlabelpara + \leftspacepara] %hlefti % ie, 1.5em (chapter) + 2.3em
+			[\leftspacesec + \lenlabelpara + \leftspacepara] %hlefti % ie, 1.5em (chapter) + 2.3em
 			{}%habove-codei
 			{\contentslabel{\lenlabelpara}}%hnumbered-entry-formati
 			{\hspace*{-\lenlabelpara}}%hnumberless-entry-formati
