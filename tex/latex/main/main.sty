@@ -39,6 +39,8 @@
 \DeclareOptionX{spacing}{\newcommand{\textspacing}{#1}}
 \DeclareOptionX{language}{\newcommand{\doclanguage}{#1}}
 \DeclareOptionX{geometry}[1]{\newcommand{\fancygeometry}{#1}}
+\DeclareOptionX{showframe}{\RequirePackage{showframe}}
+
 \DeclareOptionX*{\PackageError{main_package}{the entry #1 doesn't exist}}
 
 \ProcessOptionsX\relax
@@ -62,6 +64,8 @@
 % =============================================================
 % main Page style
 % =============================================================
+
+
 \PassOptionsToPackage{paper=a4paper}{geometry} 
 \RequirePackage{geometry}
 \ifthenelse{\equal{\fancygeometry}{1}}{
@@ -133,7 +137,12 @@
 \renewcommand{\thetable}{\arabic{chapter}.\arabic{table}}
 \renewcommand{\thesubfigure}{\Alph{subfigure}}	
 
-\newcommand{\source}[1]{\vspace{-3pt}\caption*{Source:~ {#1}} }
+\ifthenelse{\equal{\doclanguage}{fr}}{\def\sourcename{Source}}{}
+\ifthenelse{\equal{\doclanguage}{de}}{\def\sourcename{Quelle}}{}
+\ifthenelse{\equal{\doclanguage}{en}}{\def\sourcename{Source}}{}
+
+
+\newcommand{\source}[1]{\vspace{-3pt}\caption*{\sourcename:~ {#1}} }
 %	==============================================================
 %	structure dans float
 % ==============================================================
