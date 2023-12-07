@@ -17,7 +17,7 @@
 
 \newtoggle{newchappage}
 
-\DeclareOptionX{NewChapPage}{\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{newchappage}}{}}	%for chapter create new page or not 	
+\DeclareOptionX{NewChapPage}{\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{newchappage}}{\togglefalse{newchappage}}}	%for chapter create new page or not 	
 \DeclareOptionX{ChapPrefix}{\newcommand{\prefixchap}{#1}} % met un préfix devant le nom des chapitres, ex: Projet I
 \DeclareOptionX{titlenum}{\newcommand{\titlenum}{#1}}%numérotation
 \DeclareOptionX{fancytitle}{\newcommand{\fancytitle}{#1}}%savoir quel style de titre
@@ -289,7 +289,10 @@
 %	page styling
 %	==============================================================
 
-\iftoggle{newchappage}{\let\newcpage\newpage}{\def\newcpage{\clearpage}}
+
+\iftoggle{newchappage}{\let\newcpage\clearpage}{\RequirePackage{placeins}
+												\RequirePackage{afterpage}
+ 												\def\newcpage{\afterpage{\FloatBarrier}}}
 
 %attention peut causer des prob en twocolumn car les ifs ont été supprimé
 \makeatletter
