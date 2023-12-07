@@ -1,3 +1,4 @@
+{
 "latex-workshop.latex.tools": [
     {
         "name": "pdflatex",
@@ -9,6 +10,12 @@
             "-file-line-error",
             "%DOC%"
         ]
+    },{
+        "name": "bibtex",
+        "command": "bibtex",
+        "args": [
+            "%DOCFILE%"
+        ]
     }
 ],
 "latex-workshop.latex.recipes": [
@@ -17,10 +24,46 @@
         "tools": [
             "pdflatex"
         ]
-    }
+    },
+    {
+        "name": "pdflatex -> bibtex -> pdflatex * 2",
+        "tools": [
+          "pdflatex",
+          "bibtex",
+          "pdflatex",
+          "pdflatex"
+        ]
+      }
 ],
 "ltex.language": "fr",
+
+"files.associations": {
+    "*.tex": "latex",
+    "*.bib": "bibtex"
+},
+"latex-workshop.latex.magic.args": [
+    "-synctex=1",
+    "-interaction=nonstopmode",
+    "-file-line-error",
+    "%DOC%",
+    "-shell-escape"
+],
+"latex-workshop.latex.autoClean.run": "onBuilt",
+"doxdocgen.generic.authorName": "Benjamin S",
+
+"doxdocgen.generic.commandSuggestionAddPrefix": true,
+"latex-workshop.bibtex-fields.sort.enabled": true,
+"latex-workshop.bibtex-format.sort.enabled": true,
+"latex-workshop.bibtex-format.trailingComma": true,
+
 "git.autofetch": true,
 "git.confirmSync": false,
-"workbench.colorTheme": "Default High Contrast"
+"git.openRepositoryInParentFolders": "always",
+"git.confirmSync": false,
+"git.openRepositoryInParentFolders": "never",
+
+"latex-workshop.view.pdf.external.synctex.args": [],
+"latex-workshop.synctex.afterBuild.enabled": true,
+"latex-workshop.synctex.synctexjs.enabled": true,
+
 }

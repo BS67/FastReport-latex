@@ -16,7 +16,11 @@
 			"\\input{src_tex/pdg.tex}",
 			"\\pagestyle{debut}",
 			"\\newpage",
+			"\\newgeometry{tmargin=3cm,bmargin=3cm,lmargin=4cm,rmargin=4cm,headheight=100pt, headsep= 1cm, footskip=2cm}",
+			"\\singlespacing"
 			"\\input{src_tex/resume_remerciement.tex}",
+			"\\myspacing",
+			"\\loadgeometry{normal}",
 			"\\tableofcontents",
 			"\\justify",
 			"\\sloppy",
@@ -35,7 +39,7 @@
 	 	"body": [
 			"\\begin{figure}[!ht]",
     		"\t\\centering",
-    		"\t\\includegraphics[width=0.5\\textwidth]{image/$2}",
+    		"\t\\includegraphics[width=0.5\\textwidth]{pictures/$2}",
     		"\t\\caption{}",
 			"\t\\label{fig:}",
 			"\\end{figure}"
@@ -120,20 +124,21 @@
 		"description": "unité"
 	},
 	"accolade": {
-		"prefix": "accolade",
+		"prefix": "dcases",
 		"body": [
 		"\\begin{dcases}",
 		"$1",
 		"\\end{dcases}",
 		],
-		"description": "double picture"
+		"description": "cas"
 	},
 
 	"première page de garde": {
 		"prefix": "pdg1",
 		"body": [
+			"\\loadgeometry{title}",
 			"\\begin{titlepage}",
-			"\t\\topmargin=-2cm",
+			"\t\\strut \\ \\vspace{2cm}",
 			"\t\\begin{flushright}",
 				"\t\t\\includegraphics[width=0.50\\textwidth]{pictures/Insas_logo.png}",
 			"\t\\end{flushright}",
@@ -161,7 +166,8 @@
 		"% Bottom of the page",
 				"\t\t\\end{center}",
 			"\t\\end{sffamily}",
-		"\\end{titlepage}"
+		"\\end{titlepage}",
+		"\\loadgeometry{normal}"
 		],
 		"description": "double picture"
 	}
