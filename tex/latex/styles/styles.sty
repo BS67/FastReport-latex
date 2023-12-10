@@ -49,6 +49,27 @@
 \PassOptionsToPackage{indentafter, pagestyles}{titlesec}%titre, entête et pied de page
 \RequirePackage{titlesec}
 
+% ==============================================================
+%	boites
+% ==============================================================
+
+\usepackage{tcolorbox}
+
+\newtcolorbox[]{defbox}[1][]{%
+colback=red!50!white,colframe=red!75!black,fonttitle=\bfseries,
+title={Définition : ~#1}}
+
+\newtcolorbox{exbox}{%
+colback=green!50!white,colframe=green!75!black,fonttitle=\bfseries,
+title={Exemple}}
+
+\newtcolorbox{rembox}{%
+colback=blue!50!white,colframe=blue!75!black,fonttitle=\bfseries,
+title={Remarque}}
+
+\newcommand{tbox}[2]{\begin{tcolorbox}#1\end{tcolorbox}}
+
+
 
 %	==============================================================
 %	prefix/suffix management
