@@ -27,6 +27,7 @@
 \newtoggle{quote}
 \newtoggle{calc}
 
+\DeclareOptionX{font}[libertine]{\newcommand{\myfont}{#1}}
 \DeclareOptionX{calc}{			\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{calc}}{}}
 \DeclareOptionX{quote}{			\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{quote}}{}}
 \DeclareOptionX{floatbarrier}{\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{floatbarrier}}{}}
@@ -44,6 +45,7 @@
 \DeclareOptionX*{\PackageError{main_package}{the entry #1 doesn't exist}}
 
 \ProcessOptionsX\relax
+\providecommand{\myfont}{libertine}
 \providecommand{\fancygeometry}{1}
 \providecommand{\textspacing}{1.5}% if not defined, will be set to 2
 \providecommand{\mybibstyle}{unsrt}
@@ -92,13 +94,29 @@
 %text interspacing 
 \RequirePackage{setspace}
 
-		\ifthenelse{\equal{\textspacing}{1} }{\singlespacing \setlength{\parskip}{1mm plus 3pt minus3pt } \def\setItemsep{0mm} \def\setParsep{0mm} }{}
-		\ifthenelse{\equal{\textspacing}{1.5} }{\onehalfspacing \setlength{\parskip}{2mm plus 3pt minus3pt } \def\setItemsep{0.75mm} \def\setParsep{1mm}}{}
-		\ifthenelse{\equal{\textspacing}{2} }{\doublespacing \setlength{\parskip}{5mm plus 3pt minus3pt } \def\setItemsep{1mm} \def\setParsep{1.5mm} }{}	
-
+		\ifthenelse{\equal{\textspacing}{1} }{\def\myspacing{\singlespacing} \setlength{\parskip}{1mm plus 3pt minus3pt } \def\setItemsep{0mm} \def\setParsep{0mm} }{}
+		\ifthenelse{\equal{\textspacing}{1.5} }{\def\myspacing{\onehalfspacing} \setlength{\parskip}{2mm plus 3pt minus3pt } \def\setItemsep{0.75mm} \def\setParsep{1mm}}{}
+		\ifthenelse{\equal{\textspacing}{2} }{\def\myspacing{\doublespacing} \setlength{\parskip}{5mm plus 3pt minus3pt } \def\setItemsep{1mm} \def\setParsep{1.5mm} }{}	
+\myspacing
 %main font
-\RequirePackage{libertine}%main font
-\RequirePackage{courier} %typewriter font
+
+\ifthenelse{\equal{\myfont}{libertine}}{\RequirePackage{libertine} \RequirePackage{courier}}{
+	\ifthenelse{\equal{\myfont}{CM}}{}{
+		\ifthenelse{\equal{\myfont}{KPF}}{\RequirePackage{kpfonts}}{
+			\ifthenelse{\equal{\myfont}{Utopia}}{\RequirePackage{fourier}}{
+				\ifthenelse{\equal{\myfont}{DejaVu}}{\RequirePackage{dejavu}}{
+					\ifthenelse{\equal{\myfont}{Bookman}}{\RequirePackage{tgbonum}}{
+		
+					}
+				}
+			}
+		}
+	}
+
+}
+
+
+
 %for every unit: \DeclareSIUnit{\fahrenheit}{\degree F} \SI{nb}{unit}
 \RequirePackage{siunitx}
 \DeclareSIUnit{\dBV}{dBV}
