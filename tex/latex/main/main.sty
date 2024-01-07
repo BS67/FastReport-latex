@@ -210,7 +210,7 @@
 % ==============================================================
 \providecommand{\listofappendixs}{ }% si pas le package qui va avec
 \providecommand{\biblio}{ }%si pas de bibliographie
-
+\providecommand{\lstlistoflistings}{ }
 \patchcmd{\listoffigures}{\chapter*}{\section}{}{}
 \patchcmd{\listoftables}{\chapter*}{\section}{}{}
 
@@ -230,6 +230,7 @@
 	\chapter{\tabletitle}
 	\listoffigures
 	\mylistoftables
+\lstlistoflistings
 	\listofappendixs
 	\biblio
 }
@@ -262,7 +263,7 @@
 %2 nouveaux formats pour des subliste
 \newcommand{\doublepoint}[1]{{\bfseries #1 ~:~}}
 
-\SetEnumitemKey{dp}{font=\doublepoint}
+\SetEnumitemKey{dp}{font=\doublepoint, labelindent=1cm,leftmargin = 1.5cm, itemindent=-0.5cm}
 \SetEnumitemKey{sblist}{labelindent=1cm, leftmargin = *,label= \alph*)}
 \SetEnumitemKey{sbblist}{labelindent=1.5cm, leftmargin = *,label= \textit{(\roman*)}}
 \makeatletter
@@ -465,7 +466,7 @@
 	\newcommand{\vpp}{\vspace{0.1cm}\newline}
 	\newcommand{\vg}{\vspace{0.4cm}\newline}
 
-	\newcommand{\br}{\newline}
+	\newcommand{\br}{\newline \indent}
 
 
 
