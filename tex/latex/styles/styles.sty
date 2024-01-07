@@ -16,8 +16,8 @@
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 \newtoggle{newchappage}
-
-\DeclareOptionX{NewChapPage}{\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{newchappage}}{\togglefalse{newchappage}}}	%for chapter create new page or not 	
+\toggletrue{newchappage}
+\DeclareOptionX{NewChapPage}{\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{}{\togglefalse{newchappage}}}	%for chapter create new page or not 	
 \DeclareOptionX{ChapPrefix}{\newcommand{\prefixchap}{#1}} % met un préfix devant le nom des chapitres, ex: Projet I
 \DeclareOptionX{titlenum}{\newcommand{\titlenum}{#1}}%numérotation
 \DeclareOptionX{fancytitle}{\newcommand{\fancytitle}{#1}}%savoir quel style de titre
@@ -67,7 +67,7 @@ title={Exemple}}
 colback=blue!50!white,colframe=blue!75!black,fonttitle=\bfseries,
 title={Remarque}}
 
-\newcommand{tbox}[2]{\begin{tcolorbox}#1\end{tcolorbox}}
+\newcommand{\tbox}[2]{\begin{tcolorbox}#1\end{tcolorbox}}
 
 
 
@@ -311,9 +311,7 @@ title={Remarque}}
 %	==============================================================
 
 
-\iftoggle{newchappage}{\let\newcpage\clearpage}{\RequirePackage{placeins}
-												\RequirePackage{afterpage}
- 												\def\newcpage{\afterpage{\FloatBarrier}}}
+\iftoggle{newchappage}{\let\newcpage\clearpage}{\RequirePackage{placeins}\def\newcpage{\FloatBarrier}}
 
 %attention peut causer des prob en twocolumn car les ifs ont été supprimé
 \makeatletter
@@ -447,15 +445,16 @@ title={Remarque}}
 
 %distance entre
 \deflen{lenlabelsec}{2em}
- \deflen{lenlabelsbsec}{2.3em}
- \deflen{lenlabelsbbsec}{2.3em}
- \deflen{lenlabelpara}{1.5em}
+\deflen{lenlabelsbsec}{2.3em}
+\deflen{lenlabelsbbsec}{2.3em}
+\deflen{lenlabelpara}{1.5em}
 
 %distance à gauche du numéro
-\deflen{leftspacesec}{3em}
- \deflen{leftspacesbsec}{2em}
- \deflen{leftspacesbbsec}{3.3em}
- \deflen{leftspacepara}{\leftspacesbbsec +\lenlabelsbbsec }
+\deflen{leftspacechapter}{3em}
+\deflen{leftspacesec}{\leftspacechapter +\lenlabelsec }
+\deflen{leftspacesbsec}{\leftspacesec +\lenlabelsec }
+\deflen{leftspacesbbsec}{\leftspacesbsec +\lenlabelsbsec }
+\deflen{leftspacepara}{\leftspacesbbsec +\lenlabelsbbsec }
 
 
 
@@ -463,7 +462,7 @@ title={Remarque}}
 
 \RequirePackage{titletoc}
 \titlecontents{chapter} %hsectioni
-			[\leftspacesec] %hlefti % ie, 1.5em (chapter) + 2.3em
+			[\leftspacechapter] %hlefti % ie, 1.5em (chapter) + 2.3em
 			{}%habove-codei
 			{\contentslabel{\lenlabelsec}}%hnumbered-entry-formati
 			{\hspace*{-\lenlabelsec}}%hnumberless-entry-formati
@@ -471,7 +470,7 @@ title={Remarque}}
 			[]%hbelow-codei
 
 \titlecontents{section} %hsectioni
-			[\lenlabelsec + \leftspacesec ] %hlefti % ie, 1.5em (chapter) + 2.3em
+			[\leftspacesec ]
 			{}%habove-codei
 			{\contentslabel{\lenlabelsec}}%hnumbered-entry-formati
 			{\hspace*{-\lenlabelsec}}%hnumberless-entry-formati
@@ -480,7 +479,7 @@ title={Remarque}}
 
 
 \titlecontents{subsection} %hsectioni
-			[\leftspacesec +\lenlabelsbsec + \leftspacesbsec] %hlefti % ie, 1.5em (chapter) + 2.3em
+			[\leftspacesbsec]
 			{}%habove-codei
 			{\contentslabel{\lenlabelsbsec}}%hnumbered-entry-formati
 			{\hspace*{-\lenlabelsbsec}}%hnumberless-entry-formati
@@ -488,7 +487,7 @@ title={Remarque}}
 			[]%hbelow-codei
 
 \titlecontents{subsubsection} %hsectioni
-			[\leftspacesec + \lenlabelsbbsec + \leftspacesbbsec] %hlefti % ie, 1.5em (chapter) + 2.3em
+			[\leftspacesbbsec]
 			{}%habove-codei
 			{\contentslabel{\lenlabelsbbsec}}%hnumbered-entry-formati
 			{\hspace*{-\lenlabelsbbsec}}%hnumberless-entry-formati
@@ -496,7 +495,7 @@ title={Remarque}}
 			[]%hbelow-codei
 
 \titlecontents{paragraph} %hsectioni
-			[\leftspacesec + \lenlabelpara + \leftspacepara] %hlefti % ie, 1.5em (chapter) + 2.3em
+			[\leftspacepara]
 			{}%habove-codei
 			{\contentslabel{\lenlabelpara}}%hnumbered-entry-formati
 			{\hspace*{-\lenlabelpara}}%hnumberless-entry-formati
