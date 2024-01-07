@@ -24,7 +24,7 @@
 
 \DeclareOptionX{actif}[true]{\toggletrue{attach} \def\activ{#1}} %print the table
 \DeclareOptionX{pathappendix}{\newcommand{\appath}{#1}} %Anhang/
-\DeclareOptionX{code}{\toggletrue{code}\newcommand{\codetyp}{#1}} %only c++
+\DeclareOptionX{code}{\toggletrue{code}}
 \DeclareOptionX{logo}{\newcommand{\appathlogo}{#1}}%logo a mettre en entête
 \DeclareOptionX{language}{\newcommand{\doclanguage}{#1}}
 \DeclareOptionX{fancyfooter}{\newcommand{\fancyfooter}{#1}}%titre milieux de page
@@ -189,7 +189,7 @@
 									}
 
 	%\pdf[langscape->true/false]{taille}{titre}{ref}{nom du doc avec extension}		
-	\newcommand{\pdfsize}[5][false]%
+\newcommand{\pdfsize}[5][false]%
 	{ 	
 		\attachment{#3}{ap:#4}
 		\includepdf[scale=#2, pages=-,offset ={0cm -2cm}, landscape=#1, pagecommand={\section*{#3}}]{\appath#5}
@@ -222,16 +222,28 @@
 %----------------------------------------------------------------
 \ifthenelse{\equal{\doclanguage}{fr}}
 			{%option is french
+					\PassOptionsToPackage{french,ruled,vlined}{algorithm2e} 
 					\renewcommand{\lstlistingname}{Extrait de code }
+                    \renewcommand{\lstlistlistingname}{Extraits de code}
 			}{
 \ifthenelse{\equal{\doclanguage}{de}}
 			{%option is german
+					\PassOptionsToPackage{german,ruled,vlined}{algorithm2e} 
 					\renewcommand{\lstlistingname}{Code-Abschnitt}
+                    \renewcommand{\lstlistlistingname}{Code-Verzeichnis}
 			}{
 \ifthenelse{\equal{\doclanguage}{en}}
 			{%option is english
+					\PassOptionsToPackage{english,ruled,vlined}{algorithm2e} 
 					\renewcommand{\lstlistingname}{Code-Extract}
+                    \renewcommand{\lstlistlistingname}{Table of code}
 			}{}}}
+
+\RequirePackage{algorithm2e}
+
+\makeatletter
+\patchcmd{\lstlistoflistings}{\float@listhead}{\section}{}{}
+\makeatother
 %----------------------------------------------------------------
 %general cmd
 %----------------------------------------------------------------
@@ -243,42 +255,88 @@
 \newenvironment{code}[1]%
 		{\begin{minipage}{\textwidth} \begin{lstlisting}[#1]}
 		{\end{lstlisting}\end{minipage}}
+
+  
 %----------------------------------------------------------------
 %caption
 %----------------------------------------------------------------
 \RequirePackage{caption}
 \captionsetup[lstlisting]{position=above, font={tt}, labelfont={sc}, textfont={bf}}
 
+
+
+%----------------------------------------------------------------
+%remedier aux bugs des caractères utf8 dans les environnemnets listings
+%----------------------------------------------------------------
+
+    \lstset{
+        numberbychapter=false,
+        captionpos = top,
+        inputencoding = utf8,  % Input encoding
+        extendedchars = true,  % Extended ASCII
+        literate      =        % Support additional characters
+          {á}{{\'a}}1  {é}{{\'e}}1  {í}{{\'i}}1 {ó}{{\'o}}1  {ú}{{\'u}}1
+          {Á}{{\'A}}1  {É}{{\'E}}1  {Í}{{\'I}}1 {Ó}{{\'O}}1  {Ú}{{\'U}}1
+          {à}{{\`a}}1  {è}{{\`e}}1  {ì}{{\`i}}1 {ò}{{\`o}}1  {ù}{{\`u}}1
+          {À}{{\`A}}1  {È}{{\`E}}1  {Ì}{{\`I}}1 {Ò}{{\`O}}1  {Ù}{{\`U}}1
+          {ä}{{\"a}}1  {ë}{{\"e}}1  {ï}{{\"i}}1 {ö}{{\"o}}1  {ü}{{\"u}}1
+          {Ä}{{\"A}}1  {Ë}{{\"E}}1  {Ï}{{\"I}}1 {Ö}{{\"O}}1  {Ü}{{\"U}}1
+          {â}{{\^a}}1  {ê}{{\^e}}1  {î}{{\^i}}1 {ô}{{\^o}}1  {û}{{\^u}}1
+          {Â}{{\^A}}1  {Ê}{{\^E}}1  {Î}{{\^I}}1 {Ô}{{\^O}}1  {Û}{{\^U}}1
+          {œ}{{\oe}}1  {Œ}{{\OE}}1  {æ}{{\ae}}1 {Æ}{{\AE}}1  {ß}{{\ss}}1
+          {ẞ}{{\SS}}1  {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {ø}{{\o}}1  {Ø}{{\O}}1
+          {å}{{\aa}}1  {Å}{{\AA}}1  {ã}{{\~a}}1  {õ}{{\~o}}1 {Ã}{{\~A}}1
+          {Õ}{{\~O}}1  {ñ}{{\~n}}1  {Ñ}{{\~N}}1  {¿}{{?`}}1  {¡}{{!`}}1
+          {°}{{\textdegree}}1 {º}{{\textordmasculine}}1 {ª}{{\textordfeminine}}1
+          {£}{{\pounds}}1  {©}{{\copyright}}1  {®}{{\textregistered}}1
+          {«}{{\guillemotleft}}1  {»}{{\guillemotright}}1  {Ð}{{\DH}}1  {ð}{{\dh}}1
+          {Ý}{{\'Y}}1    {ý}{{\'y}}1    {Þ}{{\TH}}1    {þ}{{\th}}1    {Ă}{{\u{A}}}1
+          {ă}{{\u{a}}}1  {Ą}{{\k{A}}}1  {ą}{{\k{a}}}1  {Ć}{{\'C}}1    {ć}{{\'c}}1
+          {Č}{{\v{C}}}1  {č}{{\v{c}}}1  {Ď}{{\v{D}}}1  {ď}{{\v{d}}}1  {Đ}{{\DJ}}1
+          {đ}{{\dj}}1    {Ė}{{\.{E}}}1  {ė}{{\.{e}}}1  {Ę}{{\k{E}}}1  {ę}{{\k{e}}}1
+          {Ě}{{\v{E}}}1  {ě}{{\v{e}}}1  {Ğ}{{\u{G}}}1  {ğ}{{\u{g}}}1  {Ĩ}{{\~I}}1
+          {ĩ}{{\~\i}}1   {Į}{{\k{I}}}1  {į}{{\k{i}}}1  {İ}{{\.{I}}}1  {ı}{{\i}}1
+          {Ĺ}{{\'L}}1    {ĺ}{{\'l}}1    {Ľ}{{\v{L}}}1  {ľ}{{\v{l}}}1  {Ł}{{\L{}}}1
+          {ł}{{\l{}}}1   {Ń}{{\'N}}1    {ń}{{\'n}}1    {Ň}{{\v{N}}}1  {ň}{{\v{n}}}1
+          {Ő}{{\H{O}}}1  {ő}{{\H{o}}}1  {Ŕ}{{\'{R}}}1  {ŕ}{{\'{r}}}1  {Ř}{{\v{R}}}1
+          {ř}{{\v{r}}}1  {Ś}{{\'S}}1    {ś}{{\'s}}1    {Ş}{{\c{S}}}1  {ş}{{\c{s}}}1
+          {Š}{{\v{S}}}1  {š}{{\v{s}}}1  {Ť}{{\v{T}}}1  {ť}{{\v{t}}}1  {Ũ}{{\~U}}1
+          {ũ}{{\~u}}1    {Ū}{{\={U}}}1  {ū}{{\={u}}}1  {Ů}{{\r{U}}}1  {ů}{{\r{u}}}1
+          {Ű}{{\H{U}}}1  {ű}{{\H{u}}}1  {Ų}{{\k{U}}}1  {ų}{{\k{u}}}1  {Ź}{{\'Z}}1
+          {ź}{{\'z}}1    {Ż}{{\.Z}}1    {ż}{{\.z}}1    {Ž}{{\v{Z}}}1
+          % ¿ and ¡ are not correctly displayed if inconsolata font is used
+          % together with the lstlisting environment. Consider typing code in
+          % external files and using \lstinputlisting to display them instead.      
+      }
+
 %----------------------------------------------------------------
 %c++ style
 %----------------------------------------------------------------
-
+    
 	
-	\ifthenelse{\equal{\codetyp}{c++}}%
-	{
-		\definecolor{clr-background}{RGB}{0,0,0}
-		\definecolor{clr-text}{RGB}{255,255,255}
-		\definecolor{clr-string}{RGB}{163,21,21}
-		\definecolor{clr-namespace}{RGB}{255,255,255}
-		\definecolor{clr-preprocessor}{RGB}{128,128,128}
-		\definecolor{clr-keyword}{RGB}{0,0,255}
-		\definecolor{clr-type}{RGB}{43,145,175}
-		\definecolor{clr-variable}{RGB}{255,255,255}
-		\definecolor{clr-constant}{RGB}{111,156,234} % macro color
-		\definecolor{clr-comment}{RGB}{218,240,13}
-		\definecolor{clr-serial}{RGB}{22,219,194}
-		\definecolor{clr-add}{RGB}{101,156,234}
+        \definecolor{cpp-background}{RGB}{0,0,0}
+		\definecolor{cpp-text}{RGB}{255,255,255}
+		\definecolor{cpp-string}{RGB}{163,21,21}
+		\definecolor{cpp-namespace}{RGB}{255,255,255}
+		\definecolor{cpp-preprocessor}{RGB}{128,128,128}
+		\definecolor{cpp-keyword}{RGB}{0,0,255}
+		\definecolor{cpp-type}{RGB}{43,145,175}
+		\definecolor{cpp-variable}{RGB}{255,255,255}
+		\definecolor{cpp-constant}{RGB}{111,156,234} % macro color
+		\definecolor{cpp-comment}{RGB}{218,240,13}
+		\definecolor{cpp-serial}{RGB}{22,219,194}
+		\definecolor{cpp-add}{RGB}{101,156,234}
 	
 	
 		\lstdefinestyle{c++}%
 		{
-			backgroundcolor=\color{clr-background},
-			basicstyle=\scriptsize\ttfamily\color{clr-text}, % any text
-			stringstyle=\color{clr-string},
-			identifierstyle=\color{clr-variable}, % just about anything that isn't a directive, comment, string or known type
-			commentstyle=\color{clr-comment},
-			keywordstyle=\color{clr-type},
-			morekeywords={[2]char,int,void, long,enum}, keywordstyle={[2]				\color{clr-constant}}, % you'll need to define these or use a custom language
+			backgroundcolor=\color{cpp-background},
+			basicstyle=\scriptsize\ttfamily\color{cpp-text}, % any text
+			stringstyle=\color{cpp-string},
+			identifierstyle=\color{cpp-text}, % just about anything that isn't a directive, comment, string or known type
+			commentstyle=\color{cpp-comment},
+			keywordstyle=\color{cpp-type},
+			morekeywords={[2]char,int,void, long,enum}, keywordstyle={[2]				\color{cpp-constant}}, % you'll need to define these or use a custom language
 			morecomment=[s][\color{red}]{/*!}{*/},
 			tabsize=4,
 			escapeinside={<@}{@>},
@@ -287,16 +345,31 @@
 			framexleftmargin=5pt,
 			framexrightmargin=0.5cm,
 			numberbychapter=false,
-			morekeywords ={Serial,Serial1,Serial2},keywordstyle=\color{clr-serial}
+			morekeywords ={Serial,Serial1,Serial2},keywordstyle=\color{cpp-serial}
 		}
+            
 
-	
-		\lstset{style=c++}%set this style for the rest of the page
-	
-		
-	
-	}{}
-	
+
+     
+        	\lstdefinestyle{matlab}{
+            language=Matlab,
+            breaklines=true,
+            basicstyle=\small\ttfamily,
+            keywordstyle=\color{blue},
+            commentstyle=\color{green!40!black},
+            stringstyle=\color{red},
+            numbers=left,
+            numberstyle=\tiny\color{gray},
+            stepnumber=1,
+            numbersep=5pt,
+            backgroundcolor=\color{gray!5},
+            frame=single,
+            rulecolor=\color{black!30},
+            captionpos=b,
+            tabsize=2,
+            showspaces=false,
+            showstringspaces=false
+            }
 
 
 
