@@ -200,11 +200,14 @@
 % float & text repartition & floatbarrier
 % ==============================================================
 \iftoggle{floatbarrier}{ 
-\PassOptionsToPackage{section}{placeins}
+\PassOptionsToPackage{section, above}{placeins}
 \RequirePackage{placeins}%\FloatBarrier
 	\newcommand{\floatprotec}[2]{\FloatBarrier #1{#2} \FloatBarrier} %float barrier pour section automatique
 		\renewcommand{\sbsec}{\floatprotec{\subsection}}
 		\renewcommand{\sbbsec}{\floatprotec{\subsubsection}}
+	\let\saveFloatBarrier\FloatBarrier	
+	\newcommand{\desactivatefloatbarrier}{\let\FloatBarrier\relax}	
+	\newcommand{\reactivatefloatbarrier}{\let\FloatBarrier\saveFloatBarrier}
 }{}
 
 \RequirePackage{float} %[H]
