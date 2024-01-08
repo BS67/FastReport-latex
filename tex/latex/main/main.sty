@@ -19,7 +19,7 @@
 % Package Options
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\newtoggle{math}  
+
 \newtoggle{bib}
 \newtoggle{svg}
 \newtoggle{floatbarrier}
@@ -36,7 +36,6 @@
 \DeclareOptionX{bibstyle}{ \newcommand{\mybibstyle}{#1}}
 \DeclareOptionX{bib}{				\ifthenelse{\equal{#1}{no}}{}{\toggletrue{bib} \newcommand{\bibfile}{#1}}}
 \DeclareOptionX{table}{			\newcommand{\mylistoftables}{\listoftables}}
-\DeclareOptionX{math}{\toggletrue{math}			\ifthenelse{\equal{#1}{old} }{\def\mathmode{old}}{\def\mathmode{new}}}
 \DeclareOptionX{spacing}{\newcommand{\textspacing}{#1}}
 \DeclareOptionX{language}{\newcommand{\doclanguage}{#1}}
 \DeclareOptionX{geometry}[1]{\newcommand{\fancygeometry}{#1}}
@@ -313,8 +312,6 @@
 
 
 
-\iftoggle{math}{
-
 %compteur pour exercice
 		\ifthenelse{\equal{\doclanguage}{fr}}{\def\exercice{Exercice}}{}
 		\ifthenelse{\equal{\doclanguage}{de}}{\def\exercice{Aufgabe}}{}
@@ -332,53 +329,25 @@
 
 
 
-		\ifthenelse{\equal{\mathmode}{old}}{
-			\PassOptionsToPackage{fleqn}{amsmath} % num a droite
-			\RequirePackage{amsmath,amssymb,amsfonts} 
-				
-				
-							\renewcommand{\[}{\mbox{[\hspace{-0.45em} [}} % accolades pour entiers
-							\renewcommand{\]}{\mbox{]\hspace{-0.45em} ]}} % accolades pour entiers
-				%noms des ensembles en mode math
-							\newcommand{\N}{\mathbb{N}}
-							\newcommand{\R}{\mathbb{R}}
-							\newcommand{\C}{\mathbb{C}}
-							\newcommand{\Z}{\mathbb{Z}}
-							\newcommand{\Q}{\mathbb{Q}}
-							\newcommand{\K}{\mathbb{K}}
-							\newcommand{\U}{\mathbb{U}}
-							\newcommand{\Mn}{\mathcal{M}_n}
-							\newcommand{\M}{\mathcal{M}}
-							\newcommand{\B}{\mathcal{B}}
-							\newcommand{\A}{\mathcal{A}}
-							\newcommand{\F}{\mathcal{F}}
-							\renewcommand{\L}{\mathcal{L}}
-							
-				\newcommand\eq[1]{\begin{align}#1\end{align}} %equations
-				\newcommand\noeq[1]{\begin{align*}#1\end{align*}}
-
-
 \newcommand{\bc}{\begin{cases}} 
 \newcommand{\ec}{\end{cases}}
 				
 				
-		}{
 			\PassOptionsToPackage{fleqn}{amsmath}
 			\PassOptionsToPackage{allowspaces}{mathtools} %https://ctan.crest.fr/tex-archive/macros/latex/contrib/mathtools/mathtools.pdf
 			\RequirePackage{amsmath,amssymb,amsfonts, mathtools}%mathtools très très puissant voir si problème il y a enormément de chose
 			
-				\providecommand\eq[1]{\begin{align}#1\end{align}} %equations
-				\providecommand\noeq[1]{\begin{align*}#1\end{align*}}
+		\providecommand\eq[1]{\begin{align}#1\end{align}} %equations
+		\providecommand\noeq[1]{\begin{align*}#1\end{align*}}
 				
-				\mathtoolsset{showonlyrefs}
-				\usetagform{default}
+		\mathtoolsset{showonlyrefs}
+		\usetagform{default}
 
-			\providecommand{\bc}{\begin{dcases}} 
-			\providecommand{\ec}{\end{dcases}}
+		\providecommand{\bc}{\begin{dcases}} 
+		\providecommand{\ec}{\end{dcases}}
 
-			\newcommand*\abs[1]{\lvert#1\rvert}
-			\usetagform{default}
-		}
+		\newcommand*\abs[1]{\lvert#1\rvert}
+
 		\newcommand{\N}{\mathbb{N}}
 		\newcommand{\R}{\mathbb{R}}
 		\newcommand{\C}{\mathbb{C}}
@@ -397,11 +366,8 @@
 			%equations
 			
 			
-			%equation display
-			\setlength{\abovedisplayskip}{0.5cm}
-			\setlength{\belowdisplayskip}{0.5cm}
+
 			
-	}{}
 	
 \iftoggle{calc}{
 					\RequirePackage{calculator}% faire des calculs avec latex
