@@ -26,6 +26,8 @@
 \newtoggle{link}
 \newtoggle{quote}
 \newtoggle{calc}
+\newtoggle{showframe}
+
 
 \DeclareOptionX{font}[libertine]{\newcommand{\myfont}{#1}}
 \DeclareOptionX{calc}{			\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{calc}}{}}
