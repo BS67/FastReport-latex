@@ -41,14 +41,14 @@
 \DeclareOptionX{spacing}{\newcommand{\textspacing}{#1}}
 \DeclareOptionX{language}{\newcommand{\doclanguage}{#1}}
 \DeclareOptionX{geometry}[1]{\newcommand{\fancygeometry}{#1}}
-\DeclareOptionX{showframe}{\RequirePackage{showframe}}
+\DeclareOptionX{showframe}{\toggletrue{showframe}}
 
 \DeclareOptionX*{\PackageError{main_package}{the entry #1 doesn't exist}}
 
 \ProcessOptionsX\relax
 \providecommand{\myfont}{libertine}
 \providecommand{\fancygeometry}{1}
-\providecommand{\textspacing}{1.5}% if not defined, will be set to 2
+\providecommand{\textspacing}{1.5}% if not defined, will be set to 1.5
 \providecommand{\mybibstyle}{unsrt}
 \providecommand{\doclanguage}{fr}
 \providecommand{\mylistoftables}{}
@@ -95,9 +95,21 @@
 %text interspacing 
 \RequirePackage{setspace}
 
-		\ifthenelse{\equal{\textspacing}{1} }{\def\myspacing{\singlespacing} \setlength{\parskip}{1mm plus 3pt minus3pt } \def\setItemsep{0mm} \def\setParsep{0mm} }{}
-		\ifthenelse{\equal{\textspacing}{1.5} }{\def\myspacing{\onehalfspacing} \setlength{\parskip}{2mm plus 3pt minus3pt } \def\setItemsep{0.75mm} \def\setParsep{1mm}}{}
-		\ifthenelse{\equal{\textspacing}{2} }{\def\myspacing{\doublespacing} \setlength{\parskip}{5mm plus 3pt minus3pt } \def\setItemsep{1mm} \def\setParsep{1.5mm} }{}	
+		\ifthenelse{\equal{\textspacing}{1} }{\def\myspacing{\singlespacing} \setlength{\parskip}{1mm plus 3pt minus3pt } \def\setItemsep{0mm} \def\setParsep{0mm} 			
+		%equation display 
+		\setlength{\abovedisplayskip}{0.1cm}
+		\setlength{\belowdisplayskip}{0.1cm}
+		}{}
+		\ifthenelse{\equal{\textspacing}{1.5} }{\def\myspacing{\onehalfspacing} \setlength{\parskip}{2mm plus 3pt minus3pt } \def\setItemsep{0.75mm} \def\setParsep{1mm}
+		%equation display 
+		\setlength{\abovedisplayskip}{0.5cm}
+		\setlength{\belowdisplayskip}{0.5cm}
+		}{}
+		\ifthenelse{\equal{\textspacing}{2} }{\def\myspacing{\doublespacing} \setlength{\parskip}{5mm plus 3pt minus3pt } \def\setItemsep{1mm} \def\setParsep{1.5mm} 
+		%equation display 
+		\setlength{\abovedisplayskip}{0.7cm}
+		\setlength{\belowdisplayskip}{0.7cm}
+		}{}	
 \myspacing
 %main font
 
