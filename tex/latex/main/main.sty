@@ -56,7 +56,9 @@
 % MAIN
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\iftoggle{showframe}{\RequirePackage{showframe}}{}
+\iftoggle{showframe}{\RequirePackage{showframe}
+\RequirePackage{widows-and-orphans} %indication ligne vide
+}{}
 
 % =============================================================
 % raccourci de base
@@ -344,11 +346,6 @@
 					\vp\noindent{\bf \exercice {\theexo}.\\ }
 				}
 
-
-
-
-\newcommand{\bc}{\begin{cases}} 
-\newcommand{\ec}{\end{cases}}
 				
 				
 			\PassOptionsToPackage{fleqn}{amsmath}
@@ -387,9 +384,9 @@
 
 			
 	
-\iftoggle{calc}{
-					\RequirePackage{calculator}% faire des calculs avec latex
-				}{}
+		\iftoggle{calc}{
+							\RequirePackage{calculator}% faire des calculs avec latex
+						}{}
 			
 %	==============================================================
 %	footnote
