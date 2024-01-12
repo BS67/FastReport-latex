@@ -28,7 +28,7 @@
 \newtoggle{calc}
 \newtoggle{showframe}
 
-
+\DeclareOptionX{math}{}%legacy version
 \DeclareOptionX{font}[libertine]{\newcommand{\myfont}{#1}}
 \DeclareOptionX{calc}{			\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{calc}}{}}
 \DeclareOptionX{quote}{			\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{quote}}{}}
@@ -352,7 +352,7 @@
 %compteur, rajoute le num du chapitre 
 \renewcommand{\theequation}{\arabic{chapter}.\arabic{equation}}
 
-
+	\newcommand{\inlineeqlabel}[1]{\refstepcounter{equation}(\theequation)\label{#1}}
 
 
 %compteur pour exercice
