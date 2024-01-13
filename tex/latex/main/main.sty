@@ -99,38 +99,54 @@
 %TODO n'est pas encore fonctionnel 
 \RequirePackage{setspace}
 	\AfterEndPreamble{
-		\ifthenelse{\equal{\textspacing}{1} }{\def\myspacing{\singlespacing} 
-		
-		\setlength{\parskip}{1pt plus 1pt minus 1pt } \def\setItemsep{0mm} \def\setParsep{0mm} 			
-		%equation display 
-		
-		\setlength{\abovedisplayskip}{0pt}
-		\setlength{\abovedisplayshortskip}{0pt }
-		\setlength{\belowdisplayshortskip}{0pt }
-		\setlength{\belowdisplayskip}{0pt}
-		%floats
-		\setlength{\intextsep}{0pt} % Vertical space above & below [h] floats
-		\setlength{\textfloatsep}{1pt} % Vertical space below [t] and abowe [b] floats
-		\setlength{\abovecaptionskip}{1pt}
-		\setlength{\belowcaptionskip}{5pt}
+		\ifthenelse{\equal{\textspacing}{1} }{
+			\def\myspacing{\singlespacing} 
+		%paragraph spacing
+			\setlength{\parskip}{1pt plus 1pt minus 1pt } 
+		%enumeration spacing
+			\def\setItemsep{0mm} 
+			\def\setParsep{0mm} 			
+			%equation display 
+			
+			\setlength{\abovedisplayskip}{0pt}
+			\setlength{\abovedisplayshortskip}{0pt }
+			\setlength{\belowdisplayshortskip}{0pt }
+			\setlength{\belowdisplayskip}{0pt}
+			%floats
+			\setlength{\intextsep}{0pt} % Vertical space above & below [h] floats
+			\setlength{\textfloatsep}{1pt} % Vertical space below [t] and abowe [b] floats
+			\setlength{\abovecaptionskip}{1pt}
+			\setlength{\belowcaptionskip}{5pt}
 		}{}
-		\ifthenelse{\equal{\textspacing}{1.5} }{\def\myspacing{\onehalfspacing} \setlength{\parskip}{1mm plus 3pt minus3pt } \def\setItemsep{0.75mm} \def\setParsep{1mm}
+		\ifthenelse{\equal{\textspacing}{1.5} }{
+			\def\myspacing{\onehalfspacing} 
+		%paragraph spacing
+			\setlength{\parskip}{1mm plus 3pt minus3pt } 
+		%enumeration spacing
+			\def\setItemsep{0.75mm} 
+			\def\setParsep{1mm}
 		%equation display 
-		\setlength{\abovedisplayskip}{10pt}
-		\setlength{\belowdisplayskip}{10pt }
-		\setlength{\intextsep}{10pt} % Vertical space above & below [h] floats
-		\setlength{\textfloatsep}{10pt} % Vertical space below (above) [t] ([b]) floats
-		\setlength{\abovecaptionskip}{10pt}
-		\setlength{\belowcaptionskip}{5pt}
+			\setlength{\abovedisplayskip}{10pt}
+			\setlength{\belowdisplayskip}{10pt }
+			\setlength{\intextsep}{10pt} % Vertical space above & below [h] floats
+			\setlength{\textfloatsep}{10pt} % Vertical space below (above) [t] ([b]) floats
+			\setlength{\abovecaptionskip}{10pt}
+			\setlength{\belowcaptionskip}{5pt}
 		}{}
-		\ifthenelse{\equal{\textspacing}{2} }{\def\myspacing{\doublespacing} \setlength{\parskip}{3mm plus 3pt minus3pt } \def\setItemsep{1mm} \def\setParsep{1.5mm} 
+		\ifthenelse{\equal{\textspacing}{2} }{
+			\def\myspacing{\doublespacing} 
+		%paragraph spacing
+			\setlength{\parskip}{3mm plus 3pt minus3pt } 
+		%enumeration spacing
+			\def\setItemsep{1mm} 
+			\def\setParsep{1.5mm} 
 		%equation display 
-		\setlength{\abovedisplayskip}{20pt}
-		\setlength{\belowdisplayskip}{20pt}
-		\setlength{\intextsep}{10pt} % Vertical space above & below [h] floats
-		\setlength{\textfloatsep}{10pt} % Vertical space below (above) [t] ([b]) floats
-		\setlength{\abovecaptionskip}{10pt}
-		\setlength{\belowcaptionskip}{5pt}
+			\setlength{\abovedisplayskip}{20pt}
+			\setlength{\belowdisplayskip}{20pt}
+			\setlength{\intextsep}{10pt} % Vertical space above & below [h] floats
+			\setlength{\textfloatsep}{10pt} % Vertical space below (above) [t] ([b]) floats
+			\setlength{\abovecaptionskip}{10pt}
+			\setlength{\belowcaptionskip}{5pt}
 		}{}	
 \myspacing
 \selectfont
