@@ -192,8 +192,9 @@
 	%\multirow{nomb_ligne}{largeur ex * }{contenu qui est 1 fusionné}
 
 
-
-
+\RequirePackage{array}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
 %caption pour tableau, figure, subfigure
 \RequirePackage{caption}
