@@ -315,9 +315,11 @@
 \RequirePackage{enumitem}%parametrer enumeration
 %liste
 %les listes * on le même paramétrage que les listes normales
-\setlist[enumerate]{ topsep = 0mm, parsep=1mm, labelindent=5pt, label= \arabic*.,font=\bfseries}
-\setlist[description]{ topsep = 0mm, parsep=1mm, labelindent=5pt }
-\setlist[itemize]{ topsep = 0mm, parsep=1mm, labelindent=5pt, label=\textbullet }	
+
+\setlist[enumerate]{ topsep = 0mm, labelindent=5pt, label= \arabic*.,font=\bfseries}
+
+\setlist[description]{ topsep = 0mm, labelindent=5pt }
+\setlist[itemize]{ topsep = 0mm, labelindent=5pt, label=\textbullet }	
 
 %2 nouveaux formats pour des subliste
 \newcommand{\doublepoint}[1]{{\bfseries #1 ~:~}}
