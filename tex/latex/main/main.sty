@@ -172,8 +172,42 @@
 
 %for every unit: \DeclareSIUnit{\fahrenheit}{\degree F} \SI{nb}{unit}
 \RequirePackage{siunitx}
-\DeclareSIUnit{\dBV}{dBV}
 \sisetup{ detect-all = true }
+% Astronomy
+\DeclareSIUnit\parsec{pc}
+\DeclareSIUnit\lightyear{ly}
+% Chemical engineering
+\DeclareSIUnit\gmol{g\text{-}mol}
+\DeclareSIUnit\kgmol{kg\text{-}mol}
+\DeclareSIUnit\lbmol{lb\text{-}mol}
+% Chemistry
+\DeclareSIUnit\molar{\mole\per\cubic\deci\metre}
+\DeclareSIUnit\Molar{\textsc{m}}
+\DeclareSIUnit\torr{torr}
+% Geophysics
+\DeclareSIUnit\gon{gon}
+% High energy physics
+\DeclareSIUnit\micron{\micro\metre}
+\DeclareSIUnit\mrad{\milli\rad}
+\DeclareSIUnit\gauss{G}
+\DeclareSIUnit\eVperc{\eV\per\clight}
+\DeclareSIUnit\nanobarn{\nano\barn}
+\DeclareSIUnit\picobarn{\pico\barn}
+\DeclareSIUnit\femtobarn{\femto\barn}
+\DeclareSIUnit\attobarn{\atto\barn}
+\DeclareSIUnit\zeptobarn{\zepto\barn}
+\DeclareSIUnit\yoctobarn{\yocto\barn}
+\DeclareSIUnit\nb{\nano\barn}
+\DeclareSIUnit\pb{\pico\barn}
+\DeclareSIUnit\fb{\femto\barn}
+\DeclareSIUnit\ab{\atto\barn}
+\DeclareSIUnit\zb{\zepto\barn}
+\DeclareSIUnit\yb{\yocto\barn}
+
+%Industry
+\DeclareSIUnit{\dBm}{dBm}%decibel milliwatt
+\DeclareSIUnit{\dBV}{dBV}%decibel volt
+
 
 %	==============================================================
 %	figure, table, equation
