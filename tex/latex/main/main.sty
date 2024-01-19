@@ -96,57 +96,49 @@
 \widowpenalties 1 10000 %evite les pagebreaks au milieu des paragraphes
 
 %text interspacing 
-%TODO n'est pas encore fonctionnel 
 \RequirePackage{setspace}
 	\AfterEndPreamble{
 		\ifthenelse{\equal{\textspacing}{1} }{
-			\def\myspacing{\singlespacing} 
-		%paragraph spacing
-			\setlength{\parskip}{1pt plus 1pt minus 1pt } 
-		%enumeration spacing
-			\def\setItemsep{0mm} 
-			\def\setParsep{0mm} 			
-			%equation display 
-			
-			\setlength{\abovedisplayskip}{0pt}
-			\setlength{\abovedisplayshortskip}{0pt }
-			\setlength{\belowdisplayshortskip}{0pt }
-			\setlength{\belowdisplayskip}{0pt}
-			%floats
-			\setlength{\intextsep}{0pt} % Vertical space above & below [h] floats
-			\setlength{\textfloatsep}{1pt} % Vertical space below [t] and abowe [b] floats
-			\setlength{\abovecaptionskip}{1pt}
-			\setlength{\belowcaptionskip}{5pt}
+			\def\myspacing{\setstretch{1.2}} %baselinestretch => espace entre les deux lignes
+			\setlength{\parskip}{4pt plus 2pt minus 2pt }  % sautre en paragraphes
+			\setlist{itemsep = 1pt plus 1pt minus 1pt, parsep = 1pt plus 1pt minus 1pt} 
+			% itemsep => entre les items d'une liste
+			% parsep => entre les paragraphes de la liste
+			\setlength{\abovedisplayskip}{10pt plus 2pt minus 5pt} % au dessus equation
+			\setlength{\abovedisplayshortskip}{10pt plus 2pt minus 5pt} % au dessus equation
+			\setlength{\belowdisplayshortskip}{10pt plus 2pt minus 5pt} % en dessous equation
+			\setlength{\belowdisplayskip}{10pt plus 2pt minus 5pt} % en dessous equation
+			\setlength{\intextsep}{7pt plus 5pt minus 3pt} % espace entre la figure + texte
+			\setlength{\textfloatsep}{5pt plus 7pt minus 1pt} % espace entre le texte et l'espace des floats top et bottom
+			% espace entre caption et images => gérer par le package caption 10 pt cst
+			\setlength{\abovecaptionskip}{8pt plus 2pt minus 5pt} % espace entre le texte et caption => caption haut
+			\setlength{\belowcaptionskip}{8pt plus 2pt minus 5pt} % espace entre texte et catpion => caption bas
 		}{}
 		\ifthenelse{\equal{\textspacing}{1.5} }{
-			\def\myspacing{\onehalfspacing} 
-		%paragraph spacing
-			\setlength{\parskip}{1mm plus 3pt minus3pt } 
-		%enumeration spacing
-			\def\setItemsep{0.75mm} 
-			\def\setParsep{1mm}
-		%equation display 
-			\setlength{\abovedisplayskip}{10pt}
-			\setlength{\belowdisplayskip}{10pt }
-			\setlength{\intextsep}{10pt} % Vertical space above & below [h] floats
-			\setlength{\textfloatsep}{10pt} % Vertical space below (above) [t] ([b]) floats
-			\setlength{\abovecaptionskip}{10pt}
-			\setlength{\belowcaptionskip}{5pt}
+			\def\myspacing{\setstretch{1}}
+			\setlength{\parskip}{0pt plus 2pt } 
+			\setlist{itemsep = 1pt plus 1pt minus 1pt, parsep = 2pt plus 1pt minus 1pt}
+			\setlength{\abovedisplayskip}{2pt plus 2pt }
+			\setlength{\abovedisplayshortskip}{2pt plus 2pt }
+			\setlength{\belowdisplayshortskip}{2pt plus 2pt }
+			\setlength{\belowdisplayskip}{2pt plus 2pt }
+			\setlength{\intextsep}{2pt plus 5pt minus 3pt}
+			\setlength{\textfloatsep}{2pt plus 7pt minus 1pt}
+			\setlength{\abovecaptionskip}{6pt plus 2pt minus 5pt}
+			\setlength{\belowcaptionskip}{6pt plus 2pt minus 5pt}
 		}{}
 		\ifthenelse{\equal{\textspacing}{2} }{
-			\def\myspacing{\doublespacing} 
-		%paragraph spacing
-			\setlength{\parskip}{3mm plus 3pt minus3pt } 
-		%enumeration spacing
-			\def\setItemsep{1mm} 
-			\def\setParsep{1.5mm} 
-		%equation display 
-			\setlength{\abovedisplayskip}{20pt}
-			\setlength{\belowdisplayskip}{20pt}
-			\setlength{\intextsep}{10pt} % Vertical space above & below [h] floats
-			\setlength{\textfloatsep}{10pt} % Vertical space below (above) [t] ([b]) floats
-			\setlength{\abovecaptionskip}{10pt}
-			\setlength{\belowcaptionskip}{5pt}
+			\def\myspacing{\setstretch{1.5}}
+			\setlength{\parskip}{10pt plus 3pt minus 3pt } 
+			\setlist{itemsep = 0pt plus 1pt minus 1pt, parsep = 0pt plus 1pt minus 1pt}
+			\setlength{\abovedisplayskip}{20pt plus 2pt minus 5pt}
+			\setlength{\abovedisplayshortskip}{20pt plus 2pt minus 10pt}
+			\setlength{\belowdisplayshortskip}{20pt plus 2pt minus 10pt}
+			\setlength{\belowdisplayskip}{15pt plus 2pt minus 5pt}
+			\setlength{\intextsep}{15pt plus 5pt minus 3pt}
+			\setlength{\textfloatsep}{10pt plus 7pt minus 1pt}
+			\setlength{\abovecaptionskip}{15pt plus 2pt minus 7pt}
+			\setlength{\belowcaptionskip}{15pt plus 2pt minus 7pt}
 		}{}	
 \myspacing
 \selectfont
@@ -232,9 +224,9 @@
 
 %caption pour tableau, figure, subfigure
 \RequirePackage{caption}
-		\captionsetup[table]{justification=centering, format=hang,  labelfont={sc,tt}, textfont={bf,sl,tt}, skip=10pt, position=above, labelsep=colon}
-		\captionsetup[figure]{justification=centering, format=hang, labelfont={sc,tt}, textfont={bf,sl,tt}, skip=10pt, position=bottom, labelsep=colon}	
-		\captionsetup[sub]{justification=centering, format=hang, labelfont={sc,tt}, textfont={bf,sl,tt}, skip=10pt, labelsep=colon}
+		\captionsetup[table]{justification=centering, format=hang,  labelfont={sc,tt}, textfont={bf,sl,tt},skip=8pt, position=above, labelsep=colon}
+		\captionsetup[figure]{justification=centering, format=hang, labelfont={sc,tt}, textfont={bf,sl,tt},skip=8pt, position=bottom, labelsep=colon}	
+		\captionsetup[sub]{justification=centering, format=hang, labelfont={sc,tt}, textfont={bf,sl,tt},skip=8pt, labelsep=colon}
 
 %compteur, met le num du chapitre aussi
 
@@ -280,7 +272,7 @@
 
 	\newcommand{\floatprotec}[2]{\FloatBarrier #1{#2} \FloatBarrier} %float barrier pour section automatique
 	\renewcommand{\sbsec}{\floatprotec{\subsection}}
-	\renewcommand{\sbbsec}{\floatprotec{\subsubsection}}
+	%\renewcommand{\sbbsec}{\floatprotec{\subsubsection}}
 
 	\let\saveFloatBarrier\FloatBarrier	
 	\newcommand{\desactivatefloatbarrier}{\let\FloatBarrier\relax}	
