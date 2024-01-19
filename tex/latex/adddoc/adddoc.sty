@@ -181,7 +181,7 @@
 
 
 \RequirePackage{pdfpages}													
-	%\pdf[langscape->true/false]{titre}{ref}{nom du doc avec extension}												
+%\pdf[langscape->true/false]{titre}{ref}{nom du doc avec extension}												
 \newcommand{\pdf}[4][false]%
 {
 	\attachment{#2}{ap:#3}
@@ -194,7 +194,26 @@
 		\attachment{#3}{ap:#4}
 		\includepdf[scale=#2, pages=-,offset ={0cm -2cm}, landscape=#1, pagecommand={\section*{#3}}]{\appath#5}
 	}
-	
+
+
+\makeatletter
+
+	\define@key{pdfoptions}{scale}[0.8]{\def\pdf@scale{#1} }
+	\define@key{pdfoptions}{offseth}[-2cm]{\def\pdf@offseth{#1}}
+	\define@key{pdfoptions}{offsetw}[0cm]{\def\pdf@offsetw{#1}}
+	\define@key{pdfoptions}{landscape}[false]{\def\pdf@landscape{#1} }
+	\define@key{pdfoptions}{title}[]{\def\pdf@title{#1} }
+	\define@key{pdfoptions}{ref}[]{\def\pdf@ref{#1} }
+
+
+
+\newcommand{\pdfoptions}[2][]
+{
+	\setkeys{pdfoptions}{#1}
+	\attachment{\pdf@title}{ap:\pdf@ref}
+	\includepdf[scale=\pdf@scale, pages=-,offset ={\pdf@offsetw, \pdf@offseth}, landscape=\pdf@landscape, pagecommand={\section*{\pdf@title}}]{\appath#2}
+}
+\makeatother
 	%---------------------------------------
 	%impression de la table 
 	%---------------------------------------
