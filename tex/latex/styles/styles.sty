@@ -109,7 +109,7 @@ title={Remarque}}
 			\renewcommand{\thechaptertitle}{\@Roman\c@chapter\chappoint}
 			\renewcommand{\thechapter}{\@Roman\c@chapter.} 
 			\renewcommand{\thesection}{\@arabic\c@section.}
-			\renewcommand\thesubsection {\thesection\@arabic\c@subsection.}
+			\renewcommand\thesubsection {\thesection\@arabic\c@subsection}
 			\renewcommand{\thesubsubsection}{\thesubsection\@Alph\c@subsubsection}
 			\renewcommand{\theparagraph}{\@alph\c@paragraph)}
 			\makeatother
@@ -123,7 +123,7 @@ title={Remarque}}
 			\renewcommand{\thechapter}{\@Roman\c@chapter.} 
 			\renewcommand{\thesection}{\@arabic\c@section.}
 			\renewcommand\thesubsection {\thesection\@alph\c@subsection}
-			\renewcommand{\thesubsubsection}{\@arabic\c@subsubsection.}
+			\renewcommand{\thesubsubsection}{\@roman\c@subsubsection.}
 			\renewcommand{\theparagraph}{\@alph\c@paragraph)}
 			\makeatother
 		
@@ -164,7 +164,7 @@ title={Remarque}}
 				
 			\titleformat{\section} % command
 				[hang] % shape
-				{\sc \bfseries \LARGE } % format
+				{\sc \bfseries \Large } % format
 				{\thesection} % label
 				{1cm} % sep
 				{} % before-code
@@ -172,7 +172,7 @@ title={Remarque}}
 				
 			\titleformat{\subsection} % command
 				[hang] % shape
-				{\bf \itshape \Large } % format
+				{\bf \itshape \large } % format
 				{\thesubsection} % label
 				{0,5cm} % sep
 				{} % before-code
@@ -217,7 +217,7 @@ title={Remarque}}
 				
 			\titleformat{\section} % command
 				[hang] % shape
-				{\sc \bfseries \LARGE } % format
+				{\sc \bfseries \Large } % format
 				{\thesection} % label
 				{1cm} % sep
 				{} % before-code
@@ -225,7 +225,7 @@ title={Remarque}}
 				
 			\titleformat{\subsection} % command
 				[hang] % shape
-				{\bf \itshape \Large } % format
+				{\bf \itshape \large } % format
 				{\thesubsection} % label
 				{1cm} % sep
 				{} % before-code
