@@ -1,60 +1,66 @@
 {
-"latex-workshop.latex.tools": [
-    {
-        "name": "pdflatex",
-        "command": "pdflatex",
-        "args": [
-            "--shell-escape", // if you want to have the shell-escape flag
-            "-synctex=1",
-            "-interaction=nonstopmode",
-            "-file-line-error",
-            "%DOC%"
-        ]
-    },{
-        "name": "bibtex",
-        "command": "bibtex",
-        "args": [
-            "%DOCFILE%"
-        ]
-    }
-],
-"latex-workshop.latex.recipes": [
-    {
-        "name": "pdflatex",
-        "tools": [
-            "pdflatex"
-        ]
+    "latex-workshop.latex.tools": [
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "--shell-escape", // if you want to have the shell-escape flag
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ]
+        },{
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+                "%DOCFILE%"
+            ]
+        }
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "pdflatex",
+            "tools": [
+                "pdflatex"
+            ]
+        },
+        {
+            "name": "pdflatex *2",
+            "tools": [
+                "pdflatex",
+                "pdflatex"
+            ]
+        },
+        {
+            "name": "pdflatex -> bibtex -> pdflatex * 2",
+            "tools": [
+              "pdflatex",
+              "bibtex",
+              "pdflatex",
+              "pdflatex"
+            ]
+          }
+    ],
+    "ltex.language": "fr",
+
+    "files.associations": {
+        "*.tex": "latex",
+        "*.bib": "bibtex"
     },
-    {
-        "name": "pdflatex -> bibtex -> pdflatex * 2",
-        "tools": [
-          "pdflatex",
-          "bibtex",
-          "pdflatex",
-          "pdflatex"
-        ]
-      }
-],
-"ltex.language": "fr",
+    "latex-workshop.latex.magic.args": [
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "%DOC%",
+        "-shell-escape"
+    ],
+    "latex-workshop.latex.autoClean.run": "onFailed",
 
-"files.associations": {
-    "*.tex": "latex",
-    "*.bib": "bibtex"
-},
-"latex-workshop.latex.magic.args": [
-    "-synctex=1",
-    "-interaction=nonstopmode",
-    "-file-line-error",
-    "%DOC%",
-    "-shell-escape"
-],
-"latex-workshop.latex.autoClean.run": "onBuilt",
-"doxdocgen.generic.authorName": "Benjamin S",
 
-"doxdocgen.generic.commandSuggestionAddPrefix": true,
-"latex-workshop.bibtex-fields.sort.enabled": true,
-"latex-workshop.bibtex-format.sort.enabled": true,
-"latex-workshop.bibtex-format.trailingComma": true,
+    "latex-workshop.bibtex-fields.sort.enabled": true,
+    "latex-workshop.bibtex-format.sort.enabled": true,
+    "latex-workshop.bibtex-format.trailingComma": true,
 
 "git.autofetch": true,
 "git.confirmSync": false,
@@ -65,5 +71,18 @@
 "latex-workshop.view.pdf.external.synctex.args": [],
 "latex-workshop.synctex.afterBuild.enabled": true,
 "latex-workshop.synctex.synctexjs.enabled": true,
+
+"latex-workshop.latex.clean.method": "glob",
+    "latex-workshop.view.outline.sections": [
+        "part",
+        "chapter",
+        "section",
+        "subsection|sbsec",
+        "subsubsection|sbbsec",
+        "paragraph|para"
+    ],
+
+    "latex-workshop.view.pdf.external.synctex.args": [],
+    "latex-workshop.synctex.synctexjs.enabled": true
 
 }
