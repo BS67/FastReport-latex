@@ -470,7 +470,7 @@
 %	quote
 % ==============================================================	
 \iftoggle{quote}{
-					\PassOptionsToPackage{babel=true, csdisplay=true}{csquotes} %enquote{}
+					\PassOptionsToPackage{autostyle, csdisplay=true}{csquotes} %enquote{}
 					\RequirePackage{csquotes} 
 					%bcp bcp d'option aller regarder: https://mirror.ibcp.fr/pub/CTAN/macros/latex/contrib/csquotes/csquotes.pdf
 				\RequirePackage{epigraph} % sectional heading: https://mirrors.chevalier.io/CTAN/macros/latex/contrib/epigraph/epigraph.pdf
@@ -478,7 +478,7 @@
 				
 				\ifthenelse{\equal{\doclanguage}{fr}}{\setquotestyle[quotes]{french}}{}
 				\ifthenelse{\equal{\doclanguage}{de}}{\setquotestyle[quotes]{german}}{}
-				\ifthenelse{\equal{\doclanguage}{en}}{\setquotestyle[quotes]{english}}{}
+				\ifthenelse{\equal{\doclanguage}{en}}{}{}%per default ? I suppose it's set with autostyle
 				
 				
 }{}
