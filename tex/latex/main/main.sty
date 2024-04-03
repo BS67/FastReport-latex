@@ -315,7 +315,7 @@
 	\chapter{\tabletitle}
 	\listoffigures
 	\mylistoftables
-\lstlistoflistings
+	\lstlistoflistings
 	\listofappendixs
 	\biblio
 }
@@ -493,8 +493,10 @@
 \iftoggle{bib}{
 					\RequirePackage{cite}	
 					\patchcmd{\thebibliography}{\chapter*{\bibname}}{\section{\bibname}}{}{} %transforme le chapitre en section
-
+					\patchcmd{\thebibliography}{\clubpenalty 4000}{\clubpenalty 0}{}{}
+					\patchcmd{\thebibliography}{\widowpenalty 4000}{\widowpenalty 0}{}{}
 					\def\biblio{ 
+							\clearpage
 							\bibliographystyle{\mybibstyle}
 							\bibliography{\bibfile}
 					}
