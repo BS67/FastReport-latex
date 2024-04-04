@@ -293,8 +293,8 @@
 %	==============================================================
 %	print table
 % ==============================================================
-\providecommand{\listofappendixs}{ }% si pas le package qui va avec
-\providecommand{\biblio}{ }%si pas de bibliographie
+\providecommand{\listofappendixs}{}% si pas le package qui va avec
+\providecommand{\biblio}{}%si pas de bibliographie
 \providecommand{\lstlistoflistings}{ }
 \patchcmd{\listoffigures}{\chapter*}{\section}{}{}
 \patchcmd{\listoftables}{\chapter*}{\section}{}{}
@@ -355,7 +355,7 @@
 \SetEnumitemKey{sbblist}{labelindent=1.5cm, leftmargin = *,label= \textit{(\roman*)}}
 \makeatletter
 	\@beginparpenalty=1000 % high penality -> do not encourage break
-	\@itempenalty=10000% high penality -> do not encourage break
+	\@itempenalty=1000% high penality -> do not encourage break
 	\@endparpenalty=1% low penality ->  encourage break
 \makeatother
 %	==============================================================
@@ -491,16 +491,34 @@
 % ==============================================================
 
 \iftoggle{bib}{
-					\RequirePackage{cite}	
-					\patchcmd{\thebibliography}{\chapter*{\bibname}}{\section{\bibname}}{}{} %transforme le chapitre en section
-					\patchcmd{\thebibliography}{\clubpenalty 4000}{\clubpenalty 0}{}{}
-					\patchcmd{\thebibliography}{\widowpenalty 4000}{\widowpenalty 0}{}{}
+					
+					\PassOptionsToPackage{
+						sorting = count, %trie les references par nombre de passage
+						date = short, %format de la date
+						url = true,
+						hyperref=true,
+						citestyle = numeric-comp, %format des references [1–3, 7, 8]
+						bibstyle = numeric,
+						backend=biber,
+						block = ragged
+						}{biblatex} %enquote{}
+					
+						\RequirePackage{biblatex}
+
+					\defbibheading{bibliography}[\bibname]{
+						\section{#1}
+						\markboth{#1}{#1}}
+						
+					\addbibresource{\bibfile}
+					% \patchcmd{\thebibliography}{\chapter*{\bibname}}{\section{\bibname}}{}{} %transforme le chapitre en section
+
 					\def\biblio{ 
 							\clearpage
-							\bibliographystyle{\mybibstyle}
-							\bibliography{\bibfile}
+							\setlength{\bibitemsep}{10 pt plus 2 pt minus 1 pt}
+							% \bibliographystyle{\mybibstyle}
+							% \bibliography{\bibfile}
+							\printbibliography
 					}
-					
 }{}
 
 %	==============================================================

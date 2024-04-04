@@ -1,4 +1,7 @@
 {
+    
+    
+
     "latex-workshop.latex.tools": [
         {
             "name": "pdflatex",
@@ -14,6 +17,14 @@
             "name": "bibtex",
             "command": "bibtex",
             "args": [
+                "%DOCFILE%"
+            ]
+        }
+        ,{
+            "name": "biber",
+            "command": "biber",
+            "args": [
+                "--output-directory=%OUTDIR%",
                 "%DOCFILE%"
             ]
         }
@@ -33,10 +44,10 @@
             ]
         },
         {
-            "name": "pdflatex -> bibtex -> pdflatex * 2",
+            "name": "pdflatex -> biber -> pdflatex * 2",
             "tools": [
               "pdflatex",
-              "bibtex",
+              "biber",
               "pdflatex",
               "pdflatex"
             ]
@@ -46,7 +57,7 @@
 
     "files.associations": {
         "*.tex": "latex",
-        "*.bib": "bibtex"
+        "*.bib": "biber"
     },
     "latex-workshop.latex.magic.args": [
         "-synctex=1",
@@ -55,24 +66,17 @@
         "%DOC%",
         "-shell-escape"
     ],
-    "latex-workshop.latex.autoClean.run": "onFailed",
+    "doxdocgen.generic.authorName": "Benjamin S",
 
-
+    "doxdocgen.generic.commandSuggestionAddPrefix": true,
     "latex-workshop.bibtex-fields.sort.enabled": true,
     "latex-workshop.bibtex-format.sort.enabled": true,
     "latex-workshop.bibtex-format.trailingComma": true,
+    
 
-"git.autofetch": true,
-"git.confirmSync": false,
-"git.openRepositoryInParentFolders": "always",
-"git.confirmSync": false,
-"git.openRepositoryInParentFolders": "never",
-
-"latex-workshop.view.pdf.external.synctex.args": [],
-"latex-workshop.synctex.afterBuild.enabled": true,
-"latex-workshop.synctex.synctexjs.enabled": true,
-
-"latex-workshop.latex.clean.method": "glob",
+    "latex-workshop.view.pdf.external.synctex.args": [],
+    "latex-workshop.synctex.synctexjs.enabled": true,
+    "latex-workshop.latex.clean.method": "glob",
     "latex-workshop.view.outline.sections": [
         "part",
         "chapter",
@@ -81,8 +85,98 @@
         "subsubsection|sbbsec",
         "paragraph|para"
     ],
-
-    "latex-workshop.view.pdf.external.synctex.args": [],
-    "latex-workshop.synctex.synctexjs.enabled": true
-
+    "files.autoSave": "onWindowChange",
+    "editor.wordWrap": "on",
+    "latex-workshop.intellisense.citation.backend": "biblatex",
+    "latex-workshop.latex.clean.fileTypes": [
+        "%DOCFILE%.aux",
+        "%DOCFILE%.idx",
+        "%DOCFILE%.ind",
+        "%DOCFILE%.lof",
+        "%DOCFILE%.lot",
+        "%DOCFILE%.out",
+        "%DOCFILE%.toc",
+        "%DOCFILE%.acn",
+        "%DOCFILE%.acr",
+        "%DOCFILE%.alg",
+        "%DOCFILE%.glg",
+        "%DOCFILE%.glo",
+        "%DOCFILE%.gls",
+        "%DOCFILE%.fls",
+        "%DOCFILE%.log",
+        "%DOCFILE%.fdb_latexmk",
+        "%DOCFILE%.snm",
+        "%DOCFILE%.synctex(busy)",
+        "%DOCFILE%.synctex.gz(busy)",
+        "%DOCFILE%.nav",
+        "%DOCFILE%.vrb"
+    ],
+    "latex-workshop.intellisense.file.exclude": [
+        "**/*.aux",
+        "**/*.bcf",
+        "**/*.blg",
+        "**/*.idx",
+        "**/*.ind",
+        "**/*.lof",
+        "**/*.lot",
+        "**/*.out",
+        "**/*.toc",
+        "**/*.acn",
+        "**/*.acr",
+        "**/*.alg",
+        "**/*.glg",
+        "**/*.glo",
+        "**/*.gls",
+        "**/*.ist",
+        "**/*.fls",
+        "**/*.log",
+        "**/*.nav",
+        "**/*.snm",
+        "**/*.fdb_latexmk",
+        "**/*.synctex.gz",
+        "**/*.run.xml"
+    ],
+    "latex-workshop.latex.watch.files.ignore": [
+        "**/*.bbx",
+        "**/*.cbx",
+        "**/*.cfg",
+        "**/*.clo",
+        "**/*.cnf",
+        "**/*.def",
+        "**/*.dfu",
+        "**/*.enc",
+        "**/*.fd",
+        "**/*.fmt",
+        "**/*.lbx",
+        "**/*.map",
+        "**/*.mkii",
+        "**/*.pfb",
+        "**/*.tfm",
+        "**/*.vf",
+        "**/*.code.tex",
+        "**/*.sty",
+        "**/texmf-{dist,var}/**",
+        "**/Local/MiKTeX/**",
+        "**/Local/Programs/MiKTeX/**",
+        "**/Roaming/MiKTeX/**",
+        "**/Program*/MiKTeX*/**",
+        "**/.miktex/texmfs/**",
+        "/var/cache/miktex-texmf/**",
+        "/usr/local/share/miktex-texmf/**",
+        "**/Library/Application Support/MiKTeX/texmfs/**",
+        "/dev/null"
+    ],
+    "latex-workshop.intellisense.citation.format": [
+        "author",
+        "title",
+        "journal",
+        "publisher",
+        "booktitle",
+        "year",
+        "annotation",
+        "isbn",
+        "url",
+        "abstract"
+    ],
+    
 }
