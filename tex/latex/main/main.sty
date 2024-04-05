@@ -500,7 +500,9 @@
 						citestyle = numeric-comp, %format des references [1–3, 7, 8]
 						bibstyle = numeric,
 						backend=biber,
-						block = ragged
+						url=false,
+						maxnames=2,
+						eprint=false
 						}{biblatex} %enquote{}
 					
 						\RequirePackage{biblatex}
@@ -510,11 +512,33 @@
 						\markboth{#1}{#1}}
 						
 					\addbibresource{\bibfile}
-					% \patchcmd{\thebibliography}{\chapter*{\bibname}}{\section{\bibname}}{}{} %transforme le chapitre en section
+					\renewcommand*{\bibfont}{\small}
+
+					\AtEveryBibitem{
+							\clearfield{month}
+							\clearfield{series}
+							\clearfield{venue}
+							%\clearname{editor}
+							\clearlist{publisher}
+							\clearlist{location} % alias to field 'address'
+							%\clearfield{doi}
+							\clearfield{url}
+							\clearfield{venue}
+							\clearfield{issn}
+							\clearfield{isbn}
+							\clearfield{urldate}
+							%\clearfield{eventdate}
+							%\clearfield{pages}
+							%\clearfield{booktitle}
+							%\clearfield{journaltitle}
+							%\clearfield{number}
+							%\clearfield{volume}
+							\clearfield{language}
+							}
 
 					\def\biblio{ 
 							\clearpage
-							\setlength{\bibitemsep}{10 pt plus 2 pt minus 1 pt}
+							
 							% \bibliographystyle{\mybibstyle}
 							% \bibliography{\bibfile}
 							\printbibliography
