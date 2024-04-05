@@ -401,49 +401,49 @@
 
 
 %compteur pour exercice
-		\ifthenelse{\equal{\doclanguage}{fr}}{\def\exercice{Exercice}}{}
-		\ifthenelse{\equal{\doclanguage}{de}}{\def\exercice{Aufgabe}}{}
-		\ifthenelse{\equal{\doclanguage}{en}}{\def\exercice{Exercice}}{}
+\ifthenelse{\equal{\doclanguage}{fr}}{\def\exercice{Exercice}}{}
+\ifthenelse{\equal{\doclanguage}{de}}{\def\exercice{Aufgabe}}{}
+\ifthenelse{\equal{\doclanguage}{en}}{\def\exercice{Exercice}}{}
 
 
-			\newcounter{exo}
-				\setcounter{exo}{0}
-				\newcommand{\exosuivant}
-				{
-					\addtocounter{exo}{1}
-					\vp\noindent{\bf \exercice {\theexo}.\\ }
-				}
+	\newcounter{exo}
+		\setcounter{exo}{0}
+		\newcommand{\exosuivant}
+		{
+			\addtocounter{exo}{1}
+			\vp\noindent{\bf \exercice {\theexo}.\\ }
+		}
 
-				
-				
-			\PassOptionsToPackage{fleqn}{amsmath}
-			\PassOptionsToPackage{allowspaces}{mathtools} %https://ctan.crest.fr/tex-archive/macros/latex/contrib/mathtools/mathtools.pdf
-			\RequirePackage{amsmath,amssymb,amsfonts, mathtools}%mathtools très très puissant voir si problème il y a enormément de chose
-			
-		\providecommand\eq[1]{\begin{align}#1\end{align}} %equations
-		\providecommand\noeq[1]{\begin{align*}#1\end{align*}}
-				
-		\mathtoolsset{showonlyrefs}
-		\usetagform{default}
+		
+		
+	\PassOptionsToPackage{fleqn}{amsmath}
+	\PassOptionsToPackage{allowspaces}{mathtools} %https://ctan.crest.fr/tex-archive/macros/latex/contrib/mathtools/mathtools.pdf
+	\RequirePackage{amsmath,amssymb,amsfonts, mathtools}%mathtools très très puissant voir si problème il y a enormément de chose
+	
+\providecommand\eq[1]{\begin{align}#1\end{align}} %equations
+\providecommand\noeq[1]{\begin{align*}#1\end{align*}}
+		
+\mathtoolsset{showonlyrefs}
+\usetagform{default}
 
-		\providecommand{\bc}{\begin{dcases}} 
-		\providecommand{\ec}{\end{dcases}}
+\providecommand{\bc}{\begin{dcases}} 
+\providecommand{\ec}{\end{dcases}}
 
-		\newcommand*\abs[1]{\lvert#1\rvert}
+\newcommand*\abs[1]{\lvert#1\rvert}
 
-		\newcommand{\N}{\mathbb{N}}
-		\newcommand{\R}{\mathbb{R}}
-		\newcommand{\C}{\mathbb{C}}
-		\newcommand{\Z}{\mathbb{Z}}
-		\newcommand{\Q}{\mathbb{Q}}
-		\newcommand{\K}{\mathbb{K}}
-		\newcommand{\U}{\mathbb{U}}
-		\newcommand{\Mn}{\mathcal{M}_n}
-		\newcommand{\M}{\mathcal{M}}
-		\newcommand{\B}{\mathcal{B}}
-		\newcommand{\A}{\mathcal{A}}
-		\newcommand{\F}{\mathcal{F}}
-		\renewcommand{\L}{\mathcal{L}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\U}{\mathbb{U}}
+\newcommand{\Mn}{\mathcal{M}_n}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\F}{\mathcal{F}}
+\renewcommand{\L}{\mathcal{L}}
 	
 			
 			%equations
