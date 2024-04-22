@@ -90,6 +90,7 @@
 \PassOptionsToPackage{document}{ragged2e} 
 \RequirePackage{ragged2e} % permet un alignement du texte qui soit plus naturel avec les cmd: \Centering \RaggedLeft \RaggedRight
 \RequirePackage{parskip}%pour avoir des parskip qui soient propre et qui ne donnent pas de trucs bizarre
+\RequirePackage{multicol}
 
 %paragraph spacing
 \setlength{\parindent}{5ex}
@@ -322,6 +323,27 @@
 
 \setcounter{secnumdepth}{6}
 \setcounter{tocdepth}{5}
+
+% ==============================================================
+%  Acronyms
+% ==============================================================
+\PassOptionsToPackage{printonlyreused}{acronym}
+\RequirePackage{acronym} %https://tex.stackexchange.com/questions/25520/how-can-i-use-the-latex-acronym-package-and-optionally-create-an-acronym-list-i
+
+\ifthenelse{\equal{\doclanguage}{fr}}{\newcommand*{\acrotitle}{Acronymes}}{}
+\ifthenelse{\equal{\doclanguage}{de}}{\newcommand*{\acrotitle}{Abkürzungen}}{}
+\ifthenelse{\equal{\doclanguage}{en}}{\newcommand*{\acrotitle}{Acronyms}}{}
+
+\newenvironment{myacronyms}{
+		\begin{multicols}{2}[\section{\acrotitle}]  
+		\small \setstretch{0.9} \setlength{\parskip}{0pt } \selectfont
+		\setlist[description,1]{font=\doublepoint, labelindent=1cm,leftmargin = 1.5cm, itemindent=-0.5cm}
+		\begin{acronym}
+	}{    
+		\end{acronym}
+		\end{multicols}
+	}
+
 %	==============================================================
 %  svg
 % ==============================================================
