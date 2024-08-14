@@ -15,12 +15,15 @@
 \RequirePackage{ifthen} 
 \RequirePackage{etoolbox} % provides a lot of robusts commands, here for the toogle bool
 \RequirePackage{fmtcount}	%for counters
+\RequirePackage{totcount}
+\providecommand\mytotfile{totcnt.aux}
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 % Package Options
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 \newtoggle{attach} 
 \newtoggle{code}
+\newtoggle{algo}
 
 \DeclareOptionX{actif}[true]{\toggletrue{attach} \def\activ{#1}} %print the table
 \DeclareOptionX{pathappendix}{\newcommand{\appath}{#1}} %Anhang/
@@ -28,6 +31,7 @@
 \DeclareOptionX{logo}{\newcommand{\appathlogo}{#1}}%logo a mettre en entête
 \DeclareOptionX{language}{\newcommand{\doclanguage}{#1}}
 \DeclareOptionX{fancyfooter}{\newcommand{\fancyfooter}{#1}}%titre milieux de page
+\DeclareOptionX{algo}{\toggletrue{algo}}%titre milieux de page
 \ProcessOptionsX\relax
 
 %if not defined
@@ -84,6 +88,8 @@
 % --------------------------------------------------------------
 \newcounter{achapter}%chapter for appendix
 \newcounter{appendix}[achapter]%real attachment
+
+
 %format des compteurs
 \makeatletter
 	\renewcommand*{\theachapter}{\@Alph\c@achapter}
@@ -108,7 +114,7 @@
 	\newcommand*\l@appendix{\@dottedtocline{1}{2.5em}{2.3em}} 
 \makeatother
 
-\contentsuse{appendix}{loa}
+\contentsuse{appendix}{loap}
 
 
 \let\listofappendixs\listoftables
@@ -116,23 +122,38 @@
 \patchcmd{\listofappendixs}{\listtablename}{\listappendixname}{}{}
 \patchcmd{\listofappendixs}{\listtablename}{\listappendixname}{}{}
 \patchcmd{\listofappendixs}{\listtablename}{\listappendixname}{}{}
-\patchcmd{\listofappendixs}{lot}{loa}{}{}
+\patchcmd{\listofappendixs}{lot}{loap}{}{}
 
 %	-------------------------------------------------------------
 %	commande d'entrée
 % --------------------------------------------------------------
+\usepackage{pdflscape}
+
+
+
 
 
 \newcommand\attachment[2]{
 									\refstepcounter{appendix}
-									\label{#2}
-									\addcontentsline{loa}{appendix}{\numberline{\theappendix}{\itshape #1}}
+									\label{ap:#1}
+									\addcontentsline{loap}{appendix}{\numberline{\theappendix}{\itshape #2}}
 									}
 \newcommand\achapter[1]{
 								\refstepcounter{achapter}
 								\def\achaptertitle{#1}
-								\addcontentsline{loa}{achapter}{\bfseries\theachapter \hspace{1em} #1}%style, espacement entre num et label 
+								\addcontentsline{loap}{achapter}{\bfseries\theachapter \hspace{1em} #1}%style, espacement entre num et label 
 								}
+\newcommand\asection[2]{
+						\attachment{#1}{#2}
+						\section*{#2}
+}
+
+\newcommand\lspapp[3]{%landscapeappendix
+	\begin{landscape}
+		\asection{#1}{#2}
+		#3
+	\end{landscape}
+}
 
 %	-------------------------------------------------------------
 %	style de page
@@ -172,7 +193,7 @@
 													\addcontentsline{toc}{chapter}{\attachname}
 													\part*{\attachname}
 													\pagestyle{appendix}
-													\newgeometry{paper=a4paper,tmargin=2cm,bmargin=1.5cm,lmargin=0.5cm,rmargin=0.5cm,headheight=100pt, headsep=0.5cm, footskip=1cm}
+													\newgeometry{tmargin=2cm,bmargin=1.5cm,lmargin=0.5cm,rmargin=0.5cm,headheight=100pt, headsep=0.5cm, footskip=1cm}
 												}
 
 %	-------------------------------------------------------------
@@ -184,14 +205,14 @@
 %\pdf[langscape->true/false]{titre}{ref}{nom du doc avec extension}												
 \newcommand{\pdf}[4][false]%
 {
-	\attachment{#2}{ap:#3}
+	\attachment{#2}{#3}
 	\includepdf[scale=.8, pages=-,offset ={0cm -2cm}, landscape=#1, pagecommand={\section*{#2}}]{\appath#4}
 									}
 
 	%\pdf[langscape->true/false]{taille}{titre}{ref}{nom du doc avec extension}		
 \newcommand{\pdfsize}[5][false]%
 	{ 	
-		\attachment{#3}{ap:#4}
+		\attachment{#3}{#4}
 		\includepdf[scale=#2, pages=-,offset ={0cm -2cm}, landscape=#1, pagecommand={\section*{#3}}]{\appath#5}
 	}
 
@@ -232,33 +253,61 @@
 %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 %code
 %$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-\iftoggle{code}{
 
-	\RequirePackage{listings}
-	
+
 %----------------------------------------------------------------
 %langues
 %----------------------------------------------------------------
 \ifthenelse{\equal{\doclanguage}{fr}}
 			{%option is french
 					\PassOptionsToPackage{french,ruled,vlined}{algorithm2e} 
-					\renewcommand{\lstlistingname}{Extrait de code }
-                    \renewcommand{\lstlistlistingname}{Extraits de code}
 			}{
 \ifthenelse{\equal{\doclanguage}{de}}
 			{%option is german
 					\PassOptionsToPackage{german,ruled,vlined}{algorithm2e} 
-					\renewcommand{\lstlistingname}{Code-Abschnitt}
-                    \renewcommand{\lstlistlistingname}{Code-Verzeichnis}
 			}{
 \ifthenelse{\equal{\doclanguage}{en}}
 			{%option is english
 					\PassOptionsToPackage{english,ruled,vlined}{algorithm2e} 
-					\renewcommand{\lstlistingname}{Code-Extract}
-                    \renewcommand{\lstlistlistingname}{Table of code}
 			}{}}}
 
+%make title of listofalgorithms => section*
+
+
+\let\listofalgorithms\undefined
 \RequirePackage{algorithm2e}
+\makeatletter
+	\def\algocf@seclistalgo{\section}
+\makeatother
+
+\iftoggle{algo}{
+	\patchcmd{\listofalgocfs}{*}{ }{}{}%section* => section
+}{
+	\def\listofalgorithms{}
+}
+
+
+\iftoggle{code}{
+	%----------------------------------------------------------------
+	%langues
+	%----------------------------------------------------------------
+	\ifthenelse{\equal{\doclanguage}{fr}}
+	{%option is french
+			\renewcommand{\lstlistingname}{Extrait de code }
+			\renewcommand{\lstlistlistingname}{Extraits de code}
+	}{
+	\ifthenelse{\equal{\doclanguage}{de}}
+	{%option is german
+			\renewcommand{\lstlistingname}{Code-Abschnitt}
+			\renewcommand{\lstlistlistingname}{Code-Verzeichnis}
+	}{
+	\ifthenelse{\equal{\doclanguage}{en}}
+	{%option is english
+			\renewcommand{\lstlistingname}{Code-Extract}
+			\renewcommand{\lstlistlistingname}{Table of code}
+	}{}}}
+
+	\RequirePackage{listings}
 
 \makeatletter
 \patchcmd{\lstlistoflistings}{\float@listhead}{\section}{}{}
