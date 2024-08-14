@@ -27,6 +27,7 @@
 \newtoggle{quote}
 \newtoggle{calc}
 \newtoggle{showframe}
+\newtoggle{acro}
 
 \DeclareOptionX{math}{}%legacy version
 \DeclareOptionX{font}[libertine]{\newcommand{\myfont}{#1}}
@@ -37,6 +38,7 @@
 \DeclareOptionX{svg}{				\ifthenelse{\equal{#1}{} \or \equal{#1}{true}}{\toggletrue{svg}}{}}
 \DeclareOptionX{bibstyle}{ \newcommand{\mybibstyle}{#1}}
 \DeclareOptionX{bib}{				\ifthenelse{\equal{#1}{no}}{}{\toggletrue{bib} \newcommand{\bibfile}{#1}}}
+\DeclareOptionX{acro}{				\ifthenelse{\equal{#1}{no} }{}{\toggletrue{acro}}}
 \DeclareOptionX{table}{			\newcommand{\mylistoftables}{\listoftables}}
 \DeclareOptionX{spacing}{\newcommand{\textspacing}{#1}}
 \DeclareOptionX{language}{\newcommand{\doclanguage}{#1}}
@@ -165,7 +167,7 @@
 
 %for every unit: \DeclareSIUnit{\fahrenheit}{\degree F} \SI{nb}{unit}
 \RequirePackage{siunitx}
-\sisetup{ detect-all = true }
+\sisetup{ detect-all = true, binary-units = true , free-standing-units = true }
 % Astronomy
 \DeclareSIUnit\parsec{pc}
 \DeclareSIUnit\lightyear{ly}
@@ -197,6 +199,8 @@
 \DeclareSIUnit\zb{\zepto\barn}
 \DeclareSIUnit\yb{\yocto\barn}
 
+%images
+\DeclareSIUnit\px{px}
 %Industry
 \DeclareSIUnit{\dBm}{dBm}%decibel milliwatt
 \DeclareSIUnit{\dBV}{dBV}%decibel volt
@@ -212,13 +216,12 @@
 \RequirePackage{graphicx,xcolor}
 \RequirePackage{subcaption} %create cmd to make subcaption easyer
 
-
-
+\usepackage{diagbox} %diagonale in tables \diagbox{r}{l}
 \RequirePackage{multirow} %: 
 	%\multicolumn{nomb_col}{alignement ex:|c|}{contenu} 
 	%\multirow{nomb_ligne}{largeur ex * }{contenu qui est 1 fusionné}
 
-
+\usepackage{hhline}% pour lignes ====
 \RequirePackage{array}
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
@@ -228,6 +231,8 @@
 		\captionsetup[table]{justification=centering, format=hang,  labelfont={sc,tt}, textfont={bf,sl,tt},skip=8pt, position=above, labelsep=colon}
 		\captionsetup[figure]{justification=centering, format=hang, labelfont={sc,tt}, textfont={bf,sl,tt},skip=8pt, position=bottom, labelsep=colon}	
 		\captionsetup[sub]{justification=centering, format=hang, labelfont={sc,tt}, textfont={bf,sl,tt},skip=8pt, labelsep=colon}
+
+\def\brcaption{\hspace{\textwidth}}
 
 %compteur, met le num du chapitre aussi
 
@@ -297,6 +302,9 @@
 \providecommand{\listofappendixs}{}% si pas le package qui va avec
 \providecommand{\biblio}{}%si pas de bibliographie
 \providecommand{\lstlistoflistings}{ }
+\providecommand{\listofalgorithms}{ }
+\providecommand{\acrolist}{ }
+
 \patchcmd{\listoffigures}{\chapter*}{\section}{}{}
 \patchcmd{\listoftables}{\chapter*}{\section}{}{}
 
@@ -309,14 +317,37 @@
 \ifthenelse{\equal{\doclanguage}{en}}{\newcommand*{\tabletitle}{Tables}}{}
 
 
+\newcommand\tablestart{
+	\let\oldprechap\prechap
+	\let\oldsufchap\sufchap
+	\def\sufchap{~}% supprimer une quelconque mise en forme provenant du style package
+	\def\prechap{}%dans style package
+	\chapter{\tabletitle}
+	\acrolist \filbreak
+	\listoffigures \filbreak
+	\mylistoftables \filbreak
+	\lstlistoflistings \filbreak
+	\listofalgorithms \filbreak
+	\listofappendixs 
+	\let\prechap\oldprechap
+	\let\sufchap\oldsufchap
+	}
+	
+
+\newcommand\tableend{
+	\let\bibtitle\chapter
+	\biblio
+}
 
 \newcommand\tables{
 \def\sufchap{~}% supprimer une quelconque mise en forme provenant du style package
 \def\prechap{}%dans style package
 	\chapter{\tabletitle}
+	\acrolist \filbreak
 	\listoffigures \filbreak
 	\mylistoftables \filbreak
 	\lstlistoflistings \filbreak
+	\listofalgorithms \filbreak
 	\listofappendixs \filbreak
 	\biblio
 }
@@ -324,25 +355,12 @@
 \setcounter{secnumdepth}{6}
 \setcounter{tocdepth}{5}
 
-% ==============================================================
-%  Acronyms
-% ==============================================================
-\PassOptionsToPackage{printonlyreused}{acronym}
-\RequirePackage{acronym} %https://tex.stackexchange.com/questions/25520/how-can-i-use-the-latex-acronym-package-and-optionally-create-an-acronym-list-i
 
-\ifthenelse{\equal{\doclanguage}{fr}}{\newcommand*{\acrotitle}{Acronymes}}{}
-\ifthenelse{\equal{\doclanguage}{de}}{\newcommand*{\acrotitle}{Abkürzungen}}{}
-\ifthenelse{\equal{\doclanguage}{en}}{\newcommand*{\acrotitle}{Acronyms}}{}
 
-\newenvironment{myacronyms}{
-		\begin{multicols}{2}[\section{\acrotitle}]  
-		\small \setstretch{0.9} \setlength{\parskip}{0pt } \selectfont
-		\setlist[description,1]{font=\doublepoint, labelindent=1cm,leftmargin = 1.5cm, itemindent=-0.5cm}
-		\begin{acronym}
-	}{    
-		\end{acronym}
-		\end{multicols}
-	}
+
+
+
+
 
 %	==============================================================
 %  svg
@@ -451,7 +469,11 @@
 \providecommand{\bc}{\begin{dcases}} 
 \providecommand{\ec}{\end{dcases}}
 
-\newcommand*\abs[1]{\lvert#1\rvert}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\hvect{[}{]^T}
+
+\newcommand{\mb}{\mathbf}
+
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\R}{\mathbb{R}}
@@ -486,6 +508,7 @@
 \newcommand{\fnm}{\footnotemark~}
 \newcommand{\pnm}{\protecting{\footnotemark}~} % a utiliser dans ce qui est écrit dans les tables 
 \newcommand{\fnt}{\footnotetext}
+\usepackage{tablefootnote}
 					
 				
 %	==============================================================
@@ -529,9 +552,11 @@
 					
 						\RequirePackage{biblatex}
 
+					\let\bibtitle\section
 					\defbibheading{bibliography}[\bibname]{
-						\section{#1}
-						\markboth{#1}{#1}}
+						\bibtitle{#1}
+						%\markboth{#1}{#1}
+						}
 						
 					\addbibresource{\bibfile}
 					\renewcommand*{\bibfont}{\small}
@@ -540,7 +565,7 @@
 							\clearfield{month}
 							\clearfield{series}
 							\clearfield{venue}
-							%\clearname{editor}
+							\clearname{editor}
 							\clearlist{publisher}
 							\clearlist{location} % alias to field 'address'
 							%\clearfield{doi}
@@ -550,11 +575,11 @@
 							\clearfield{isbn}
 							\clearfield{urldate}
 							%\clearfield{eventdate}
-							%\clearfield{pages}
-							%\clearfield{booktitle}
-							%\clearfield{journaltitle}
-							%\clearfield{number}
-							%\clearfield{volume}
+							\clearfield{pages}
+							\clearfield{booktitle}
+							\clearfield{journaltitle}
+							\clearfield{number}
+							\clearfield{volume}
 							\clearlist{language}
 							\clearlist{langid}
 							}
@@ -566,6 +591,7 @@
 							% \bibliography{\bibfile}
 							\printbibliography
 					}
+					
 }{}
 
 %	==============================================================
@@ -608,3 +634,25 @@
 
 \let\oldref\ref
 \renewcommand{\ref}{ \oldref} %ajoute un espace avant		
+
+% ==============================================================
+%  Acronyms
+% ==============================================================
+\iftoggle{acro}{
+
+
+	\usepackage[acronym,nonumberlist,style=list,nopostdot]{glossaries}
+
+	\ifthenelse{\equal{\doclanguage}{fr}}{\newcommand*{\acrotitle}{Acronymes}}{}
+	\ifthenelse{\equal{\doclanguage}{de}}{\newcommand*{\acrotitle}{Abkürzungen}}{}
+	\ifthenelse{\equal{\doclanguage}{en}}{\newcommand*{\acrotitle}{Acronyms}}{}
+
+	\makenoidxglossaries
+	\renewcommand{\glossarysection}[2][]{} % supprime le titre
+	\def\acrolist{
+		\section{\acrotitle}
+		\begin{multicols}{3}
+			\printnoidxglossary[type=\acronymtype]
+		\end{multicols}
+	}
+}{}
