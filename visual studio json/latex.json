@@ -37,7 +37,7 @@
 	"insertion d'une image": {
 		"prefix": "figure",
 	 	"body": [
-			"\\begin{figure}[]",
+			"\\begin{figure}[tbp]",
     		"\t\\centering",
     		"\t\\includegraphics[width=0.5\\textwidth]{pictures/$2}",
     		"\t\\caption{}",
@@ -60,7 +60,7 @@
 	"deux images côte à le côte": {
 		"prefix": "twopic",
 		"body": [
-		"\\begin{figure}[]",
+		"\\begin{figure}[tbp]",
     	"\t\\centering",
     	"\t\\twopic{\\includegraphics[width=\\textwidth]{}\\subcaption{}}{\\includegraphics[width=\\textwidth]{}\\subcaption{}}",
     	"\t\\caption{}",
