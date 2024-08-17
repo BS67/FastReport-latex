@@ -382,15 +382,15 @@
 %liste
 %les listes * on le même paramétrage que les listes normales
 
-\setlist[enumerate]{ topsep = 0mm, labelindent=5pt, label= \arabic*.,font=\bfseries}
+\setlist[enumerate]{ topsep = 0mm, labelindent=5pt, label= \arabic*.,font=\bfseries,leftmargin = {\parindent + 1cm}}
 
-\setlist[description]{ topsep = 0mm, labelindent=5pt }
-\setlist[itemize]{ topsep = 0mm, labelindent=5pt, label=\textbullet }	
+\setlist[description]{ topsep = 0mm, labelindent=5pt, leftmargin = {\parindent + 1cm} }
+\setlist[itemize]{ topsep = 0mm, labelindent=5pt, label=\textbullet, leftmargin = {\parindent + 1cm} }	
 
 %2 nouveaux formats pour des subliste
 \newcommand{\doublepoint}[1]{{\bfseries #1 ~:~}}
 \SetEnumitemKey{compact}{noitemsep,nolistsep}
-\SetEnumitemKey{dp}{font=\doublepoint, labelindent=1cm,leftmargin = 1.5cm, itemindent=-0.5cm}
+\SetEnumitemKey{dp}{font=\doublepoint, labelindent=1cm, itemindent=-0.5cm}
 \SetEnumitemKey{sblist}{labelindent=1cm, leftmargin = *,label= \alph*)}
 \SetEnumitemKey{sbblist}{labelindent=1.5cm, leftmargin = *,label= \textit{(\roman*)}}
 \makeatletter
