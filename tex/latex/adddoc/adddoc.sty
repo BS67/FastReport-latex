@@ -145,7 +145,7 @@
 								}
 \newcommand\asection[2]{
 						\attachment{#1}{#2}
-						\section*{#2}
+						\section*{\theappendix\hspace{1cm} #2}
 }
 
 \newcommand\lspapp[3]{%landscapeappendix
@@ -309,9 +309,9 @@
 
 	\RequirePackage{listings}
 
-\makeatletter
-\patchcmd{\lstlistoflistings}{\float@listhead}{\section}{}{}
-\makeatother
+	\makeatletter
+		\patchcmd{\lstlistoflistings}{\float@listhead}{\section}{}{}
+	\makeatother
 %----------------------------------------------------------------
 %general cmd
 %----------------------------------------------------------------
