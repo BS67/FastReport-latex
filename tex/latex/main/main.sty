@@ -58,9 +58,7 @@
 % MAIN
 % $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-\iftoggle{showframe}{\RequirePackage{showframe}
-\RequirePackage{widows-and-orphans} %indication ligne vide
-}{}
+
 
 % =============================================================
 % raccourci de base
@@ -97,6 +95,7 @@
 %paragraph spacing
 \setlength{\parindent}{5ex}
 \widowpenalties 1 10000 %evite les pagebreaks au milieu des paragraphes
+\clubpenalty=10000 %orphan lines
 
 %text interspacing 
 \RequirePackage{setspace}
@@ -167,7 +166,7 @@
 
 %for every unit: \DeclareSIUnit{\fahrenheit}{\degree F} \SI{nb}{unit}
 \RequirePackage{siunitx}
-\sisetup{ detect-all = true, binary-units = true , free-standing-units = true }
+\sisetup{ detect-all = true, free-standing-units = true }
 % Astronomy
 \DeclareSIUnit\parsec{pc}
 \DeclareSIUnit\lightyear{ly}
@@ -292,9 +291,9 @@
 %[!h] ici si ca passe
 
 
-\renewcommand\topfraction{0.6}% un float en haut de page a le droit de faire 60% de pageheight
-\renewcommand\textfraction{0.2}%il faut au 20% de la hauteur de la page qui soit occupé de texte pur
-\renewcommand\floatpagefraction{0.8}%ratio pour que une page occupé par un float devienne une page pur float
+\renewcommand\topfraction{0.4}% un float en haut de page a le droit de faire 40% de pageheight
+\renewcommand\textfraction{0.3}%il faut au 50% de la hauteur de la page qui soit occupé de texte pur
+\renewcommand\floatpagefraction{0.7}%ratio pour que une page occupé par un float devienne une page pur float
 
 %	==============================================================
 %	print table
@@ -357,11 +356,6 @@
 
 
 
-
-
-
-
-
 %	==============================================================
 %  svg
 % ==============================================================
@@ -394,7 +388,7 @@
 \SetEnumitemKey{sblist}{labelindent=1cm, leftmargin = *,label= \alph*)}
 \SetEnumitemKey{sbblist}{labelindent=1.5cm, leftmargin = *,label= \textit{(\roman*)}}
 \makeatletter
-	\@beginparpenalty=1000 % high penality -> do not encourage break
+	\@beginparpenalty=4000 % high penality -> do not encourage break
 	\@itempenalty=4000% high penality -> do not encourage break
 	\@endparpenalty=1% low penality ->  encourage break
 \makeatother
@@ -655,4 +649,8 @@
 			\printnoidxglossary[type=\acronymtype]
 		\end{multicols}
 	}
+}{}
+
+\iftoggle{showframe}{\RequirePackage{showframe}
+\RequirePackage{widows-and-orphans} %indication ligne vide
 }{}

@@ -70,6 +70,30 @@ title={Remarque}}
 
 \newcommand{\tbox}[2]{\begin{tcolorbox}#1\end{tcolorbox}}
 
+%	==============================================================
+%	additional commands
+% ==============================================================
+\newcommand{\varnewpage}[1]{%
+  \ifdim\dimexpr\textheight-\pagetotal\relax>#1\baselineskip
+  %\the\numexpr\dimexpr\textheight-\pagetotal\relax/\baselineskip\relax
+  % There's enough space, no action needed
+  \else
+  %\the\numexpr\dimexpr\textheight-\pagetotal\relax/\baselineskip\relax
+  \vspace*{\fill}  
+  \newpage%  if not enough space
+  \fi
+}
+
+\let\oldsection\section
+\renewcommand{\section}{\varnewpage{20}\oldsection}
+
+\let\oldsubsection\subsection
+\renewcommand{\subsection}{\varnewpage{13}\oldsubsection}
+
+\let\oldsubsubsection\subsubsection
+\renewcommand{\subsubsection}{\varnewpage{10}\oldsubsubsection}
+
+
 
 
 %	==============================================================
@@ -145,7 +169,7 @@ title={Remarque}}
 
 
 
-%	==============================================================
+% ==============================================================
 %	title styling
 % ==============================================================
 
