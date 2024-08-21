@@ -166,7 +166,8 @@
 
 %for every unit: \DeclareSIUnit{\fahrenheit}{\degree F} \SI{nb}{unit}
 \RequirePackage{siunitx}
-\sisetup{ detect-all = true, free-standing-units = true }
+\sisetup{ detect-all = true, free-standing-units = true,output-exponent-marker=\ensuremath{\mathrm{e}},
+scientific-notation=true }
 % Astronomy
 \DeclareSIUnit\parsec{pc}
 \DeclareSIUnit\lightyear{ly}
@@ -324,12 +325,12 @@
 	\def\sufchap{~}% supprimer une quelconque mise en forme provenant du style package
 	\def\prechap{}%dans style package
 	\chapter{\tabletitle}
-	\acrolist \filbreak
-	\listoffigures \filbreak
-	\mylistoftables \filbreak
-	\lstlistoflistings \filbreak
-	\listofalgorithms \filbreak
-	\listofappendixs 
+	\acrolist %\filbreak
+	\listoffigures %\filbreak
+	\mylistoftables %\filbreak
+	\lstlistoflistings %\filbreak
+	\listofalgorithms %\filbreak
+	\listofappendixs \filbreak
 	\let\prechap\oldprechap
 	\let\sufchap\oldsufchap
 	}
@@ -547,6 +548,10 @@
 						}{biblatex} %enquote{}
 					
 						\RequirePackage{biblatex}
+					
+					\let\oldciteauthor\citeauthor
+					\renewcommand{\citeauthor}[1]{\oldciteauthor{#1}~\cite{#1}}
+					
 
 					\let\bibtitle\section
 					\defbibheading{bibliography}[\bibname]{
