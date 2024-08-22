@@ -634,7 +634,7 @@ scientific-notation=true }
 }{}
 
 \let\oldref\ref
-\renewcommand{\ref}{ \oldref} %ajoute un espace avant		
+\renewcommand{\ref}{~\oldref} %ajoute un espace avant		
 
 % ==============================================================
 %  Acronyms
@@ -656,6 +656,8 @@ scientific-notation=true }
 			\printnoidxglossary[type=\acronymtype]
 		\end{multicols}
 	}
+
+	\def\resetacrocounter{\glsresetall}
 }{}
 
 \iftoggle{showframe}{\RequirePackage{showframe}

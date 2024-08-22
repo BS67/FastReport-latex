@@ -335,13 +335,14 @@ title={Remarque}}
 %	page styling
 %	==============================================================
 
-
+\providecommand{\resetacrocounter}{} %for the acronyms to be printed the first time in each chapter
 \iftoggle{newchappage}{\let\newcpage\clearpage}{\RequirePackage{placeins}\def\newcpage{\FloatBarrier}}
 
 %attention peut causer des prob en twocolumn car les ifs ont été supprimé
 \makeatletter
 	%desactive mode empty page aux chapitres + newpage si besoin
 	\renewcommand\chapter{\newcpage%
+			\resetacrocounter
 			\global\@topnum\z@%
 			\@afterindentfalse%
 			\secdef\@chapter\@schapter}
