@@ -67,6 +67,10 @@
 \newcommand{\sbsec}{\subsection}
 \newcommand{\sbbsec}{\subsubsection}
 \newcommand{\para}{\paragraph*}
+\newcommand{\chapternonum}[1]{%
+  \chapter*{#1}%
+  \addcontentsline{toc}{chapter}{#1}%
+}
 % =============================================================
 % main Page style
 % =============================================================
@@ -166,8 +170,7 @@
 
 %for every unit: \DeclareSIUnit{\fahrenheit}{\degree F} \SI{nb}{unit}
 \RequirePackage{siunitx}
-\sisetup{ detect-all = true, free-standing-units = true,output-exponent-marker=\ensuremath{\mathrm{e}},
-scientific-notation=true }
+\sisetup{ detect-all = true, free-standing-units = true, use-xspace = true, output-exponent-marker=\ensuremath{\mathrm{e}} }
 % Astronomy
 \DeclareSIUnit\parsec{pc}
 \DeclareSIUnit\lightyear{ly}
@@ -273,12 +276,15 @@ scientific-notation=true }
 % ===============================================================
 % float & text repartition & floatbarrier
 % ==============================================================
+\PassOptionsToPackage{above}{placeins}
+\RequirePackage{placeins}%\FloatBarrier
+
 \iftoggle{floatbarrier}{ 
 
-	\PassOptionsToPackage{section, above}{placeins}
-	\RequirePackage{placeins}%\FloatBarrier
+
 
 	\newcommand{\floatprotec}[2]{\FloatBarrier #1{#2} \FloatBarrier} %float barrier pour section automatique
+	\renewcommand{\section}{\floatprotec{\section}}
 	\renewcommand{\sbsec}{\floatprotec{\subsection}}
 	%\renewcommand{\sbbsec}{\floatprotec{\subsubsection}}
 
@@ -631,6 +637,10 @@ scientific-notation=true }
 	\newcommand{\refB}[2]{\hypertarget{#1B}{\hyperlink{#1A}{#2}}}
 	\let\oldurl\url
 	\renewcommand{\url}[2]{\href{#1}{#2}}
+
+	\definecolor{linkcolor}{rgb}{0.059, 0.0, 0.278}
+	\hypersetup{colorlinks=true,allcolors=linkcolor}
+
 }{}
 
 \let\oldref\ref

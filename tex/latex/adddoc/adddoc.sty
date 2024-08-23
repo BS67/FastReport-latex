@@ -140,6 +140,7 @@
 									}
 \newcommand\achapter[1]{
 								\refstepcounter{achapter}
+								\label{ap:#1}
 								\def\achaptertitle{#1}
 								\addcontentsline{loap}{achapter}{\bfseries\theachapter \hspace{1em} #1}%style, espacement entre num et label 
 								}
@@ -186,6 +187,7 @@
 %	initialisation de l'appendix
 % --------------------------------------------------------------
 
+\providecommand{\resetsecautoskip}{}
 
 \let\oldappendix\appendix
 \renewcommand{\appendix}{%
@@ -197,6 +199,8 @@
 													\addcontentsline{toc}{chapter}{\attachname}
 													\newgeometry{tmargin=2cm,bmargin=1.5cm,lmargin=0.5cm,rmargin=0.5cm,headheight=100pt, headsep=0.5cm, footskip=1cm}
 													\pagestyle{appendix}
+													\resetsecautoskip
+													%\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}} %no section in the toc 
 
 												}
 

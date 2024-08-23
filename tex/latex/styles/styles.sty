@@ -79,13 +79,13 @@ title={Remarque}}
   % There's enough space, no action needed
   \else
   %\the\numexpr\dimexpr\textheight-\pagetotal\relax/\baselineskip\relax
-  \vspace*{\fill}  
+	\vspace*{\fill}  
   \newpage%  if not enough space
   \fi
 }
 
 \let\oldsection\section
-\renewcommand{\section}{\varnewpage{20}\oldsection}
+\renewcommand{\section}{\varnewpage{18}\oldsection}
 
 \let\oldsubsection\subsection
 \renewcommand{\subsection}{\varnewpage{13}\oldsubsection}
@@ -93,7 +93,11 @@ title={Remarque}}
 \let\oldsubsubsection\subsubsection
 \renewcommand{\subsubsection}{\varnewpage{13}\oldsubsubsection}
 
-
+\newcommand{\resetsecautoskip}{
+	\let\section\oldsection
+	\let\subsection\oldsubsection
+	\let\subsubsection\oldsubsubsection
+}
 
 
 %	==============================================================
