@@ -138,7 +138,8 @@
 									\label{ap:#1}
 									\addcontentsline{loap}{appendix}{\numberline{\theappendix}{\itshape #2}}
 									}
-\newcommand\achapter[1]{
+\newcommand\achapter[1]{		%
+								\clearpage
 								\refstepcounter{achapter}
 								\label{ap:#1}
 								\def\achaptertitle{#1}

@@ -186,7 +186,7 @@
 \DeclareSIUnit\gon{gon}
 % High energy physics
 \DeclareSIUnit\micron{\micro\metre}
-\DeclareSIUnit\mrad{\milli\rad}
+\DeclareSIUnit\mrad{\milli\radian}
 \DeclareSIUnit\gauss{G}
 \DeclareSIUnit\eVperc{\eV\per\clight}
 \DeclareSIUnit\nanobarn{\nano\barn}
@@ -625,7 +625,7 @@
 	
 \iftoggle{link}{
 		\PassOptionsToPackage{hyphens}{url}							%sinon prob de cohésion entre hyperrref et {hyphen}url pour que les longues url breaks 
-		\PassOptionsToPackage{urlcolor=cyan,pdftex}{hyperref}
+		\PassOptionsToPackage{pdftex}{hyperref}
 		\RequirePackage{url}
 		\RequirePackage{hyperref}	
 			\def\UrlBreaks{\do\.\do\@\do\\\do\/\do\!\do\_\do\|\do\;\do\>%
@@ -638,7 +638,7 @@
 	\let\oldurl\url
 	\renewcommand{\url}[2]{\href{#1}{#2}}
 
-	\definecolor{linkcolor}{rgb}{0.059, 0.0, 0.278}
+	\definecolor{linkcolor}{rgb}{0.0157, 0.0706, 0.3451}
 	\hypersetup{colorlinks=true,allcolors=linkcolor}
 
 }{}
