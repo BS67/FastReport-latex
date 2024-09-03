@@ -138,17 +138,60 @@
 									\label{ap:#1}
 									\addcontentsline{loap}{appendix}{\numberline{\theappendix}{\itshape #2}}
 									}
-\newcommand\achapter[1]{		%
-								\clearpage
-								\refstepcounter{achapter}
-								\label{ap:#1}
-								\def\achaptertitle{#1}
-								\addcontentsline{loap}{achapter}{\bfseries\theachapter \hspace{1em} #1}%style, espacement entre num et label 
-								}
-\newcommand\asection[2]{
-						\attachment{#1}{#2}
-						\section*{\theappendix\hspace{1cm} #2}
+% \newcommand\achapter[1]{		%
+% 								\clearpage
+% 								\refstepcounter{achapter}
+% 								\label{ap:#1}
+% 								\def\achaptertitle{#1}
+% 								\addcontentsline{loap}{achapter}{\bfseries\theachapter \hspace{1em} #1}%style, espacement entre num et label 
+% 								}
+
+\newenvironment{achapter}[1]{
+									\refstepcounter{achapter}
+									\label{ap:#1}
+									\def\achaptertitle{#1}
+									\addcontentsline{loap}{achapter}{\bfseries\theachapter \hspace{1em} #1}
+									
+													  }{\newpage}
+													  
+													  
+													  
+%utility for multifile compiling => when a chapter is mooved to the appendix upon certain condition like \equal{\mainfile}{report}   
+													  
+% \chapterToAppendix{boolean-> \equal{...}{...}}{reference-> (sec:ref)}{chapter title}
+													  
+\newcommand\chapterToAppendix[3]{
+	\ifthenelse{#1}{
+		\chapter*{#3}\attachment{#2}{#3}\setcounter{section}{0}
+	}{
+	\clearpage
+	\chapter{#3}
+	}	
+	\label{sec:biblio}
+	}
+
+
+
+\newcommand\asectiontitle[1]{
+		\vspace*{-\topskip-\headsep} % Remove any top space
+		\raggedbottom
+		\vspace*{0.5cm} 
+		\noindent{\hspace{0.3cm}\sc \bfseries \Large \theappendix\hspace{1cm} #1}
+		\vskip 0.5cm
+}													
+
+\newcommand\asection[2]{%
+						\newpage%
+						\attachment{#1}{#2}%
+						%\section*{\theappendix\hspace{1cm} #2}
+						\asectiontitle{#2}		
 }
+
+
+%to use in the following way:
+%	\asection{ref}{title}
+%	\centeredimg{x%width}{filepath}
+\newcommand\centeredimg[2]{{\hfill \includegraphics[width=#1\textwidth]{#2} \hfill}}
 
 \newcommand\lspapp[3]{%landscapeappendix
 	\begin{landscape}
@@ -188,22 +231,31 @@
 %	initialisation de l'appendix
 % --------------------------------------------------------------
 
-\providecommand{\resetsecautoskip}{}
 
 \let\oldappendix\appendix
 \renewcommand{\appendix}{%
 													%\setcounter{LastPage}{\value{page}}???
 													\clearpage
+													%\oldappendix
 													\pagestyle{empty}
-													\oldappendix
-													\part*{\attachname}
 													\addcontentsline{toc}{chapter}{\attachname}
+													\part*{\attachname}
+													
 													\newgeometry{tmargin=2cm,bmargin=1.5cm,lmargin=0.5cm,rmargin=0.5cm,headheight=100pt, headsep=0.5cm, footskip=1cm}
 													\pagestyle{appendix}
-													\resetsecautoskip
-													%\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}} %no section in the toc 
-
+													\renewcommand{\thefigure}{\theachapter.\arabic{figure}}
+    												\renewcommand{\thetable}{\theachapter.\arabic{table}}
+													\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}} %no section in the toc 
 												}
+\makeatletter
+\newcommand\immaddtocontents[1]{{%
+	\let\protect\@unexpandable@protect
+	\immediate\write\@auxout{\noexpand\@writefile{toc}{#1}}%
+}}
+\makeatother
+
+\AtEndDocument{\immaddtocontents{\noexpand\setcounter{tocdepth}{3}} %no section in the toc }
+}
 
 %	-------------------------------------------------------------
 %	annexes en pdf
@@ -211,18 +263,18 @@
 
 
 \RequirePackage{pdfpages}													
-%\pdf[langscape->true/false]{titre}{ref}{nom du doc avec extension}												
+%\pdf[langscape->true/false]{ref}{titre}{nom du doc avec extension}												
 \newcommand{\pdf}[4][false]%
 {
 	\attachment{#2}{#3}
-	\includepdf[scale=.8, pages=-,offset ={0cm -2cm}, landscape=#1, pagecommand={\section*{#2}}]{\appath#4}
+	\includepdf[scale=.8, pages=-,offset ={0cm -2cm}, landscape=#1, pagecommand={\asectiontitle{#3}}]{\appath#4}
 									}
 
-	%\pdf[langscape->true/false]{taille}{titre}{ref}{nom du doc avec extension}		
+	%\pdf[langscape->true/false]{taille}{ref}{titre}{nom du doc avec extension}		
 \newcommand{\pdfsize}[5][false]%
 	{ 	
 		\attachment{#3}{#4}
-		\includepdf[scale=#2, pages=-,offset ={0cm -2cm}, landscape=#1, pagecommand={\section*{#3}}]{\appath#5}
+		\includepdf[scale=#2, pages=-,offset ={0cm -2cm}, landscape=#1, pagecommand={\asectiontitle{#4}}]{\appath#5}
 	}
 
 
@@ -238,10 +290,12 @@
 
 
 \newcommand{\pdfoptions}[2][]
-{
+{	
+	
 	\setkeys{pdfoptions}{#1}
-	\attachment{\pdf@title}{ap:\pdf@ref}
-	\includepdf[scale=\pdf@scale, pages=-,offset ={\pdf@offsetw, \pdf@offseth}, landscape=\pdf@landscape, pagecommand={\section*{\pdf@title}}]{\appath#2}
+	\attachment{\pdf@ref}{\pdf@title}
+	\includepdf[scale=\pdf@scale, pages=-,offset ={\pdf@offsetw, \pdf@offseth}, landscape=\pdf@landscape, pagecommand={
+	\asectiontitle{\pdf@title}}]{\appath#2}
 }
 \makeatother
 	%---------------------------------------
@@ -291,6 +345,10 @@
 
 \iftoggle{algo}{
 	\patchcmd{\listofalgocfs}{*}{ }{}{}%section* => section
+	%keywords for algorithm2e => initsequence, endsequence, mainprogram
+	\SetKwBlock{init}{Initialisation}{end}
+	\SetKwBlock{endpro}{End sequence}{end}
+	\SetKwBlock{main}{Main program}{end}
 }{
 	\def\listofalgorithms{}
 }

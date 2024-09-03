@@ -138,7 +138,7 @@ title={Remarque}}
 			\renewcommand{\thechapter}{\@Roman\c@chapter.} 
 			\renewcommand{\thesection}{\@arabic\c@section.}
 			\renewcommand\thesubsection {\thesection\@arabic\c@subsection}
-			\renewcommand{\thesubsubsection}{\thesubsection\@Alph\c@subsubsection}
+			\renewcommand{\thesubsubsection}{\thesubsection.\@Alph\c@subsubsection}
 			\renewcommand{\theparagraph}{\@alph\c@paragraph)}
 			\makeatother
 		
@@ -222,12 +222,7 @@ title={Remarque}}
 				{} % before-code
 				[~:~] % after-code
 				
-			%\titlespacing*{command}{left}{before-sep}{after-sep}[right-sep] 
-			\titlespacing*{\chapter}				{0cm}		{0cm}		{0.7cm}
-			\titlespacing*{\section}				{0.5cm}	{1cm}		{0.7cm}
-			\titlespacing*{\subsection}			{0.5cm}	{0.7cm}	{0.7cm}
-			\titlespacing*{\subsubsection}		{0.5cm}	{0.3cm}	{0.5cm}
-			\titlespacing*{\paragraph}			{0cm}	{\parskip}{3pt}%before=\parskip: longueur entre paragraph
+
 		
 		}{}
 	
@@ -275,12 +270,6 @@ title={Remarque}}
 				{} % before-code
 				[~:~] % after-code
 				
-			%\titlespacing*{command}{left}{before-sep}{after-sep}[right-sep] 
-			\titlespacing*{\chapter}				{0cm}		{0cm}		{0.7cm}
-			\titlespacing*{\section}				{0.5cm}	{1cm}		{0.7cm}
-			\titlespacing*{\subsection}			{1cm}	{0.5cm}	{0.5cm}
-			\titlespacing*{\subsubsection}		{2cm}	{0.5cm}	{0.5cm}
-			\titlespacing*{\paragraph}			{0.7cm}	{\parskip}{3pt}%before=\parskip: longueur entre paragraph
 		
 		}{}
 	% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -327,13 +316,40 @@ title={Remarque}}
 				{} % before-code
 				[~:~] % after-code
 				
-			%\titlespacing*{command}{left}{before-sep}{after-sep}[right-sep] 
-			\titlespacing*{\chapter}				{0cm}		{0cm}		{0.2cm}
-			\titlespacing*{\section}				{0.3cm}	{1cm}		{0.7cm}
-			\titlespacing*{\subsection}			{0.5cm}	{0.7cm}	{0.7cm}
-			\titlespacing*{\subsubsection}		{0.5cm}	{0.3cm}	{0.5cm}
-			\titlespacing*{\paragraph}			{0.7cm}	{\parskip}{3pt}%before=\parskip: longueur entre paragraph
+			
 }{}
+
+%	==============================================================
+%	title spacing
+%	==============================================================
+	\providecommand{\textspacing}{2}%main package
+	\ifthenelse{\equal{\textspacing}{2} }{ %normal 
+			%\titlespacing*{command}{left}{before-sep}{after-sep}[right-sep] 
+			\titlespacing*{\chapter}{0cm}{0cm}{0.7cm}
+			\titlespacing*{\section}{0.5cm}{1cm}{0.7cm}
+			\titlespacing*{\subsection}{0.5cm}{0.7cm}{0.7cm}
+			\titlespacing*{\subsubsection}{0.5cm}{0.3cm}{0.5cm}
+			\titlespacing*{\paragraph}{0cm}{\parskip}{3pt}%before=\parskip: longueur entre paragraph
+	}{}
+	\ifthenelse{\equal{\textspacing}{1.5} }{
+			%\titlespacing*{command}{left}{before-sep}{after-sep}[right-sep] 
+			\titlespacing*{\chapter}{0cm}{-0.5cm}{0.5cm plus 0pt minus 3pt}
+			\titlespacing*{\section}{0.5cm}{0.7cm plus 0pt minus 2pt}{0.5cm plus 0pt minus 3pt}
+			\titlespacing*{\subsection}{0.5cm}{0.5cm plus 0pt minus 2pt}{0.5cm plus 0pt minus 3pt}
+			\titlespacing*{\subsubsection}{0.5cm}{0.2cm plus 0pt minus 2pt}{0.3cm plus 0pt minus 3pt}
+			\titlespacing*{\paragraph}{0cm}{\parskip}{3pt}%before=\parskip: longueur entre paragraph
+	}{}
+	\ifthenelse{\equal{\textspacing}{1} }{
+			%\titlespacing*{command}{left}{before-sep}{after-sep}[right-sep] 
+			\titlespacing*{\chapter}{0cm}{-1.5cm plus 0pt minus 2pt }{0.3cm plus 0pt minus 3pt}
+			\titlespacing*{\section}{0.5cm}{0.5cm plus 0pt minus 2pt }{0.3cm plus 0pt minus 3pt}
+			\titlespacing*{\subsection}{0.5cm}{0.3cm plus 0pt minus 2pt }{0.3cm plus 0pt minus 3pt}
+			\titlespacing*{\subsubsection}{0.5cm}{0.1cm plus 0pt minus 2pt }{0.2cm plus 0pt minus 3pt}
+			\titlespacing*{\paragraph}{0cm}{\parskip}{3pt}%before=\parskip: longueur entre paragraph
+	}{}
+
+
+
 
 %	==============================================================
 %	page styling
@@ -371,7 +387,7 @@ title={Remarque}}
 \ifthenelse{\equal{\fancypage}{1}}
 {
 			%stylepage
-		\newpagestyle{debut}{%
+		\renewpagestyle{debut}{%
 			\pagenumbering{Roman}
 			\sethead{}{\titre}{\headlogo}
 			\setfoot{}{}{}
@@ -379,7 +395,7 @@ title={Remarque}}
 			\setheadrule{0.4pt}
 			}
 
-		\newpagestyle{main}{%
+		\renewpagestyle{main}{%
 			\pagenumbering{arabic}
 			\sethead{\fontsize{20pt}{0pt}\selectfont \scshape \thechapter\hspace{3mm}\chaptertitle}{\titre}{\headlogo}
 			\setfoot{\fancyfooter}{\centering \thepage}{}
@@ -392,7 +408,7 @@ title={Remarque}}
 \ifthenelse{\equal{\fancypage}{2}}
 {
 			%stylepage
-		\newpagestyle{debut}{%
+		\renewpagestyle{debut}{%
 			\pagenumbering{Roman}
 			\sethead{\name}{\titre}{\headlogo}
 			\setfoot{\fancyfooter}{}{}
@@ -400,7 +416,7 @@ title={Remarque}}
 			\setheadrule{0.4pt}
 			}
 
-		\newpagestyle{main}{%
+		\renewpagestyle{main}{%
 			\pagenumbering{arabic}
 			\sethead{\name}{\titre}{\headlogo}
 			\setfoot{\fancyfooter}{\centering \thepage}{}
@@ -415,7 +431,7 @@ title={Remarque}}
 \ifthenelse{\equal{\fancypage}{3}}
 {
 			%stylepage
-		\newpagestyle{debut}{%
+		\renewpagestyle{debut}{%
 			\pagenumbering{Roman}
 			\sethead{\name}{\titre}{\headlogo}
 			\setfoot{\fancyfooter}{\centering\Roman{page}}{}
@@ -423,7 +439,7 @@ title={Remarque}}
 			\setheadrule{0.4pt}
 			}
 
-		\newpagestyle{main}{%
+		\renewpagestyle{main}{%
 			\pagenumbering{arabic}
 			\sethead{\fontsize{20pt}{0pt}\selectfont \scshape \thechapter\hspace{3mm}\chaptertitle}{\titre}{\headlogo}
 			\setfoot{\fancyfooter}{\centering \thepage}{}
@@ -437,7 +453,7 @@ title={Remarque}}
 \ifthenelse{\equal{\fancypage}{4}}
 {
 			%stylepage
-		\newpagestyle{debut}{%
+		\renewpagestyle{debut}{%
 			\pagenumbering{Roman}
 			\sethead{\name}{\titre}{\headlogo}
 			\setfoot{\fancyfooter}{\centering\Roman{page}}{}
@@ -445,7 +461,7 @@ title={Remarque}}
 			\setheadrule{0.4pt}
 			}
 
-		\newpagestyle{main}{%
+		\renewpagestyle{main}{%
 			\pagenumbering{arabic}
 			\sethead{\name}{\titre}{\headlogo}
 			\setfoot{\fancyfooter}{\centering \thepage}{}
