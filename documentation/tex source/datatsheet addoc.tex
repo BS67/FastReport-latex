@@ -1,0 +1,246 @@
+\documentclass[12pt,twoside]{report}
+\usepackage[language=en, spacing = 2,link, geometry=1]{main}
+\usepackage[titlenum=3,fancytitle=3,fancypage=2, titre={\texttt{Adddoc} package},name = {\isodate{\today}}]{styles}
+\usepackage[actif=true,algo]{adddoc}
+
+\title{\texttt{adddoc} Package \\ A custom way to have a \texttt{listofappendix}}
+\author{Benjamin Stambach}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\startbody
+
+\chapter{Package Options}
+\section*{Introduction}
+This document provides a detailed explanation of the options available in the \texttt{adddoc} package. Each option is described with its possible values and effects on document formatting and behavior.
+
+\section{Available Options}
+
+\subsection{\texttt{actif}}
+\begin{itemize}
+    \item \textbf{Values}: \texttt{true} (default), \texttt{false}
+    \item \textbf{Effect}: Enables the \texttt{attach} toggle when set to \texttt{true} or left empty, controlling whether the table of appendices is printed. Stores the value in \texttt{\textbackslash activ}.
+\end{itemize}
+
+\subsection{\texttt{pathappendix}}
+\begin{itemize}
+    \item \textbf{Values}: Any valid file path string
+    \item \textbf{Effect}: Defines the path for appendix files, stored in \texttt{\textbackslash appath}, used to locate and include appendix files.
+\end{itemize}
+
+\subsection{\texttt{code}}
+\begin{itemize}
+    \item \textbf{Values}: \texttt{true}, \texttt{false}, or empty
+    \item \textbf{Effect}: Enables the \texttt{code} toggle when set to \texttt{true} or left empty, allowing the inclusion of code listings using the \texttt{listings} package.
+\end{itemize}
+
+\subsection{\texttt{logo}}
+\begin{itemize}
+    \item \textbf{Values}: Any valid file path string
+    \item \textbf{Effect}: Specifies the path to a logo file for appendix headers, stored in \texttt{\textbackslash appathlogo}. If no logo is provided, the default omits the logo from the header.
+\end{itemize}
+
+\subsection{\texttt{language}}
+\begin{itemize}
+    \item \textbf{Values}:
+    \begin{itemize}
+        \item \texttt{fr}: French
+        \item \texttt{de}: German
+        \item \texttt{en}: English
+    \end{itemize}
+    \item \textbf{Effect}: Sets the document's language, affecting the table of appendices' names, such as \texttt{Table des Annexes} (French), \texttt{Anhangsverzeichnis} (German), and \texttt{Table of Appendices} (English). Stored in \texttt{\textbackslash doclanguage}.
+\end{itemize}
+
+\subsection{\texttt{fancyfooter}}
+\begin{itemize}
+    \item \textbf{Values}: Any string
+    \item \textbf{Effect}: Sets the footer text for appendix pages, stored in \texttt{\textbackslash fancyfooter}.
+\end{itemize}
+
+\subsection{\texttt{algo}}
+\begin{itemize}
+    \item \textbf{Values}: \texttt{true}, \texttt{false}, or empty
+    \item \textbf{Effect}: Enables the \texttt{algo} toggle when set to \texttt{true} or left empty, allowing the inclusion of algorithms using the \texttt{algorithm2e} package.
+\end{itemize}
+
+\section{Default Values and Settings}
+\begin{itemize}
+    \item \textbf{Logo Path}: \texttt{no} (no logo provided)
+    \item \textbf{Appendix Path}: \texttt{\{\} }
+    \item \textbf{Language}: \texttt{fr} (French)
+    \item \textbf{Fancy Footer}: \texttt{\{\} }
+\end{itemize}
+
+\chapter{Functionality of Toggled Options}
+
+\section{Appendices Management}
+When \texttt{actif} is set to \texttt{true}, appendices management is enabled using the \texttt{titletoc} package. This includes defining and customizing counters for chapters and appendices, and generating a table of appendices in the selected language.
+
+\section{Code Listings}
+If \texttt{code} is enabled, the \texttt{listings} package is configured for code snippets with custom settings for different programming languages and UTF-8 support.
+
+
+\begin{itemize}
+    \item \verb|\lstlisting|: Standard command for code listings.
+    \item \verb|\lstcolor{color}{text}|: Changes text color in code listings.
+\end{itemize}
+
+
+\section{Algorithms}
+Enabling \texttt{algo} configures the \texttt{algorithm2e} package for algorithms, customizing the list of algorithms title and setting up keywords and formatting for algorithm blocks.
+
+\section{PDF Inclusion}
+The package provides commands for including PDF files in appendices, with options for landscape or portrait orientation, scaling, and offsets. The \texttt{pathappendix} and \texttt{logo} options determine file location and display settings.
+
+\chapter{Appendix Commands}
+
+\section{Appendix Structure in LaTeX}
+The \texttt{adddoc} package extends LaTeX's basic appendix functionality by introducing:
+\begin{itemize}
+    \item Custom appendix counters
+    \item A dedicated list of appendices (\texttt{\textbackslash listofappendixs})
+    \item Commands to add appendices and center images within them
+\end{itemize}
+
+\section{Commands Overview}
+\begin{itemize}
+    \item \verb|\attachment{label}{title}|: Adds an appendix entry with the specified title and label.
+    \item \verb|\achapter{title}|: Starts a new appendix chapter.
+    \item \verb|\asection{label}{title}|: Creates a new appendix section under a chapter.
+    \item \verb|\lspapp{label}{title}{content}|: Creates an appendix section in landscape mode.
+    \item \verb|\centeredimg{width}{filepath}|: Centers an image within an appendix section.
+    
+\end{itemize}
+
+\subsection*{PDF Inclusion}
+Different ways to embed a PDF document in the appendix 
+\begin{itemize}
+    \item \verb|\pdf[landscape mode]{ref}{title}{filename.pdf}|: simple command, size = \verb|0.8\textwidth|
+    \item \verb|\pdfsize[landscape mode]{scaling}{ref}{title}{filename.pdf}|: Allows for explicit size control.
+    \item \verb|\pdfoptions[options]{filename}|: A more flexible command that allows detailed customization when embedding PDF files. 
+    \begin{verbatim}
+    \pdfoptions[scale=0.9, offseth=-1cm, landscape=true, title={My PDF}, ref={pdf-sec}]{mydocument.pdf}
+    \end{verbatim}
+    \begin{itemize}
+        \item \texttt{scale}: Specifies the scale of the PDF (default: 0.8).
+        \item \texttt{offseth}: Sets the vertical offset (default: -2cm).
+        \item \texttt{offsetw}: Sets the horizontal offset (default: 0cm).
+        \item \texttt{landscape}: Indicates whether the PDF should be displayed in landscape mode (values: \texttt{true} or \texttt{false}, default: \texttt{false}).
+        \item \texttt{title}: Specifies the title of the PDF section in the appendix.
+        \item \texttt{ref}: Defines a reference label for the PDF section.
+    \end{itemize}
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+This command allows you to embed a PDF document with customized scaling, offset, and orientation. It also supports the addition of a title and reference label for easy identification in the document.
+
+
+\section{Customizing Appendices}
+\subsection{Counters}
+\texttt{adddoc} defines custom counters for clear and consistent numbering:
+\begin{itemize}
+    \item \texttt{achapter}: Appendix chapter level (A, B, C, etc.)
+    \item \texttt{appendix}: Individual appendices within chapters (1, 2, 3, etc.)
+\end{itemize}
+
+\subsection{List of Appendices}
+The list of appendices is customized using the \texttt{titletoc} package:
+\begin{itemize}
+    \item \verb|\l@achapter[2]{...}|: Defines appendix chapter appearance in the TOC.
+    \item \verb|\l@appendix{\@dottedtocline{1}{2.5em}{2.3em}}|: Formats individual appendix entries.
+\end{itemize}
+
+\section{Example Usage}
+
+\begin{verbatim}
+\listofappendixs % Generates the list of appendices
+\appendix % Start the appendix section
+\begin{achapter}{Technical Appendices}
+    \asection{specs}{Technical Specifications}
+    % Content here...
+    \asection{data}{Data Tables}
+    \centeredimg{0.9}{images/data_table.png}
+    % Content here...
+    \lspapp{landscapeApp}{Wide Table}{
+        \begin{tabular}{...}
+        % Large table content
+        \end{tabular}
+    }
+\end{achapter}
+\end{verbatim}
+\newpage
+
+\renewcommand{\tcc}[1]{\texttt{\*\hspace{0.5cm}#1\hspace{0.5cm}*/}}
+
+\SetAlgoNlRelativeSize{-2}
+\begin{algorithm}
+    \caption{General calibration algorithm}
+    \label{alg:calibration}
+    \DontPrintSemicolon
+    \KwData{$n$ samples}
+
+    \init{
+        Create a voltage sequence of $n$ samples\;
+        Create the queues and the shared memory\;
+        Start the camera and image processing\; 
+        Pause the image acquisition \;
+    }
+
+    \main{\For{$i=1$ \KwTo $n$}{
+        Move the mirror according to the voltage sequence\;
+        Start image acquisition and wait until finished\;
+        $P_i \gets Q_i$ \tcc{Read the coordinates from FIFO queue}\;
+    }}
+    \endpro{
+        Close the processes, queues and shared memory\;
+        Do something with the points $P_i$\;
+        Write the result into a JSON file\;
+    }
+    
+\end{algorithm}
+\begin{verbatim}
+\renewcommand{\tcc}[1]{\texttt{\*\hspace{0.5cm}#1\hspace{0.5cm}*/}}
+\SetAlgoNlRelativeSize{-2}
+\begin{algorithm}
+    \caption{General calibration algorithm}
+    \label{alg:calibration}
+    \DontPrintSemicolon
+    \KwData{$n$ samples}
+    \init{
+        Create a voltage sequence of $n$ samples\;
+        Create the queues and the shared memory\;
+        Start the camera and image processing\; 
+        Pause the image acquisition \;
+    }
+    \main{\For{$i=1$ \KwTo $n$}{
+        Move the mirror according to the voltage sequence\;
+        Start image acquisition and wait until finished\;
+        $P_i \gets Q_i$ \tcc{Read the coordinates from FIFO queue}\;
+    }}
+    \endpro{
+        Close the processes, queues and shared memory\;
+        Do something with the points $P_i$\;
+        Write the result into a JSON file\;
+    }
+\end{algorithm}  
+\end{verbatim}
+\section{Dependencies}
+\begin{itemize}
+    \item \texttt{titletoc}: Customizes TOC entries.
+    \item \texttt{pdflscape}, \texttt{pdfpages}: Manage landscape orientation and PDF embedding.
+    \item \texttt{etoolbox}, \texttt{ifthen}, \texttt{xkeyval}: Handle package options and conditional logic.
+\end{itemize}
+
+
+\end{document}

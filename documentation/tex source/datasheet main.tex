@@ -1,0 +1,565 @@
+\documentclass[12pt,twoside]{report}
+\usepackage[language=en, spacing = 2,link, geometry=1]{main}
+\usepackage[titlenum=3,fancytitle=3,fancypage=2, titre={\texttt{Main} package},name = {\isodate{\today}}]{styles}
+\usepackage[actif=true]{adddoc}
+
+\title{Main Package \\ A Comprehensive Guide to Package Options and Commands}
+\author{Benjamin Stambach}
+\date{\today}
+
+\makeatletter
+\renewcommand\thesubsection {\@arabic\c@subsection.}
+\makeatother
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\startbody
+\chapter{Package Options}
+\section*{Introduction}
+This document provides a comprehensive guide to the package options available in the custom LaTeX package. Each option is described with its possible values and the effects it has on the document's formatting and behavior.
+
+\section{Detailed Package Options}
+
+\subsection{Legacy Options}
+\begin{itemize}
+    \item \texttt{math} 
+    \item \texttt{bibstyle}
+\end{itemize}
+
+\subsection{\texttt{font}}
+\begin{itemize}
+    \item \textbf{Possible Values}: \texttt{libertine} (default), \texttt{CM}, \texttt{KPF}, \texttt{Utopia}, \texttt{DejaVu}, \texttt{Bookman}.
+    \item \textbf{Effect}: Determines the main font of the document.
+\end{itemize}
+
+\subsection{\texttt{calc}}
+\begin{itemize}
+    \item \textbf{Possible Values}: \texttt{true}, \texttt{false}, or empty.
+    \item \textbf{Effect}: Enables or disables the \texttt{calculator} package for in-document calculations.
+\end{itemize}
+
+\subsection{\texttt{quote}}
+\begin{itemize}
+    \item \textbf{Possible Values}: \texttt{true}, \texttt{false}, or empty.
+    \item \textbf{Effect}: Activates the \texttt{csquotes} and \texttt{epigraph} packages for consistent quotation and epigraph management.
+\end{itemize}
+
+\subsection{\texttt{floatbarrier}}
+\begin{itemize}
+    \item \textbf{Possible Values}: \texttt{true}, \texttt{false}, or empty.
+    \item \textbf{Effect}: Controls the behavior of floats using the \texttt{placeins} package to maintain logical structure within sections.
+\end{itemize}
+
+\subsection{\texttt{link}}
+\begin{itemize}
+    \item \textbf{Possible Values}: \texttt{true}, \texttt{false}, or empty.
+    \item \textbf{Effect}: Enables hyperlinking via the \texttt{hyperref} package, supporting clickable links and formatted URLs.
+\end{itemize}
+
+\subsection{\texttt{svg}}
+\begin{itemize}
+    \item \textbf{Possible Values}: \texttt{true}, \texttt{false}, or empty.
+    \item \textbf{Effect}: Processes SVG images by converting them into PNG format.
+\end{itemize}
+
+\subsection{\texttt{bib}}
+\begin{itemize}
+    \item \textbf{Possible Values}: \texttt{no} or a bibliography file name.
+    \item \textbf{Effect}: Enables or disables bibliography handling using \texttt{biblatex}.
+\end{itemize}
+
+\subsection{\texttt{acro}}
+\begin{itemize}
+    \item \textbf{Possible Values}: \texttt{true}, \texttt{false}, \texttt{no}, or empty.
+    \item \textbf{Effect}: Manages acronyms with the \texttt{glossaries} package.
+\end{itemize}
+
+\subsection{\texttt{table}}
+\begin{itemize}
+    \item \textbf{Possible Values}: None.
+    \item \textbf{Effect}: Defines the \texttt{\textbackslash mylistoftables} command for generating the List of Tables section.
+\end{itemize}
+
+\subsection{\texttt{spacing}}
+\begin{itemize}
+    \item \textbf{Possible Values}: Any number (e.g., \texttt{1}, \texttt{1.5}, \texttt{2}).
+    \item \textbf{Effect}: Controls the line spacing in the document.
+\end{itemize}
+
+\subsection{\texttt{language}}
+\begin{itemize}
+    \item \textbf{Possible Values}: \texttt{fr}, \texttt{de}, \texttt{en}.
+    \item \textbf{Effect}: Sets the document language, affecting hyphenation, date formatting, and LaTeX command behavior.
+\end{itemize}
+
+\subsection{\texttt{geometry}}
+\begin{itemize}
+    \item \textbf{Possible Values}: \texttt{1} (default), \texttt{2}, or any custom geometry string.
+    \item \textbf{Effect}: Controls page layout and margins.
+\end{itemize}
+
+\subsection{\texttt{showframe}}
+\begin{itemize}
+    \item \textbf{Possible Values}: \texttt{true}, \texttt{false}, or empty.
+    \item \textbf{Effect}: Displays the layout frame on each page using the \texttt{showframe} package for debugging.
+\end{itemize}
+
+\subsection{Error Handling}
+\begin{itemize}
+    \item \textbf{Effect}: Generates an error for unsupported options using \texttt{\textbackslash PackageError}.
+\end{itemize}
+
+\section*{Default Values and Settings}
+\begin{itemize}
+    \item \textbf{Default Font}: \texttt{libertine}
+    \item \textbf{Default Geometry}: \texttt{1} (standard margin settings)
+    \item \textbf{Default Line Spacing}: \texttt{1.5}
+    \item \textbf{Default Language}: \texttt{fr} (French)
+\end{itemize}
+
+\chapter{Commands}
+\section{Introduction}
+This chapter provides a detailed overview of the commands defined in the custom LaTeX package, organized into categories for easy reference.
+
+\section{General Text and Document Structure Commands}
+\begin{itemize}
+    \item \verb|\sbsec|: Shortcut for \verb|\subsection|.
+    \item \verb|\sbbsec|: Shortcut for \verb|\subsubsection|.
+    \item \verb|\para|: Shortcut for \verb|\paragraph*|.
+    \item \verb|\prechapter[#1]{#2}|: Creates a chapter without a number, with optional pre-chapter page break.
+    \item \verb|\inlineeqlabel{#1}|: Labels an inline equation.
+    \item \verb|\exosuivant|: Increments the exercise counter and creates a new "Exercice" section.
+    \item \verb|\emptypage|: Inserts an empty page.
+    \item \verb|\vp|, \verb|\vpp|, \verb|\vg|: Shortcuts for vertical spacing.
+    \item \verb|\br|: Adds a newline with an indent.
+    \item \verb|\startbody[toc=true][tablestart=no,short,full][clearpage=false]|: Starts the main body of the document.
+    \item \verb|\startpreface|: Starts a preface section with specific formatting.
+\end{itemize}
+
+\section{Table and Figure Management Commands}
+\begin{itemize}
+    \item \verb|\twopic{#1}{#2}|: Places two pictures side by side.
+    \item \verb|\sidecap{#1}{#2}|: Creates a side caption for a figure.
+    \item \verb|\fntabular{#1}|: Creates a custom tabular environment that centers content.
+    \item \verb|\source{#1}|: Adds a source note below a table or figure.
+\end{itemize}
+
+\subsection{Table Column Types \texttt{M} and \texttt{P}}
+\begin{itemize}
+    \item \verb|\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}|: Defines a new centered column type \texttt{M}.
+    \item \verb|\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}|: Defines a new centered column type \texttt{P}.
+\end{itemize}
+
+\section{Geometry Management Commands}
+\begin{itemize}
+    \item \verb|\savegeometry{name}|: Saves the current geometry settings.
+    \item \verb|\loadgeometry{name}|: Loads previously saved geometry settings.
+\end{itemize}
+
+\section{List Management Commands}
+\begin{itemize}
+    \item \verb|\doublepoint{#1}|: Formats a list item with bold text followed by a colon.
+    \item The keys can be used in the following way : \verb|\begin{enumerate}[keys]...|: Configures enumerated lists.
+\end{itemize}
+
+\subsection{Enumeration List Styles}
+
+
+\begin{itemize}
+    \item \verb|\setlist[enumerate]{...}|: Configures enumerated lists.
+    \item \verb|\SetEnumitemKey{compact}{noitemsep,nolistsep}|: Defines a compact list style.
+    \item \verb|\SetEnumitemKey{dp}{font=\doublepoint, labelindent=1cm, itemindent=-0.5cm}|: Defines a double-point list style.
+    \item \verb|\SetEnumitemKey{sblist}{labelindent=1cm, leftmargin = *,label= \alph*)}|: Defines an alphabetical sublist style.
+    \item \verb|\SetEnumitemKey{sbblist}{labelindent=1.5cm, leftmargin = *,label= \textit{(\roman*)}}|: Defines an italicized roman numeral sublist style.
+\end{itemize}
+
+\section{Math Commands}
+\begin{itemize}
+    \item \verb|\eq{#1}|: Shortcut for aligned equations.
+    \item \verb|\noeq{#1}|: Shortcut for non-numbered equations.
+    \item \verb|\bc| and \verb|\ec|: Begin and end a \verb|dcases| environment.
+    \item \verb|\abs{\lvert}{\rvert}|: Creates absolute value delimiters.
+    \item \verb|\hvect{[}{]^T}|: Creates a horizontal vector notation.
+    \item \verb|\mb|: Shortcut for \verb|\mathbf|.
+\end{itemize}
+
+\subsection{Mathematical Symbols and Sets}
+\begin{itemize}
+    \item \verb|\N|: \verb|\mathbb{N}| (Natural numbers).
+    \item \verb|\R|: \verb|\mathbb{R}| (Real numbers).
+    \item \verb|\C|: \verb|\mathbb{C}| (Complex numbers).
+    \item \verb|\Z|: \verb|\mathbb{Z}| (Integers).
+    \item \verb|\Q|: \verb|\mathbb{Q}| (Rational numbers).
+    \item \verb|\K|: \verb|\mathbb{K}| (Field).
+    \item \verb|\U|: \verb|\mathbb{U}| (Unitary group).
+    \item \verb|\Mn|: \verb|\mathcal{M}_n| (Matrix space of order n).
+    \item \verb|\M|: \verb|\mathcal{M}| (Matrix space).
+    \item \verb|\B|: \verb|\mathcal{B}| (Borel set or Banach space).
+    \item \verb|\A|: \verb|\mathcal{A}| (Algebra or other mathematical object).
+    \item \verb|\F|: \verb|\mathcal{F}| (Filtration or function space).
+    \item \verb|\L|: \verb|\mathcal{L}| (Linear operator or space).
+\end{itemize}
+
+\section{Floating Environment Management}
+\begin{itemize}
+    \item \verb|\floatprotec{#1}{#2}|: Protects a section or subsection with \verb|\FloatBarrier|.
+    \item \verb|\desactivatefloatbarrier|: Deactivates \verb|\FloatBarrier|.
+    \item \verb|\reactivatefloatbarrier|: Reactivates \verb|\FloatBarrier|.
+\end{itemize}
+
+\section{Table of Contents and Listings Management}
+\begin{itemize}
+    \item \verb|\tablestart|: Begins the listings section for the table of contents, figures, tables, etc.
+    \item \verb|\tableend|: Ends the listings section.
+    \item \verb|\tables|: Prints the table of contents, lists of figures, tables, and bibliography.
+\end{itemize}
+
+\section{Hyperlinks and References}
+\begin{itemize}
+    \item \verb|\refA{#1}{#2}|: Links to \verb|#1B| and anchors at \verb|#1A|.
+    \item \verb|\refB{#1}{#2}|: Links to \verb|#1A| and anchors at \verb|#1B|.
+    \item \verb|\url{#1}{#2}|: Redefines \verb|\url| to take a URL and display text.
+\end{itemize}
+
+\section{Footnote Management}
+\begin{itemize}
+    \item \verb|\fnm|: Shortcut for \verb|\footnotemark|.
+    \item \verb|\pnm|: Protected \verb|\footnotemark| for tables.
+    \item \verb|\fnt|: Shortcut for \verb|\footnotetext|.
+\end{itemize}
+
+\section{Acronym Management}
+\begin{itemize}
+    \item \verb|\acrolist|: Prints the list of acronyms.
+    \item \verb|\resetacrocounter|: Resets acronym counters at the beginning of each chapter.
+\end{itemize}
+
+\section{Additional Explanations}
+
+\subsection{Printing the Bibliography}
+Use the \verb|\biblio| command to print the bibliography at the document's end. Ensure that \verb|\bibfile| is set with the appropriate bibliography file name.
+
+\subsection{Section Numbering Depth (\texttt{secnumdepth})}
+Set \verb|\setcounter{secnumdepth}{6}| to generate numbers down to \verb|\subparagraph|.
+
+\subsection{Table of Contents Depth (\texttt{tocdepth})}
+Set \verb|\setcounter{tocdepth}{5}| to include entries down to \verb|\subsubsection|.
+
+\subsection{Command \texttt{\textbackslash prechapter}}
+The \verb|\prechapter[#1]{#2}| command creates a chapter without a number, with optional pre-chapter page break.
+
+\chapter{Dependencies}
+\section{Introduction}
+This chapter provides a comprehensive overview of the dependencies used in the LaTeX package, detailing their purpose, main commands, and usage within the package.
+
+\section{Basic Packages}
+\subsection{xkeyval}
+\textbf{Purpose}: Extended key-value handling.
+\begin{itemize}
+    \item \verb|\DeclareOptionX{key}[default]{definition}|: Declares key-value pairs as options.
+    \item \verb|\ProcessOptionsX{}|: Processes declared options.
+\end{itemize}
+
+\subsection{ifthen}
+\textbf{Purpose}: Conditional logic based on counter values.
+\begin{itemize}
+    \item \verb|\ifthenelse{<condition>}{<true part>}{<false part>}|: Conditional execution.
+\end{itemize}
+
+\subsection{etoolbox}
+\textbf{Purpose}: Programming tools (booleans, conditionals).
+\begin{itemize}
+    \item \verb|\newtoggle{<name>}|: Declares a new boolean toggle.
+    \item \verb|\toggletrue{<name>}|, \verb|\togglefalse{<name>}|: Sets the toggle to true or false.
+    \item \verb|\iftoggle{<name>}{<true part>}{<false part>}|: Executes code based on toggle state.
+\end{itemize}
+
+\subsection{fmtcount}
+\textbf{Purpose}: Formats counters in various languages and styles.
+\begin{itemize}
+    \item \verb|\ordinal{counter}|: Converts a counter to its ordinal form.
+    \item \verb|\numberstring{counter}|: Converts a counter to its string representation.
+\end{itemize}
+
+\subsection{geometry}
+\textbf{Purpose}: Manages page layout and margins.
+\begin{itemize}
+    \item \verb|\newgeometry{<options>}|: Temporarily changes the page layout.
+    \item \verb|\restoregeometry|: Restores the original layout.
+\end{itemize}
+
+\subsection{ragged2e}
+\textbf{Purpose}: Advanced text alignment.
+\begin{itemize}
+    \item \verb|\Centering|, \verb|\RaggedLeft|, \verb|\RaggedRight|: Central, left, or right-aligned text.
+\end{itemize}
+
+\subsection{parskip}
+\textbf{Purpose}: Adjusts paragraph spacing.
+\begin{itemize}
+    \item \textbf{Functionality}: Automatically modifies \verb|\parskip| and \verb|\parindent|.
+\end{itemize}
+
+\subsection{multicol}
+\textbf{Purpose}: Typesetting in multiple columns.
+\begin{itemize}
+    \item \verb|\begin{multicols}{<n>}|, \verb|\end{multicols}|: Sections with \textit{n} columns.
+\end{itemize}
+
+\subsection{graphicx}
+\textbf{Purpose}: Inclusion of graphics.
+\begin{itemize}
+    \item \verb|\includegraphics[<options>]{<file>}|: Includes an image with optional scaling and placement options.
+\end{itemize}
+
+\subsection{xcolor}
+\textbf{Purpose}: Manages colors for text and graphics.
+\begin{itemize}
+    \item \verb|\textcolor{<color>}{<text>}|: Colors text.
+    \item \verb|\definecolor{<name>}{<model>}{<color specification>}|: Defines a custom color.
+\end{itemize}
+For a list of predefined SVG color names, refer to \href{https://www.latextemplates.com/svgnames-colors}{SVG Color Names}.
+
+\subsection{setspace}
+\textbf{Purpose}: Manages line spacing.
+\begin{itemize}
+    \item \verb|\setstretch{<factor>}|: Adjusts the line spacing.
+\end{itemize}
+
+\subsection{fontenc \& inputenc}
+\textbf{Purpose}: Manages font encoding.
+
+\subsection{babel}
+\textbf{Purpose}: Language-specific typographical rules and hyphenation.
+\begin{itemize}
+    \item \verb|\usepackage[<language>]{babel}|: Loads language-specific settings.
+\end{itemize}
+
+\subsection{isodate}
+\textbf{Purpose}: Formats dates according to ISO standards.
+\begin{itemize}
+    \item \verb|\isodate{<date>}|: Prints a date in ISO format.
+    \item \verb|\daterange{<start date>}{<end date>}|: Prints a range of dates.
+\end{itemize}
+
+\subsection{titlesec}
+\textbf{Purpose}: Customizes section titles and page styles.
+\begin{itemize}
+    \item \verb|\titleformat{<command>}{<format>}{<label>}{<sep>}{<before>}|: Customizes section title format.
+\end{itemize}
+
+\subsection{array}
+\textbf{Purpose}: Enhanced table formatting.
+\begin{itemize}
+    \item \verb|\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}|: Centered column type \texttt{M}.
+    \item \verb|\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}|: Centered column type \texttt{P}.
+\end{itemize}
+
+\subsection{multirow}
+\textbf{Purpose}: Merges multiple rows in tables.
+\begin{itemize}
+    \item \verb|\multirow{n}{width}{text}|: Merges \texttt{n} rows into one with specified text and width.
+\end{itemize}
+
+\subsection{diagbox}
+\textbf{Purpose}: Creates diagonal cells in tables.
+\begin{itemize}
+    \item \verb|\diagbox{left}{right}|: Splits a cell diagonally with specified content.
+\end{itemize}
+
+\subsection{hhline}
+\textbf{Purpose}: Custom horizontal lines in tables.
+\begin{itemize}
+    \item \verb|\hhline{pattern}|: Draws a horizontal line according to the specified pattern.
+\end{itemize}
+
+\subsection{float}
+\textbf{Purpose}: Controls the placement of floating objects.
+\begin{itemize}
+    \item \texttt{[H]}: Forces float placement at the specified location.
+\end{itemize}
+
+\subsection{csquotes}
+\textbf{Purpose}: Handles quotations with various styles.
+\begin{itemize}
+    \item \verb|\enquote{<text>}|: Wraps text in quotation marks.
+\end{itemize}
+
+\subsection{epigraph}
+\textbf{Purpose}: Adds epigraphs at the beginning of sections.
+\begin{itemize}
+    \item \verb|\epigraph{<quote>}{<source>}|: Adds a quote and its source.
+\end{itemize}
+
+\subsection{calculator}
+\textbf{Purpose}: Performs simple calculations.
+\begin{itemize}
+    \item \verb|\calculate{<expression>}|: Evaluates a mathematical expression.
+\end{itemize}
+
+\subsection{biblatex}
+\textbf{Purpose}: Manages bibliographies and citations.
+
+\subsection{showframe}
+\textbf{Purpose}: Displays frames around text blocks.
+\textbf{Functionality}: Visualizes the layout for debugging.
+
+\subsection{widows-and-orphans}
+\textbf{Purpose}: Manages widows and orphans in text.
+\textbf{Functionality}: Adjusts text to avoid widows and orphans.
+
+\subsection{glossaries}
+\textbf{Purpose}: Manages glossaries and acronyms.
+\begin{itemize}
+    \item \verb|\newacronym{<label>}{<short>}{<long>}|: Defines a new acronym.
+    \item \verb|\printglossary[type=\acronymtype]|: Prints the acronym list.
+\end{itemize}
+\textbf{Acronym Commands}:
+\begin{itemize}
+    \item \verb|\gls{<label>}|: Prints the acronym.
+    \item \verb|\Gls{<label>}|: Prints the acronym with an initial capital letter.
+    \item \verb|\glspl{<label>}|: Prints the plural form of the acronym.
+\end{itemize}
+
+\section{Specialized Packages}
+
+\subsection{siunitx}
+\textbf{Purpose}: Typesets SI units and scientific numbers.
+\begin{itemize}
+    \item \verb|\SI{<value>}{<unit>}|: Typesets a value with its unit.
+    \item \verb|\DeclareSIUnit{\unitname}{<definition>}|: Declares a custom SI unit.
+\end{itemize}
+
+\textbf{Defined Units}:
+\begin{itemize}
+    \item Astronomy: \verb|\parsec|, \verb|\lightyear|
+    \item Chemistry: \verb|\molar|, \verb|\Molar|, \verb|\torr|
+    \item Geophysics: \verb|\gon|
+    \item High Energy Physics: \verb|\micron|, \verb|\mrad|, \verb|\gauss|, \verb|\eVperc|
+    \item Industry: \verb|\dBm|, \verb|\dBV|
+    \item Images: \verb|\px|
+    \item Standard Units: \verb|\meter|, \verb|\second|, \verb|\kilogram|, \verb|\ampere|, \verb|\kelvin|, \verb|\mole|, \verb|\candela|, \verb|\hertz|, \verb|\newton|, \verb|\pascal|, \verb|\joule|, \verb|\watt|, \verb|\volt|
+\end{itemize}
+
+\subsection{placeins}
+\textbf{Purpose}: Prevents floats from moving past certain points.
+\begin{itemize}
+    \item \verb|\FloatBarrier|: Inserts a float barrier.
+\end{itemize}
+\textbf{Additional Information}:
+\begin{itemize}
+    \item The package redefines sections and subsections when the \texttt{floatbarrier} option is active to automatically place \verb|\FloatBarrier|:
+    \begin{itemize}
+        \item \verb|\floatprotec{\section}|, \verb|\floatprotec{\subsection}|: Sections and subsections are protected by float barriers.
+    \end{itemize}
+    \item Activation/Deactivation:
+    \begin{itemize}
+        \item \verb|\reactivatefloatbarrier|: Reactivates float barriers.
+        \item \verb|\desactivatefloatbarrier|: Deactivates float barriers.
+    \end{itemize}
+\end{itemize}
+
+\subsection{hyperref}
+\textbf{Purpose}: Manages hyperlinks within the document.
+\begin{itemize}
+    \item \verb|\href{<URL>}{<text>}|: Creates a hyperlink to a URL.
+    \item \verb|\hyperlink{<target>}{<text>}|: Creates an internal link to a target.
+\end{itemize}
+\textbf{Additional Information}:
+\begin{itemize}
+    \item \verb|\url{<URL>}{text}|: Creates a hyperlink with display text.
+    \item \verb|\oldurl{<URL>}|: Prints the URL.
+\end{itemize}
+
+\subsection{enumitem}
+\textbf{Purpose}: Customizes lists and enumerations.
+\begin{itemize}
+    \item \verb|\setlist[enumerate]{<options>}|: Customizes enumerated lists.
+    \item \verb|\setlist[itemize]{<options>}|: Customizes itemized lists.
+\end{itemize}
+
+\textbf{Usage}:
+\begin{itemize}
+    \item \textbf{Key-value options}:
+    \begin{itemize}
+        \item \texttt{topsep}, \texttt{labelindent}, \texttt{leftmargin}: Controls spacing and indentation.
+        \item \texttt{label}, \texttt{font}: Customizes the appearance of list items.
+    \end{itemize}
+\end{itemize}
+
+\subsection{mathtools}
+\textbf{Purpose}: Enhances \texttt{amsmath} with additional tools.
+\begin{itemize}
+    \item \verb|\DeclarePairedDelimiter{\cmd}{<left>}{<right>}|: Creates custom paired delimiters.
+\end{itemize}
+\textbf{Show Only Referenced Equations}:
+\begin{itemize}
+    \item \verb|\mathtoolsset{showonlyrefs}|: Only shows equation numbers for referenced equations.
+\end{itemize}
+
+\subsection{amsmath, amssymb, amsfonts}
+\textbf{Purpose}: Advanced mathematical typesetting.
+\begin{itemize}
+    \item \verb|\begin{align}|, \verb|\end{align}|: Aligns equations.
+    \item \verb|\mathbb{}|: Blackboard bold letters for sets like \verb|\mathbb{N}|, \verb|\mathbb{R}|, \verb|\mathbb{C}|.
+\end{itemize}
+
+\textbf{Basic Math Commands}:
+\begin{itemize}
+    \item \verb|\abs{x}|: Absolute value
+    \item \verb|\sqrt{x}|: Square root
+    \item \verb|\frac{a}{b}|: Fraction
+    \item \verb|\sum|, \verb|\int|: Summation, integral
+    \item \verb|\sin|, \verb|\cos|, \verb|\tan|: Trigonometric functions
+    \item \verb|\log|, \verb|\ln|: Logarithms
+\end{itemize}
+
+\subsection{caption}
+\textbf{Purpose}: Customizes figure and table captions.
+\begin{itemize}
+    \item \verb|\captionsetup{<options>}|: Configures captions globally or locally.
+\end{itemize}
+
+\textbf{Applied Settings}:
+\begin{itemize}
+    \item Tables:
+    \begin{itemize}
+        \item \texttt{justification=centering}: Centers the caption.
+        \item \texttt{format=hang}: Hangs the caption label.
+        \item \texttt{labelfont=\{sc,tt\}}, \texttt{textfont=\{bf,sl,tt\}}: Sets label and text fonts.
+        \item \texttt{skip=8pt}: Adds space between the caption and the table.
+        \item \texttt{position=above}: Places the caption above the table.
+        \item \texttt{labelsep=colon}: Uses a colon after the label.
+    \end{itemize}
+    \item Figures:
+    \begin{itemize}
+        \item \texttt{justification=centering}: Centers the caption.
+        \item \texttt{format=hang}: Hangs the caption label.
+        \item \texttt{labelfont=\{sc,tt\}}, \texttt{textfont=\{bf,sl,tt\}}: Sets label and text fonts.
+        \item \texttt{skip=8pt}: Adds space between the caption and the figure.
+        \item \texttt{position=bottom}: Places the caption below the figure.
+        \item \texttt{labelsep=colon}: Uses a colon after the label.
+    \end{itemize}
+    \item Subcaptions:
+    \begin{itemize}
+        \item \texttt{justification=centering}: Centers the caption.
+        \item \texttt{format=hang}: Hangs the caption label.
+        \item \texttt{labelfont=\{sc,tt\}}, \texttt{textfont=\{bf,sl,tt\}}: Sets label and text fonts.
+        \item \texttt{skip=8pt}: Adds space between the caption and the figure.
+        \item \texttt{labelsep=colon}: Uses a colon after the label.
+    \end{itemize}
+\end{itemize}
+
+\subsection{subcaption}
+\textbf{Purpose}: Manages captions for subfigures and subtables.
+\begin{itemize}
+    \item \verb|\subcaption|: Creates a subfigure caption, should be placed in a \{\} environment in a figure to be effective.
+\end{itemize}
+
+\section{Conclusion}
+This document has provided a comprehensive guide to the custom LaTeX package's options, commands, and dependencies. By following the instructions and examples provided, users can effectively utilize the package's various features.
+
+\end{document}

@@ -1,0 +1,286 @@
+\documentclass[12pt,twoside]{report}
+\usepackage[language=en, spacing = 2,link, geometry=1]{main}
+\usepackage[titlenum=3,fancytitle=3,fancypage=2, titre={\texttt{Styles} package},name = {\isodate{\today}}]{styles}
+\usepackage[actif=true]{adddoc}
+
+
+\makeatletter
+\renewcommand\thesubsection {\@arabic\c@subsection.}
+\makeatother
+
+
+\title{\texttt{styles} package \\ For cleaner reports}
+\author{Benjamin Stambach}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\startbody
+\listofappendixs
+
+\chapter{Package Options}
+\section*{Introduction}
+This document provides detailed explanations of the options available in the custom LaTeX package \texttt{styles}. Each option is described with its possible values and the effects on document formatting and behavior.
+
+\section{Options Overview}
+
+\subsection{\texttt{NewChapPage}}
+\begin{itemize}
+    \item \textbf{Possible Values}: \texttt{true}, \texttt{false}, or empty.
+    \item \textbf{Effect}: Controls whether a new chapter starts on a new page.
+\end{itemize}
+
+\subsection{\texttt{ChapPrefix}}
+\begin{itemize}
+    \item \textbf{Possible Values}: Any string.
+    \item \textbf{Effect}: Adds a prefix before the chapter title for customization.
+\end{itemize}
+
+\subsection{\texttt{titlenum}}
+\begin{itemize}
+    \item \textbf{Possible Values}: 
+    \begin{itemize}
+        \item \texttt{0} (default): No additional numbering style.
+        \item \texttt{1}: Roman numeral chapters, Arabic sections.
+        \item \texttt{2}: Roman chapters, alphabetic subsections.
+        \item \texttt{3}: Roman chapters, alphabetic subsections, Arabic subsubsections.
+    \end{itemize}
+    \item \textbf{Effect}: Determines the numbering style for chapters and sections.
+\end{itemize}
+
+\subsection{\texttt{fancytitle}}
+\begin{itemize}
+    \item \textbf{Possible Values}: 
+    \begin{itemize}
+        \item \texttt{0} (default): No special title formatting.
+        \item \texttt{1}: Bold, large fonts.
+        \item \texttt{2}: Bold, large fonts with colored chapter titles.
+        \item \texttt{3}: Larger fonts with style 1 formatting.
+    \end{itemize}
+    \item \textbf{Effect}: Controls visual styling of titles throughout the document.
+\end{itemize}
+
+\subsection{\texttt{fancypage}}
+\begin{itemize}
+    \item \textbf{Possible Values}:
+    \begin{itemize}
+        \item \texttt{0} (default): No special page formatting.
+        \item \texttt{1}: Document title in the header, page numbers in the footer.
+        \item \texttt{2}: Includes author name and logo in the header.
+        \item \texttt{3}: Variant of 2 with different page number placement.
+        \item \texttt{4}: Customized header and footer placement.
+    \end{itemize}
+    \item \textbf{Effect}: Configures header and footer layout, including logos and titles.
+\end{itemize}
+
+\subsection{\texttt{logo}}
+\begin{itemize}
+    \item \textbf{Possible Values}: 
+    \begin{itemize}
+        \item \texttt{no} (default): No logo.
+        \item \texttt{path/to/logo}: Path to a logo file for the header.
+    \end{itemize}
+    \item \textbf{Effect}: Specifies a logo for the document’s header.
+    \item Note: The logo should be horizontal, not square.
+\end{itemize}
+
+\subsection{\texttt{name}}
+\begin{itemize}
+    \item \textbf{Possible Values}: Any string.
+    \item \textbf{Effect}: Sets the author's name or any other name to be included in the header.
+\end{itemize}
+
+\subsection{\texttt{titre}}
+\begin{itemize}
+    \item \textbf{Possible Values}: Any string.
+    \item \textbf{Effect}: Sets the title text in the header.
+\end{itemize}
+
+\subsection{\texttt{fancyfooter}}
+\begin{itemize}
+    \item \textbf{Possible Values}: Any string.
+    \item \textbf{Effect}: Defines custom footer text for each page.
+\end{itemize}
+
+\section{Error Handling}
+\begin{itemize}
+    \item Invalid or unsupported options trigger an error message, ensuring only valid options are used.
+\end{itemize}
+
+\section{Default Settings}
+\begin{itemize}
+    \item \textbf{Default Chapter Prefix}: No prefix.
+    \item \textbf{Default Title Numbering}: \texttt{0} (no additional numbering).
+    \item \textbf{Default Fancy Title}: \texttt{0} (no special title styling).
+    \item \textbf{Default Fancy Page}: \texttt{0} (standard page layout).
+    \item \textbf{Default Logo Path}: \texttt{no} (no logo).
+\end{itemize}
+
+\chapter{Dependencies}
+\section*{Introduction}
+This chapter explains the dependencies used in the \texttt{styles} package, focusing on their purpose and key commands. It covers the \texttt{titlesec}, \texttt{titletoc}, and \texttt{titleps} packages, essential for customizing section titles, TOC entries, and page styles.
+
+\section{Base Package Dependencies}
+
+\subsection{xkeyval}
+\begin{itemize}
+    \item \textbf{Purpose}: Extends the \texttt{keyval} package for handling key-value pairs.
+    \item \textbf{Main Commands}:
+    \begin{itemize}
+        \item \verb|\DeclareOptionX{key}[default]{definition}|: Declares an option.
+        \item \verb|\ProcessOptionsX{}|: Processes declared options.
+    \end{itemize}
+\end{itemize}
+
+\subsection{ifthen}
+\begin{itemize}
+    \item \textbf{Purpose}: Provides conditional commands based on boolean expressions.
+    \item \textbf{Main Command}:
+    \begin{itemize}
+        \item \verb|\ifthenelse{<condition>}{<true part>}{<false part>}|: Executes code based on a condition.
+    \end{itemize}
+\end{itemize}
+
+\subsection{etoolbox}
+\begin{itemize}
+    \item \textbf{Purpose}: A toolbox package for managing boolean variables and toggles.
+    \item \textbf{Main Commands}:
+    \begin{itemize}
+        \item \verb|\newtoggle{<name>}|: Creates a new toggle.
+        \item \verb|\toggletrue{<name>}| / \verb|\togglefalse{<name>}|: Sets the toggle state.
+        \item \verb|\iftoggle{<name>}{<true part>}{<false part>}|: Executes code based on toggle state.
+    \end{itemize}
+\end{itemize}
+
+\subsection{titlesec}
+\begin{itemize}
+    \item \textbf{Purpose}: Customizes sectioning commands.
+    \item \textbf{Main Commands}:
+    \begin{itemize}
+        \item \verb|\titleformat{<command>}{<format>}{<label>}|\br \verb|{<sep>}{<before>}{<after>}|: Customizes title formatting.
+        \item \verb|\titlespacing*{<command>}{<left>}{<before>}{<after>}|: Adjusts title spacing.
+    \end{itemize}
+\end{itemize}
+
+\subsection{titletoc}
+\begin{itemize}
+    \item \textbf{Purpose}: Controls TOC layout and formatting.
+    \item \textbf{Main Command}:
+    \begin{itemize}
+        \item \verb|\titlecontents{<section>}[<left>]{<above>}|\br\verb|{<numbered>}{<numberless>}{<filler>}[<below>]|: Customizes TOC entries.
+    \end{itemize}
+\end{itemize}
+
+\subsection{titleps}
+\begin{itemize}
+    \item \textbf{Purpose}: Customizes page styles, including headers and footers.
+    \item \textbf{Main Commands}:
+    \begin{itemize}
+        \item \verb|\newpagestyle{<name>}{<definition>}|: Defines a custom page style.
+        \item \verb|\sethead{<left>}{<center>}{<right>}|: Defines header content.
+        \item \verb|\setfoot{<left>}{<center>}{<right>}|: Defines footer content.
+        \item \verb|\setheadrule{<thickness>}|: Sets header rule thickness.
+    \end{itemize}
+\end{itemize}
+
+\chapter{Commands}
+
+\section*{Introduction}
+This chapter details the new commands and features defined in the \texttt{styles} package, covering boxed environments, title formatting, section auto-skipping, and other key features.
+
+\section{New Commands and Features}
+
+\subsection{Boxed Environments}
+\begin{itemize}
+    \item \verb|\newtcolorbox[]{defbox}[1][]{...}|: Creates a red \texttt{tcolorbox} for definitions.
+    \item \verb|\newtcolorbox{exbox}{...}|: Creates a green \texttt{tcolorbox} for examples.
+    \item \verb|\newtcolorbox{rembox}{...}|: Creates a blue \texttt{tcolorbox} for remarks.
+    \item \verb|\tbox{#1}{#2}|: Creates a \texttt{tcolorbox} with styling defined by \verb|#1|.
+\end{itemize}
+
+\subsection{Variable New Page Command}
+\begin{itemize}
+    \item \verb|\varnewpage{#1}|: Creates a new page if there isn't enough space for \verb|#1| lines on the current page.
+\end{itemize}
+
+\subsection{Section Auto-Skipping}
+\begin{itemize}
+    \item \verb|\resetsecautoskip|: Resets section commands to their original behavior.
+\end{itemize}
+
+
+\subsection{Title Numeration Styles}
+\begin{itemize}
+    \item \verb|titlenum = 1|: Roman numerals for chapters, Arabic for sections.
+    \item \verb|titlenum = 2|: Roman chapters, alphabetic subsections.
+    \item \verb|titlenum = 3|: Roman chapters, Arabic sections, capital letter subsections.
+\end{itemize}
+
+\subsection{Title Formatting Styles}
+\begin{itemize}
+    \item \verb|fancytitle = 1|: Basic style with bold and large fonts.
+    \item \verb|fancytitle = 2|: Color scheme with \texttt{MidnightBlue} for chapter titles.
+    \item \verb|fancytitle = 3|: Larger fonts with style 1 formatting.
+\end{itemize}
+
+\subsection{Title Spacing}
+\begin{itemize}
+    \item \verb|\titlespacing*{\command}{left}{before-sep}{after-sep}[right-sep]|: Adjusts title spacing.
+\end{itemize}
+
+\subsection{Page Style Management}
+\begin{itemize}
+    \item \verb|\newcpage|: Inserts a clear page before each chapter.
+    \item \verb|\headlogo|: Defines the logo in the page header.
+    \item \verb|\renewpagestyle{main}{...}|: Defines the main page style.
+    \item \verb|\renewpagestyle{debut}{...}|: Defines the introductory page style.
+\end{itemize}
+
+\subsection{TOC Customization}
+\begin{itemize}
+    \item \verb|\deflen{name}{length}|: Defines a new length variable.
+    \item Custom lengths include:
+    \begin{itemize}
+        \item \verb|lenlabelsec|: Length for section labels.
+        \item \verb|lenlabelsbsec|: Length for subsection labels.
+        \item \verb|lenlabelsbbsec|: Length for subsubsection labels.
+        \item \verb|lenlabelpara|: Length for paragraph labels.
+        \item \verb|leftspacechapter|: Left indentation for chapters in the TOC.
+    \end{itemize}
+    \item \verb|\titlecontents{section} ...|: Customizes TOC entries.
+\end{itemize}
+
+\subsection{Acronym Counter Reset}
+\begin{itemize}
+    \item \verb|\resetacrocounter|: Resets acronym counters at the beginning of each chapter.
+\end{itemize}
+
+
+
+
+
+\appendix
+\begin{achapter}{Different Page Styles}
+    \pdfsize{1}{default}{Default Style}{default.pdf}
+    \pdfsize{1}{default}{Example 1}{style1.pdf}
+    \pdfsize{1}{default}{Example 2}{style2.pdf}
+    \pdfsize{1}{default}{Example 3 }{style3.pdf}
+    \pdfsize{1}{default}{Example 4 }{style4.pdf}
+\end{achapter}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
