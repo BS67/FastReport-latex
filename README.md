@@ -14,7 +14,7 @@ je conseille git fork pour avoir un apercu visuel de git
 
 ## Setup VSCode
 - extention latex workshop (James-Yu.latex-workshop) + ltex languagetool 
-- extension live share qui permet de modifier la même chose ==> il faut un compte github cependant (desavantage :  pas très fiable)
+- extension live share qui permet de modifier la même chose ==> il faut un compte github cependant (desavantage :  moyen fiable)
 - copie des **usersnippet**: 
     - source :   [latex.json](<visual studio json/latex.json>)
     - destination :  *file+preference+user snippet + latex json*
@@ -23,7 +23,7 @@ je conseille git fork pour avoir un apercu visuel de git
     - destination : *Preferences: Open User Settings (JSON)*
 
 # Synchronisation de Miktek et Vscode 
-    Quand les extensions ont démarrés => reload pour qu'elle voient le pdflatex.exe de miktek
+    Quand les extensions ont démarrés => reload pour qu'elles voient le pdflatex.exe de miktek
 
 > After installing TeX Live, you must add the directory of TeX Live binaries to your PATH environment variable except on Windows. See the official document. LaTeX Workshop never touches the variable. If VS Code cannot find executables of TeX, it means that the setting of your system is broken. For the ways of setting environment variables on Windows, see link or link. On macOS and Linux, see the documentation by the rbenv dev team. Very detailed information is also available on stackoverflow for macOS.
 
