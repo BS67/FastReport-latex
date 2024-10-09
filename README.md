@@ -1,9 +1,18 @@
+# 0. 
+
+Jetter un coup d'oeuil dans la documentation, permettra de connaitre les packages nécessaires à de beaux et de bon rapports et leurs utilisations. 
+Aussi pas besoin d'aller dans le ctan, la plupart des datasheets sont déjà présentes dans un dossier.
+
+Inspirez vous de la documentation pour faire vos propres documents.
+Si vous êtes en recherche d'une installation rapide et simple, suivez le tutoriel ci-dessous. 
+
+
 # 1. Cloner le dossier git 
 je conseille git fork pour avoir un apercu visuel de git
 
 # 2. Installer les logiciels
 - Miktek
-- VScode 
+- VScode ( Overleaf est payant pour des documents qui sont longs =  rapports de pfe, commencer sur VScode **c'est avoir moins de temps de chargement et économiser de l'argent à long terme**)
 
 ## Setup Miktek
 - ajouter le dossier (*package-latex*) à miktek => setting/directories 
